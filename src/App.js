@@ -1,5 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
+import Sandbox from './components/Sandbox';
+import TreasureMap from './components/TreasureMap';
 import './App.css';
 
 function App() {
@@ -19,6 +21,8 @@ function App() {
           Learn React
         </a>
       </header>
+      <Sandbox />
+      <TreasureMap />
     </div>
   );
 }

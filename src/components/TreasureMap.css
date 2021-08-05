@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Tangerine:wght@700&display=swap');
+
+.treasure-map {
+    background-color: greenyellow;
+    font-family: 'Tangerine', cursive;
+}
+
+p {
+    font-size: x-large;
+}
