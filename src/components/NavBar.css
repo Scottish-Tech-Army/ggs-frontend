@@ -1,0 +1,28 @@
+.nav-button {
+    color: white;
+    background-color: #c40063;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+    height: auto;
+    width: 100%;
+    border-style: solid;
+    border-color: #c40063;
+    border-width: 1pt;
+    border-radius: 5px;
+    padding: 5px;
+    text-align: center;
+    line-height: 1.5em;
+}
+
+.nav-button:hover {
+
+    color: black;
+    background-color: white;
+    border-color: black;
+}
+
+.nav-bar {
+    column-gap: 5px;
+    display: flex;
+    padding-top: 5px;
+}
