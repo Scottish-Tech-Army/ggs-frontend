@@ -1,37 +1,28 @@
-.nav-button {
+.filter-button {
     color: white;
     background-color: #c40063;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-weight: bold;
-    height: 7vh;
+    height: auto;
     width: 100%;
     border-style: solid;
     border-color: #c40063;
     border-width: 1pt;
     border-radius: 5px;
-    justify-content: center;
-    align-items: center;
-    --padding-x: 1.2em;
-    display: inline-flex;
+    padding: 5px;
+    text-align: center;
     line-height: 1.5em;
 }
 
-.nav-button:hover {
+.filter-button:hover {
+
     color: black;
     background-color: white;
     border-color: black;
 }
 
-.nav-button:active {
-    color: black;
-    background-color: white;
-    border-color: black;
-}
-
-.nav-bar {
+.filter-modal {
     column-gap: 5px;
-    display: flex;
+    display: none;
     padding-top: 5px;
-    padding-left: 5px;
-    padding-right: 5px;
 }
