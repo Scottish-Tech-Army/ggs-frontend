@@ -3,12 +3,28 @@ import NavBar from "./components/NavBar";
 import Markers from "./components/Markers.js";
 import FilterMarkers from "./components/FilterMarkers";
 import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
+import ReactMapGL, { Marker } from "react-map-gl";
 
-mapboxgl.accessToken =
-  "pk.eyJ1Ijoic25vd3lwaWdlb24iLCJhIjoiY2tzNHVidzhtMjlwMDJxbzljMzh1a3I3ayJ9.6oWmz_zuj2YfMGtXnm1bNg";
+export default function App(props) {
+  // set up Mapbox credentials and map
+  const MAPBOX_TOKEN =
+    "secret";
 
-export default function App() {
-  // marker setup
+  const [viewport, setViewport] = useState({
+    height: "90vh",
+    width: "100vw",
+    latitude: 55.952014,
+    longitude: -3.190728,
+    zoom: 13,
+    mapboxApiAccessToken: MAPBOX_TOKEN,
+  });
+
+  // write handler here to reveal pin text when Marker clicked/pressed.
+  const showModal = () => {
+    this.setState({ show: true});
+  };
+
+  // dummy marker data
   const incomingMarkers = [
     {
       id: "greyFriarsBobbyStatue",
@@ -36,43 +52,21 @@ export default function App() {
   ];
 
   const [ allMarkers ] = useState(incomingMarkers);
-  const [ flaggedMarkers ] = useState(myTaggedMarkers);
-
-  // map setup
-  const mapContainer = useRef(null);
-  const map = useRef(null);
-  const [lng, setLng] = useState(-3.190728);
-  const [lat, setLat] = useState(55.952014);
-  const [zoom, setZoom] = useState(14);
-
-  useEffect(() => {
-    if (map.current) return; // initialize map only once
-    map.current = new mapboxgl.Map({
-      container: mapContainer.current,
-      style: "mapbox://styles/mapbox/streets-v11",
-      center: [lng, lat],
-      zoom: zoom,
-    });
-  });
-
-  useEffect(() => {
-    if (!map.current) return; // wait for map to initialize
-    map.current.on("move", () => {
-      setLng(map.current.getCenter().lng.toFixed(4));
-      setLat(map.current.getCenter().lat.toFixed(4));
-      setZoom(map.current.getZoom().toFixed(2));
-    });
-  });
-
-  // set event handler to show/hide the FilterMarkers modal
+  const [ taggedMarkers ] = useState(myTaggedMarkers);
 
   return (
-    <div>
-      <div className="sidebar">
-        Girl Guiding Scotland
-      </div>
-      <div ref={mapContainer} className="map-container"></div>
-      <FilterMarkers />
+    <div className="container">
+      <div className="sidebar">Girl Guiding Scotland</div>
+      <ReactMapGL
+        {...viewport}
+        mapStyle="mapbox://styles/mapbox/streets-v11" // insert choice of map style here from Mapbox Studio
+        onViewportChange={setViewport}
+      >
+        <Marker latitude={55.946} longitude={-3.191} onClick={props.showModal}>
+          <div className="pin"></div>
+          <div className="pinText">Greyfriars Bobby Statue</div>
+        </Marker>
+      </ReactMapGL>
       <NavBar />
     </div>
   );

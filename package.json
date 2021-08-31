@@ -6,8 +6,10 @@
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
+    "mapbox-gl": "^2.4.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-map-gl": "^6.1.16",
     "react-scripts": "4.0.3",
     "web-vitals": "^0.2.4",
     "workbox-background-sync": "^5.1.4",
@@ -21,9 +23,7 @@
     "workbox-range-requests": "^5.1.4",
     "workbox-routing": "^5.1.4",
     "workbox-strategies": "^5.1.4",
-    "workbox-streams": "^5.1.4",
-    "mapbox-gl": "^2.4.0",
-    "react-map-gl": "^6.1.16"
+    "workbox-streams": "^5.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
