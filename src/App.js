@@ -1,9 +1,10 @@
 import React, { useRef, useEffect, useState } from "react";
 import NavBar from "./components/NavBar";
+import Pin from "./components/Pin";
 import Markers from "./components/Markers.js";
 import FilterMarkers from "./components/FilterMarkers";
 import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
-import ReactMapGL, { Marker } from "react-map-gl";
+import ReactMapGL, { Marker, NavigationControl } from "react-map-gl";
 
 export default function App(props) {
   // set up Mapbox credentials and map
@@ -19,40 +20,43 @@ export default function App(props) {
     mapboxApiAccessToken: MAPBOX_TOKEN,
   });
 
-  // write handler here to reveal pin text when Marker clicked/pressed.
-  const showModal = () => {
-    this.setState({ show: true});
+  const navControlStyle = {
+    right: 10,
+    top: 10,
   };
+
+  // write handler here to reveal pin text when Marker clicked/pressed.
+  // TO DO.
 
   // dummy marker data
   const incomingMarkers = [
     {
       id: "greyFriarsBobbyStatue",
       lat: "55.946874",
-      lng: "-3.191229"
+      lng: "-3.191229",
     },
     {
       id: "edinburghCastleEntrance",
       lat: "55.948400",
-      lng: "-3.196334"
+      lng: "-3.196334",
     },
     {
       id: "arthursSeatFootpath",
       lat: "55.942384",
-      lng: "-3.197360"
-    }
+      lng: "-3.197360",
+    },
   ];
 
   const myTaggedMarkers = [
     {
       id: "greyFriarsBobbyStatue",
       lat: "55.946874",
-      lng: "-3.191229"
-    }
+      lng: "-3.191229",
+    },
   ];
 
-  const [ allMarkers ] = useState(incomingMarkers);
-  const [ taggedMarkers ] = useState(myTaggedMarkers);
+  const [allMarkers] = useState(incomingMarkers);
+  const [taggedMarkers] = useState(myTaggedMarkers);
 
   return (
     <div className="container">
@@ -63,9 +67,9 @@ export default function App(props) {
         onViewportChange={setViewport}
       >
         <Marker latitude={55.946} longitude={-3.191} onClick={props.showModal}>
-          <div className="pin"></div>
-          <div className="pinText">Greyfriars Bobby Statue</div>
+          <Pin />
         </Marker>
+        <NavigationControl style={navControlStyle} showCompass={false} />
       </ReactMapGL>
       <NavBar />
     </div>

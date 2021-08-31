@@ -17,23 +17,6 @@ code {
   width: 100vw;
 }
 
-.pin {
-  height: 20px;
-  width: 20px;
-  border-radius: 50%;
-  background-color: #c40063;
-}
-
-.pinText {
-  display: none;
-  background-color: white;
-  padding: 2px;
-  border-radius: 5px;
-  border-width: 2px;
-  margin-top: 2px;
-  margin-left: 2px;
-}
-
 .sidebar {
   background-color: #4b88c3;
   color: #ffffff;
@@ -48,4 +31,9 @@ code {
   border-radius: 4px;
   text-align: center;
   line-height: 1.5em;
+}
+
+.mapboxgl-ctr .mapboxgl-ctrl-zoom-in .mapboxgl-ctrl-icon button {
+  width: 200%;
+  height: 200%;
 }
