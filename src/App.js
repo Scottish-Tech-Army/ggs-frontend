@@ -5,11 +5,11 @@ import Markers from "./components/Markers.js";
 import FilterMarkers from "./components/FilterMarkers";
 import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
 import ReactMapGL, { Marker, NavigationControl } from "react-map-gl";
+import { getLocations } from "./services/locations";
 
 export default function App(props) {
   // set up Mapbox credentials and map
-  const MAPBOX_TOKEN =
-    "secret";
+  const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 
   const [viewport, setViewport] = useState({
     height: "90vh",
@@ -19,6 +19,19 @@ export default function App(props) {
     zoom: 13,
     mapboxApiAccessToken: MAPBOX_TOKEN,
   });
+
+  const [locations, setLocations] = useState([]);
+
+  useEffect(() => {
+    console.log(MAPBOX_TOKEN);
+    let mounted = true;
+    getLocations().then((items) => {
+      if (mounted) {
+        setLocations(items);
+      }
+    });
+    return () => (mounted = false);
+  }, []);
 
   const navControlStyle = {
     right: 10,
