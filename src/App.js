@@ -4,11 +4,11 @@ import Pin from "./components/Pin";
 import NearestWaypoint from "./components/NearestWaypoint";
 import FilterMarkers from "./components/FilterMarkers";
 import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
-import ReactMapGL, { Marker, NavigationControl } from "react-map-gl";
+import ReactMapGL, { GeolocateControl, Marker, NavigationControl } from "react-map-gl";
 import { Modal, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-export default function App() {
+export default function App(props) {
   // set up Mapbox credentials and map
   const MAPBOX_TOKEN =
     "pk.eyJ1Ijoic25vd3lwaWdlb24iLCJhIjoiY2tzNHVidzhtMjlwMDJxbzljMzh1a3I3ayJ9.6oWmz_zuj2YfMGtXnm1bNg";
@@ -25,6 +25,11 @@ export default function App() {
   const navControlStyle = {
     right: 10,
     top: 10,
+  };
+
+  const geolocateControlStyle= {
+    left: 15,
+    top: 55
   };
 
   // dummy marker data
@@ -55,12 +60,24 @@ export default function App() {
 
   // dummy lng
   const myLng = -3.191229;
-  
 
   // modal controls
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  // Only rerender markers if props.data has changed
+  const allMarkers = React.useMemo(() => incomingMarkers
+  .filter(landmark => {
+    return ((landmark.lat !== myLat) && (landmark.lng !== myLng));
+  })
+  .map(
+    landmark => (
+      <Marker key={landmark.name} longitude={landmark.lng} latitude={landmark.lat}>
+        <Pin />
+      </Marker>
+    )
+  ), [props.data]);
 
   return (
     <div className="container">
@@ -70,20 +87,17 @@ export default function App() {
         mapStyle="mapbox://styles/mapbox/streets-v11" // insert choice of map style here from Mapbox Studio
         onViewportChange={setViewport}
       >
-        {/* {
-        incomingMarkers.map(marker => (
-          <Marker lattitude={parseFloat(marker.lat)} longitude={parseFloat(marker.lng)}>
-            {console.log("lat passed is " + Number(marker.lat))}
-            {console.log("lng passed is " + Number(marker.lng))}
-            <Pin />
-            </Marker>
-        ))
-        }; */}
-
-        <Marker latitude={55.946} longitude={-3.191} onClick={handleShow}>
+        <Marker latitude={55.946874} longitude={-3.191229} onClick={handleShow}>
           <Pin />
         </Marker>
+        {allMarkers}
         <NavigationControl style={navControlStyle} showCompass={false} />
+        <GeolocateControl
+        style={geolocateControlStyle}
+        positionOptions={{enableHighAccuracy: true}}
+        trackUserLocation={true}
+        auto
+      />
       </ReactMapGL>
        {
           incomingMarkers

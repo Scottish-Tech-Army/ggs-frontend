@@ -4,7 +4,7 @@ import "./Pin.css";
 const Pin = () => {
     // pin implemented with hardcoded text for now.
   return (
-    <div className="pin" >
+    <div className="pin">
     </div>
   );
 };
