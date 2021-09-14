@@ -23,7 +23,6 @@ export default function App(props) {
   const [locations, setLocations] = useState([]);
 
   useEffect(() => {
-    console.log(MAPBOX_TOKEN);
     let mounted = true;
     getLocations().then((items) => {
       if (mounted) {
