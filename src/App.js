@@ -11,7 +11,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 export default function App(props) {
   // set up Mapbox credentials and map
   const MAPBOX_TOKEN =
-    "pk.eyJ1Ijoic25vd3lwaWdlb24iLCJhIjoiY2tzNHVidzhtMjlwMDJxbzljMzh1a3I3ayJ9.6oWmz_zuj2YfMGtXnm1bNg";
+    "secret";
 
   const [viewport, setViewport] = useState({
     height: "90vh",

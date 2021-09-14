@@ -19,3 +19,7 @@
     border-color: #c40063;
     border-style: solid;
   }
+
+  .visited {
+    background-color: #8d5c74;
+  }
