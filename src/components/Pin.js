@@ -5,7 +5,6 @@ const Pin = () => {
     // pin implemented with hardcoded text for now.
   return (
     <div className="pin" >
-      <div className="pinText">Greyfriars Bobby Statue</div>
     </div>
   );
 };
