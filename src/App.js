@@ -1,11 +1,16 @@
 import React, { useRef, useEffect, useState } from "react";
 import NavBar from "./components/NavBar";
 import Pin from "./components/Pin";
-import Markers from "./components/Markers.js";
 import FilterMarkers from "./components/FilterMarkers";
 import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
-import ReactMapGL, { Marker, NavigationControl } from "react-map-gl";
 import { getLocations } from "./services/locations";
+import ReactMapGL, {
+  GeolocateControl,
+  Marker,
+  NavigationControl,
+} from "react-map-gl";
+import { Modal, Button } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function App(props) {
   // set up Mapbox credentials and map
@@ -13,10 +18,10 @@ export default function App(props) {
 
   const [viewport, setViewport] = useState({
     height: "90vh",
-    width: "100vw",
+    width: "94vw",
     latitude: 55.952014,
     longitude: -3.190728,
-    zoom: 13,
+    zoom: 10,
     mapboxApiAccessToken: MAPBOX_TOKEN,
   });
 
@@ -37,38 +42,80 @@ export default function App(props) {
     top: 10,
   };
 
-  // write handler here to reveal pin text when Marker clicked/pressed.
-  // TO DO.
+  const geolocateControlStyle = {
+    left: 15,
+    top: 55,
+  };
 
   // dummy marker data
-  const incomingMarkers = [
+  /* const incomingMarkers = [
     {
-      id: "greyFriarsBobbyStatue",
-      lat: "55.946874",
-      lng: "-3.191229",
+      name: "Grey Friars Bobby Statue",
+      lat: 55.946874,
+      lng: -3.191229,
+      tagged: true,
     },
     {
-      id: "edinburghCastleEntrance",
-      lat: "55.948400",
-      lng: "-3.196334",
+      name: "Edinburgh Castle Entrance",
+      lat: 55.9484,
+      lng: -3.196334,
+      tagged: false,
     },
     {
-      id: "arthursSeatFootpath",
-      lat: "55.942384",
-      lng: "-3.197360",
+      name: "Arthurs Seat Footpath",
+      lat: 55.942384,
+      lng: -3.19736,
+      tagged: false,
     },
-  ];
+  ]; */
 
-  const myTaggedMarkers = [
-    {
-      id: "greyFriarsBobbyStatue",
-      lat: "55.946874",
-      lng: "-3.191229",
-    },
-  ];
+  const incomingMarkers = locations;
+  console.log("incomingMarkers : " + incomingMarkers[0]);
 
-  const [allMarkers] = useState(incomingMarkers);
-  const [taggedMarkers] = useState(myTaggedMarkers);
+  // dummy coordinates to be replaced with user's location
+  // dummy lat Grey Friars
+  // const myLat = 55.946874;
+  // dummy lat Edinburgh Airport
+  const myLat = 55.949997;
+
+  // dummy lng Grey Friars
+  // const myLng = -3.191229;
+  // dummy lng Edinburgh Airport
+  const myLng = -3.370165;
+
+  // modal controls
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  // Only rerender markers if props.data has changed
+  /* const allMarkers = React.useMemo(
+    () =>
+      incomingMarkers
+        .filter((marker) => {
+          return marker.lat !== myLat && marker.lng !== myLng;
+        })
+        .map((landmark) => (
+          <div className="waypoint">
+            <Marker
+              key={landmark.name}
+              longitude={landmark.lng}
+              latitude={landmark.lat}
+              onClick={handleShow}
+            >
+              <Pin />
+            </Marker>
+            <Modal show={show} onHide={handleClose} centered>
+              <Modal.Title key={landmark.name}>{landmark.name}</Modal.Title>
+              <Modal.Body>
+                Body text here.
+              </Modal.Body>
+              <Button onClick={handleClose}>Close</Button>
+            </Modal>
+          </div>
+        )),
+    [incomingMarkers, show]
+  ); */
 
   return (
     <div className="container">
@@ -78,11 +125,31 @@ export default function App(props) {
         mapStyle="mapbox://styles/mapbox/streets-v11" // insert choice of map style here from Mapbox Studio
         onViewportChange={setViewport}
       >
-        <Marker latitude={55.946} longitude={-3.191} onClick={props.showModal}>
+        {/* <Marker latitude={incomingMarkers[0].latitude} longitude={incomingMarkers[0].longitude} onClick={handleShow}>
           <Pin />
-        </Marker>
+        </Marker>*/}
+        {/* {allMarkers} */}
         <NavigationControl style={navControlStyle} showCompass={false} />
+        <GeolocateControl
+          style={geolocateControlStyle}
+          positionOptions={{ enableHighAccuracy: true }}
+          trackUserLocation={true}
+          auto
+        />
       </ReactMapGL>
+{/*        {
+          incomingMarkers
+          .filter(marker => {
+            return ((marker.lat === myLat) && (marker.lng === myLng));
+          })
+          .map(marker => (
+            <Modal show={show} onHide={handleClose} centered>
+            <Modal.Title key={marker.name}>{marker.name}</Modal.Title>
+            <Modal.Body key={marker.description}>Tagged status={marker.description.toString()}</Modal.Body>
+            <Button onClick={handleClose}>Close</Button>
+            </Modal>
+          ))
+          } */}
       <NavBar />
     </div>
   );

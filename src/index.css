@@ -25,8 +25,6 @@ code {
   font-weight: bold;
   z-index: 1;
   position: absolute;
-  top: 0;
-  left: 0;
   margin: 12px;
   border-radius: 4px;
   text-align: center;
@@ -34,6 +32,6 @@ code {
 }
 
 .mapboxgl-ctr .mapboxgl-ctrl-zoom-in .mapboxgl-ctrl-icon button {
-  width: 200%;
-  height: 200%;
+  width: 100%;
+  height: 100%;
 }
