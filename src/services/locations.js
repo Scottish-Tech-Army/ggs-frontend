@@ -1,7 +1,7 @@
-const baseURL = "https://localhost:44387/api/";
+const baseURL = "https://localhost:5001/api/";
 
 export function getLocations() {
-  return fetch(baseURL + "location").then((data) => data.json());
+  return fetch(baseURL + "locations").then((data) => data.json());
 }
 
 export function createLocation(location) {
