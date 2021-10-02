@@ -32,6 +32,7 @@ export default function App(props) {
     getLocations().then((items) => {
       if (mounted) {
         setLocations(items);
+        console.log(locations)
       }
     });
     return () => (mounted = false);
@@ -68,9 +69,6 @@ export default function App(props) {
       tagged: false,
     },
   ]; */
-
-  const incomingMarkers = locations;
-  console.log("incomingMarkers : " + incomingMarkers[0]);
 
   // dummy coordinates to be replaced with user's location
   // dummy lat Grey Friars
@@ -125,9 +123,21 @@ export default function App(props) {
         mapStyle="mapbox://styles/mapbox/streets-v11" // insert choice of map style here from Mapbox Studio
         onViewportChange={setViewport}
       >
-        {/* <Marker latitude={incomingMarkers[0].latitude} longitude={incomingMarkers[0].longitude} onClick={handleShow}>
-          <Pin />
-        </Marker>*/}
+        {locations && 
+          locations.map((location, index) => (
+          <Marker
+          key={location.id}
+          index={index}
+          marker={location}
+          latitude={location.latitude} 
+          longitude={location.longitude} 
+          onClick={handleShow}
+          >
+            <Pin />
+          </Marker>
+          ))
+        }
+       
         {/* {allMarkers} */}
         <NavigationControl style={navControlStyle} showCompass={false} />
         <GeolocateControl
@@ -137,8 +147,8 @@ export default function App(props) {
           auto
         />
       </ReactMapGL>
-{/*        {
-          incomingMarkers
+       {/* {
+          locations
           .filter(marker => {
             return ((marker.lat === myLat) && (marker.lng === myLng));
           })
