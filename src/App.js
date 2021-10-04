@@ -21,7 +21,7 @@ export default function App(props) {
     width: "94vw",
     latitude: 55.952014,
     longitude: -3.190728,
-    zoom: 10,
+    zoom: 9, // use 14 when zooming to standard view, 9 for wider Edinburgh.
     mapboxApiAccessToken: MAPBOX_TOKEN,
   });
 
@@ -32,7 +32,7 @@ export default function App(props) {
     getLocations().then((items) => {
       if (mounted) {
         setLocations(items);
-        console.log(locations)
+        console.log(locations);
       }
     });
     return () => (mounted = false);
@@ -72,48 +72,26 @@ export default function App(props) {
 
   // dummy coordinates to be replaced with user's location
   // dummy lat Grey Friars
-  // const myLat = 55.946874;
+  //const myLat = 55.946874;
   // dummy lat Edinburgh Airport
-  const myLat = 55.949997;
+  // const myLat = 55.949997;
+  // near Edinburgh Airport
+  const myLat = 55.949996; // REPLACE WITH USER LOCATION
 
   // dummy lng Grey Friars
-  // const myLng = -3.191229;
+  //const myLng = -3.191229;
   // dummy lng Edinburgh Airport
-  const myLng = -3.370165;
+  // const myLng = -3.370165;
+  // near Edinburgh Airport
+  const myLng = -3.370164; // REPLACE WITH USER LOCATION
+
+  // change this as needed for coordinate distance from landmark. Note 0.00001 is approx equal to 11 metres.
+  const locTolerance = 0.00001;
 
   // modal controls
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
-  // Only rerender markers if props.data has changed
-  /* const allMarkers = React.useMemo(
-    () =>
-      incomingMarkers
-        .filter((marker) => {
-          return marker.lat !== myLat && marker.lng !== myLng;
-        })
-        .map((landmark) => (
-          <div className="waypoint">
-            <Marker
-              key={landmark.name}
-              longitude={landmark.lng}
-              latitude={landmark.lat}
-              onClick={handleShow}
-            >
-              <Pin />
-            </Marker>
-            <Modal show={show} onHide={handleClose} centered>
-              <Modal.Title key={landmark.name}>{landmark.name}</Modal.Title>
-              <Modal.Body>
-                Body text here.
-              </Modal.Body>
-              <Button onClick={handleClose}>Close</Button>
-            </Modal>
-          </div>
-        )),
-    [incomingMarkers, show]
-  ); */
 
   return (
     <div className="container">
@@ -123,22 +101,19 @@ export default function App(props) {
         mapStyle="mapbox://styles/mapbox/streets-v11" // insert choice of map style here from Mapbox Studio
         onViewportChange={setViewport}
       >
-        {locations && 
+        {locations &&
           locations.map((location, index) => (
-          <Marker
-          key={location.id}
-          index={index}
-          marker={location}
-          latitude={location.latitude} 
-          longitude={location.longitude} 
-          onClick={handleShow}
-          >
-            <Pin />
-          </Marker>
-          ))
-        }
-       
-        {/* {allMarkers} */}
+            <Marker
+              key={location.id}
+              index={index}
+              marker={location}
+              latitude={location.latitude}
+              longitude={location.longitude}
+              onClick={handleShow}
+            >
+              <Pin />
+            </Marker>
+          ))}
         <NavigationControl style={navControlStyle} showCompass={false} />
         <GeolocateControl
           style={geolocateControlStyle}
@@ -147,19 +122,22 @@ export default function App(props) {
           auto
         />
       </ReactMapGL>
-       {/* {
-          locations
-          .filter(marker => {
-            return ((marker.lat === myLat) && (marker.lng === myLng));
-          })
-          .map(marker => (
-            <Modal show={show} onHide={handleClose} centered>
-            <Modal.Title key={marker.name}>{marker.name}</Modal.Title>
-            <Modal.Body key={marker.description}>Tagged status={marker.description.toString()}</Modal.Body>
-            <Button onClick={handleClose}>Close</Button>
+      {locations &&
+        locations
+          .filter(
+            (location) =>
+              location.latitude > myLat - locTolerance &&
+              location.latitude < myLat + locTolerance &&
+              location.longitude > myLng - locTolerance &&
+              location.longitude < myLng + locTolerance
+          )
+          .map((location, index) => (
+            <Modal show={show} onHide={handleClose} key={index} centered>
+              <Modal.Title>{location.name}</Modal.Title>
+              <Modal.Body>{location.description.toString()}</Modal.Body>
+              <Button onClick={handleClose}>Close</Button>
             </Modal>
-          ))
-          } */}
+          ))}
       <NavBar />
     </div>
   );
