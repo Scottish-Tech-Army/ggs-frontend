@@ -10,6 +10,7 @@ import ReactMapGL, {
   NavigationControl,
 } from "react-map-gl";
 import { Modal, Button } from "react-bootstrap";
+import Image from 'react-bootstrap/Image';
 import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function App(props) {
@@ -21,7 +22,7 @@ export default function App(props) {
     width: "94vw",
     latitude: 55.952014,
     longitude: -3.190728,
-    zoom: 9, // use 14 when zooming to standard view, 9 for wider Edinburgh.
+    zoom: 14, // use 14 when zooming to standard view, 9 for wider Edinburgh.
     mapboxApiAccessToken: MAPBOX_TOKEN,
   });
 
@@ -37,6 +38,9 @@ export default function App(props) {
     });
     return () => (mounted = false);
   }, []);
+
+  // update modal img src
+  const [imgUrl, setImgUrl] = useState("");
 
   const navControlStyle = {
     right: 10,
@@ -72,18 +76,18 @@ export default function App(props) {
 
   // dummy coordinates to be replaced with user's location
   // dummy lat Grey Friars
-  //const myLat = 55.946874;
+  const myLat = 55.946874;
   // dummy lat Edinburgh Airport
   // const myLat = 55.949997;
   // near Edinburgh Airport
-  const myLat = 55.949996; // REPLACE WITH USER LOCATION
+  //const myLat = 55.949996; // REPLACE WITH USER LOCATION
 
   // dummy lng Grey Friars
-  //const myLng = -3.191229;
+  const myLng = -3.191229;
   // dummy lng Edinburgh Airport
   // const myLng = -3.370165;
   // near Edinburgh Airport
-  const myLng = -3.370164; // REPLACE WITH USER LOCATION
+  //const myLng = -3.370164; // REPLACE WITH USER LOCATION
 
   // change this as needed for coordinate distance from landmark. Note 0.00001 is approx equal to 11 metres.
   const locTolerance = 0.00001;
@@ -92,6 +96,9 @@ export default function App(props) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  // retrieve modal data for selected pin
+  const [locationData, setLocationData] = useState([]);
 
   return (
     <div className="container">
@@ -109,8 +116,16 @@ export default function App(props) {
               marker={location}
               latitude={location.latitude}
               longitude={location.longitude}
-              onClick={handleShow}
+              onClick={() => {
+                handleShow();
+                setLocationData(location);
+                if (location.photos[0].url != undefined){
+                  setImgUrl(location.photos[0].url);
+                  console.log("photo: " + location.photos[0].url);
+                }
+              }}
             >
+              {console.log(locationData)}
               <Pin />
             </Marker>
           ))}
@@ -122,22 +137,25 @@ export default function App(props) {
           auto
         />
       </ReactMapGL>
-      {locations &&
-        locations
-          .filter(
-            (location) =>
-              location.latitude > myLat - locTolerance &&
-              location.latitude < myLat + locTolerance &&
-              location.longitude > myLng - locTolerance &&
-              location.longitude < myLng + locTolerance
-          )
-          .map((location, index) => (
-            <Modal show={show} onHide={handleClose} key={index} centered>
-              <Modal.Title>{location.name}</Modal.Title>
-              <Modal.Body>{location.description.toString()}</Modal.Body>
-              <Button onClick={handleClose}>Close</Button>
-            </Modal>
-          ))}
+      <Modal
+        show={show}
+        onHide={handleClose}
+        key={locationData.id}
+        centered
+        scrollable
+      >
+        <Modal.Title>{locationData.name}</Modal.Title>
+        <Modal.Body>
+          <Image
+            src={imgUrl}
+            alt={"image " + imgUrl}
+            rounded
+            fluid
+          />
+          {locationData.description}
+        </Modal.Body>
+        <Button onClick={handleClose}>Close</Button>
+      </Modal>
       <NavBar />
     </div>
   );
