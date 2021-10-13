@@ -10,7 +10,7 @@ import ReactMapGL, {
   NavigationControl,
 } from "react-map-gl";
 import { Modal, Button } from "react-bootstrap";
-import Image from 'react-bootstrap/Image';
+import Image from "react-bootstrap/Image";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function App(props) {
@@ -119,13 +119,14 @@ export default function App(props) {
               onClick={() => {
                 handleShow();
                 setLocationData(location);
-                if (location.photos[0].url != undefined){
+                if (location.photos.length > 0) {
                   setImgUrl(location.photos[0].url);
-                  console.log("photo: " + location.photos[0].url);
+                  // console.log("photo: " + location.photos[0].url);
+                } else {
+                  setImgUrl("missing");
                 }
               }}
             >
-              {console.log(locationData)}
               <Pin />
             </Marker>
           ))}
@@ -146,12 +147,8 @@ export default function App(props) {
       >
         <Modal.Title>{locationData.name}</Modal.Title>
         <Modal.Body>
-          <Image
-            src={imgUrl}
-            alt={"image " + imgUrl}
-            rounded
-            fluid
-          />
+          <Image src={imgUrl} alt={"image " + imgUrl} rounded fluid />
+          <br />
           {locationData.description}
         </Modal.Body>
         <Button onClick={handleClose}>Close</Button>
