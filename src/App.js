@@ -145,13 +145,13 @@ export default function App(props) {
         centered
         scrollable
       >
-        <Modal.Title>{locationData.name}</Modal.Title>
+        <Modal.Header><Modal.Title>{locationData.name}</Modal.Title></Modal.Header>
         <Modal.Body>
           <Image src={imgUrl} alt={"image " + imgUrl} rounded fluid />
           <br />
           {locationData.description}
         </Modal.Body>
-        <Button onClick={handleClose}>Close</Button>
+        <Button onClick={handleClose} style={{margin:"10px"}}>Start Exploring</Button>
       </Modal>
       <NavBar />
     </div>

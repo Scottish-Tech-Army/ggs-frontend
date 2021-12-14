@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+//import './index.css';
+import './assets/css/style.css';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
