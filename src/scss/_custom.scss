@@ -1,12 +1,12 @@
 // COLOUR OVERRIDES
-$teal:#009cac;
+$teal: #009cac;
 $pink: #c40063;
 // theme colours
-$primary:       $teal;
-$secondary:     $pink;
+$primary: $teal;
+$secondary: $pink;
 
 // scss-docs-start gray-color-variables
-$white:    #fff;
+$white: #fff;
 $gray-100: #f8f9fa;
 $gray-200: #e9ecef;
 $gray-300: #dee2e6;
@@ -16,29 +16,30 @@ $gray-600: #6c757d;
 $gray-700: #495057;
 $gray-800: #343a40;
 $gray-900: #212529;
-$black:    #000;
+$black: #000;
 // scss-docs-end gray-color-variables
 
+// BOOTSTRAP 4 CUSTOMISATIONS
+
+// BOOTSTRAP 4 BSPREFIXES
+// Buttons
+.btn-branding {
+  background-color: $secondary;
+  color: $white;
+  margin: 0.7rem;
+  border-radius: 5px;
+  border-style: none;
+  padding: 0.4rem;
+}
+
 // Modals
-.modal-title {
-    color: $primary;
+
+.place-name {
+  color: $primary;
+  font-weight: bold;
+  font-size: x-large;
+  text-align: center;
+  margin-bottom: 0.5rem;
 }
-
-/* .btn-custom {
-    background-color: $secondary;
-    color: white;
-    border-radius: 5px;
-    border: none;
-    line-height: 2rem;
-} */
-
-.button {
-    color: white;
-    background-color: $secondary;
-    border: none;
-}
-  
-
 
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
-

@@ -1,8 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
-import NavBar from "./components/NavBar";
 import Pin from "./components/Pin";
-import FilterMarkers from "./components/FilterMarkers";
-import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
 import { getLocations } from "./services/locations";
 import ReactMapGL, {
   GeolocateControl,
@@ -145,15 +142,15 @@ export default function App(props) {
         centered
         scrollable
       >
-        <Modal.Header><Modal.Title>{locationData.name}</Modal.Title></Modal.Header>
+        <Modal.Header></Modal.Header>
         <Modal.Body>
+        <div className="place-name">{locationData.name}</div>
           <Image src={imgUrl} alt={"image " + imgUrl} rounded fluid />
           <br />
           {locationData.description}
         </Modal.Body>
-        <Button onClick={handleClose} style={{margin:"10px"}}>Start Exploring</Button>
+        <Button bsPrefix="btn-branding" onClick={handleClose}>Start Exploring</Button>
       </Modal>
-      <NavBar />
     </div>
   );
 }
