@@ -42,4 +42,10 @@ $black: #000;
   margin-bottom: 0.5rem;
 }
 
+// Icons
+
+.closing-square {
+    color: $primary;
+}
+
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";

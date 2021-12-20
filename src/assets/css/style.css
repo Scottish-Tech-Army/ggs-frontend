@@ -16,6 +16,11 @@
   margin-bottom: 0.5rem;
 }
 
+.closing-square {
+  color: #009cac;
+  text-align: right;
+}
+
 /*!
  * Bootstrap v5.1.1 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors
