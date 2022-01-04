@@ -13,6 +13,14 @@
   font-weight: bold;
   font-size: x-large;
   text-align: center;
+  margin-bottom: 0.1rem;
+}
+
+.city-name {
+  color: #009cac;
+  font-weight: bold;
+  font-size: large;
+  text-align: center;
   margin-bottom: 0.5rem;
 }
 
@@ -11157,6 +11165,11 @@ code {
   border-radius: 4px;
   text-align: center;
   line-height: 1.5em;
+}
+
+.location-modal {
+  width: 100%;
+  height: auto;
 }
 
 .closing-square {

@@ -97,6 +97,9 @@ export default function App(props) {
   // retrieve modal data for selected pin
   const [locationData, setLocationData] = useState([]);
 
+  // retrieve city name to match modal data
+  const [cityName, setCityName] = useState([]);
+
   return (
     <div className="container">
       <div className="sidebar">Girl Guiding Scotland</div>
@@ -122,6 +125,18 @@ export default function App(props) {
                 } else {
                   setImgUrl("missing");
                 }
+                fetch(
+                  "https://api.mapbox.com/geocoding/v5/mapbox.places/" +
+                    location.longitude +
+                    "," +
+                    location.latitude +
+                    ".json?access_token=" +
+                    MAPBOX_TOKEN
+                )
+                  .then((response) => response.json())
+                  .then((json) => {
+                    setCityName(json.features[3].text);
+                  });
               }}
             >
               <Pin />
@@ -148,7 +163,7 @@ export default function App(props) {
             width="24"
             height="24"
             fill="currentColor"
-            class="bi bi-x-square closing-square"
+            className="bi bi-x-square closing-square"
             viewBox="0 0 16 16"
             onClick={handleClose}
           >
@@ -158,7 +173,14 @@ export default function App(props) {
         </Modal.Header>
         <Modal.Body>
           <div className="place-name">{locationData.name}</div>
-          <Image src={imgUrl} alt={"image " + imgUrl} rounded fluid />
+          <div className="city-name">{cityName}</div>
+          <Image
+            className="location-modal"
+            src={imgUrl}
+            alt={"image " + imgUrl}
+            rounded
+            fluid
+          />
           <br />
           {locationData.description}
         </Modal.Body>
