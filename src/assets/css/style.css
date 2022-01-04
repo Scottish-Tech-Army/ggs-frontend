@@ -18,7 +18,6 @@
 
 .closing-square {
   color: #009cac;
-  text-align: right;
 }
 
 /*!
@@ -11146,11 +11145,6 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
-.container {
-  height: 90vh;
-  width: 100vw;
-}
-
 .sidebar {
   background-color: #4b88c3;
   color: #ffffff;
@@ -11163,6 +11157,16 @@ code {
   border-radius: 4px;
   text-align: center;
   line-height: 1.5em;
+}
+
+.closing-square {
+  position: relative;
+  left: 93%;
+}
+
+.container {
+  height: 90vh;
+  width: 100vw;
 }
 
 .mapboxgl-ctr .mapboxgl-ctrl-zoom-in .mapboxgl-ctrl-icon button {

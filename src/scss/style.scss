@@ -1,6 +1,7 @@
 @use 'custom';
 
 // CUSTOM ELEMENTS
+// GENERAL
 
 body {
   margin: 0;
@@ -12,11 +13,6 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-}
-
-.container {
-  height: 90vh;
-  width: 100vw;
 }
 
 .sidebar {
@@ -33,7 +29,21 @@ code {
   line-height: 1.5em;
 }
 
+// SVG
+.closing-square {
+  position: relative;
+  left: 93%;
+}
+
+// FOR MAP
+.container {
+  height: 90vh;
+  width: 100vw;
+}
+
 .mapboxgl-ctr .mapboxgl-ctrl-zoom-in .mapboxgl-ctrl-icon button {
   width: 100%;
   height: 100%;
 }
+
+
