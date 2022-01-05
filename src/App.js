@@ -150,6 +150,7 @@ export default function App(props) {
           trackUserLocation={true}
           auto
         />
+        <Button bsPrefix="btn-leaderboard">Leaderboard</Button>
       </ReactMapGL>
       <Modal
         show={show}

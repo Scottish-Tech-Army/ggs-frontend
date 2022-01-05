@@ -8,6 +8,35 @@
   padding: 0.4rem;
 }
 
+.btn-leaderboard {
+  position: relative;
+  margin-top: 92.5vh;
+  margin-left: 30vw;
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 0.2rem;
+  border-color: #c40063;
+  background-color: #fff;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  color: #c40063;
+  font-weight: bold;
+}
+
+.btn-leaderboard:active {
+  background-color: #c40063;
+  color: #fff;
+  border-color: #fff;
+}
+
+@media screen and (min-width: 480px) {
+  .btn-leaderboard {
+    margin-top: 93vh;
+    margin-left: 47vw;
+  }
+}
 .container-fluid, .container-xxl, .container-xl, .container-lg, .container-md, .container-sm {
   padding-left: 0;
   padding-right: 0;
