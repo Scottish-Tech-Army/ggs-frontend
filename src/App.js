@@ -15,8 +15,10 @@ export default function App(props) {
   const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 
   const [viewport, setViewport] = useState({
-    height: "90vh",
-    width: "94vw",
+    //height: "90vh",
+    //width: "94vw",
+    height: "99vh",
+    width: "99vw",
     latitude: 55.952014,
     longitude: -3.190728,
     zoom: 14, // use 14 when zooming to standard view, 9 for wider Edinburgh.
@@ -101,8 +103,7 @@ export default function App(props) {
   const [cityName, setCityName] = useState([]);
 
   return (
-    <div className="container">
-      <div className="sidebar">Girl Guiding Scotland</div>
+    <div className="container-fluid">
       <ReactMapGL
         {...viewport}
         mapStyle="mapbox://styles/mapbox/streets-v11" // insert choice of map style here from Mapbox Studio

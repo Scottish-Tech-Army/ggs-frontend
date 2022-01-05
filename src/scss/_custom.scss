@@ -21,7 +21,7 @@ $black: #000;
 
 // BOOTSTRAP 4 CUSTOMISATIONS
 
-// BOOTSTRAP 4 BSPREFIXES
+// BOOTSTRAP 4 BSPREFIXES START
 // Buttons
 .btn-branding {
   background-color: $secondary;
@@ -30,6 +30,15 @@ $black: #000;
   border-radius: 5px;
   border-style: none;
   padding: 0.4rem;
+}
+// BOOTSTRAP 4 BSPREFIXES END
+
+// BOOTSTRAP 4 CUSTOMISATIONS
+
+// Containers
+.container-fluid {
+  padding-left: 0;
+  padding-right: 0;
 }
 
 // Modals
