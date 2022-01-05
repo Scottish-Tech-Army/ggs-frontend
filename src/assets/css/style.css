@@ -6,6 +6,15 @@
   border-radius: 5px;
   border-style: none;
   padding: 0.4rem;
+  font-weight: bold;
+}
+
+.btn-branding-in-range {
+  background-color: #c40063;
+}
+
+.btn-branding-out-of-range {
+  background-color: #ce74a1;
 }
 
 .btn-leaderboard {
@@ -46,6 +55,16 @@
   margin: 1rem;
   max-height: 95vh;
   max-width: 95vw;
+}
+
+.leaderboard-modal {
+  margin: 1rem;
+  max-height: 95vh;
+  max-width: 95vw;
+}
+.leaderboard-modal h1, .leaderboard-modal .h1 {
+  color: #009cac;
+  font-weight: bold;
 }
 
 .place-name {

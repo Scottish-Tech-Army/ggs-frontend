@@ -1,9 +1,11 @@
 // COLOUR OVERRIDES
 $teal: #009cac;
 $pink: #c40063;
+$mutedPink: #ce74a1;
 // theme colours
 $primary: $teal;
 $secondary: $pink;
+$muted-secondary: $mutedPink;
 
 // scss-docs-start gray-color-variables
 $white: #fff;
@@ -30,6 +32,15 @@ $black: #000;
   border-radius: 5px;
   border-style: none;
   padding: 0.4rem;
+  font-weight: bold;
+}
+
+.btn-branding-in-range {
+  background-color: $secondary;
+}
+
+.btn-branding-out-of-range {
+  background-color: $muted-secondary;
 }
 
 .btn-leaderboard {
@@ -76,6 +87,16 @@ $black: #000;
   margin: 1rem;
   max-height: 95vh;
   max-width: 95vw;
+}
+
+.leaderboard-modal {
+  margin: 1rem;
+  max-height: 95vh;
+  max-width: 95vw;
+  h1 {
+    color: $primary;
+    font-weight: bold;
+  }
 }
 
 .place-name {
