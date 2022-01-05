@@ -13,6 +13,12 @@
   padding-right: 0;
 }
 
+.location-modal {
+  margin: 1rem;
+  max-height: 95vh;
+  max-width: 95vw;
+}
+
 .place-name {
   color: #009cac;
   font-weight: bold;
@@ -11158,9 +11164,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
-.location-modal {
+.img-location-modal {
   width: 100%;
   height: auto;
+  margin-bottom: 1rem;
 }
 
 .closing-square {
@@ -11168,10 +11175,6 @@ code {
   left: 93%;
 }
 
-/* .container {
-  height: 90vh;
-  width: 100vw;
-} */
 .mapboxgl-ctr .mapboxgl-ctrl-zoom-in .mapboxgl-ctrl-icon button {
   width: 100%;
   height: 100%;

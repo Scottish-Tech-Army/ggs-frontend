@@ -155,8 +155,8 @@ export default function App(props) {
         show={show}
         onHide={handleClose}
         key={locationData.id}
-        centered
         scrollable
+        className="location-modal"
       >
         <Modal.Header>
           <svg
@@ -176,7 +176,7 @@ export default function App(props) {
           <div className="place-name">{locationData.name}</div>
           <div className="city-name">{cityName}</div>
           <Image
-            className="location-modal"
+            className="img-location-modal"
             src={imgUrl}
             alt={"image " + imgUrl}
             rounded

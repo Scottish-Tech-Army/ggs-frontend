@@ -42,6 +42,11 @@ $black: #000;
 }
 
 // Modals
+.location-modal {
+  margin: 1rem;
+  max-height: 95vh;
+  max-width: 95vw;
+}
 
 .place-name {
   color: $primary;

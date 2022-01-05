@@ -15,9 +15,11 @@ code {
     monospace;
 }
 
-.location-modal {
+// IMAGE
+.img-location-modal {
   width: 100%;
   height: auto;
+  margin-bottom: 1rem;
 }
 
 // SVG
@@ -27,10 +29,6 @@ code {
 }
 
 // FOR MAP
-/* .container {
-  height: 90vh;
-  width: 100vw;
-} */
 
 .mapboxgl-ctr .mapboxgl-ctrl-zoom-in .mapboxgl-ctrl-icon button {
   width: 100%;
