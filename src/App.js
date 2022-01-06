@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Pin from "./components/Pin";
 import { getLocations } from "./services/locations";
 import ReactMapGL, {
@@ -150,6 +150,7 @@ export default function App(props) {
                 userRangeCheck();
                 handleShowLocation();
                 setLocationData(location);
+                console.log(locationData);
                 if (location.photos.length > 0) {
                   setImgUrl(location.photos[0].url);
                   // console.log("photo: " + location.photos[0].url);

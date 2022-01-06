@@ -1,10 +1,11 @@
 import React from "react";
-import "./Pin.css";
+import brandedMarker from "./mapbox-marker-branded.svg";
 
 const Pin = () => {
-    // pin implemented with hardcoded text for now.
   return (
     <div className="pin">
+      {/* styles adjusted to enlarge map pins with margins compensated */}
+      <img src={brandedMarker} alt="map pin" style={{width:"150%", height:"150%", marginLeft: "-50%", marginTop: "-50%"}}/>
     </div>
   );
 };
