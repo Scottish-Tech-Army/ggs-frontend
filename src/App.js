@@ -209,20 +209,20 @@ export default function App(props) {
         <Modal.Body>
           <div className="place-name">{locationData.name}</div>
           <div className="city-name">{cityName}</div>
-          <Image
-            className="img-location-modal"
-            src={imgUrl}
-            alt={"image " + imgUrl}
-            rounded
-            fluid
-          />
-          <br />
-          {locationData.description}
+            <Image
+              className="img-location"
+              src={imgUrl}
+              alt={"image " + imgUrl}
+              rounded
+            />
+          <div className="description">{locationData.description}</div>
         </Modal.Body>
         <Button
           bsPrefix="btn-branding"
           onClick={handleCloseLocation}
-          className={isOutOfRange ? 'btn-branding-out-of-range' : 'btn-branding-in-range'}
+          className={
+            isOutOfRange ? "btn-branding-out-of-range" : "btn-branding-in-range"
+          }
         >
           {collectButtonText}
         </Button>

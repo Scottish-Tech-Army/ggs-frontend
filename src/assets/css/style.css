@@ -11203,6 +11203,7 @@ textarea.form-control-lg {
 }
 body {
   margin: 0;
+  padding: 0;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -11212,10 +11213,21 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
-.img-location-modal {
-  width: 100%;
-  height: auto;
-  margin-bottom: 1rem;
+.img-location {
+  display: block;
+  margin: auto;
+  max-height: 24vh;
+  max-width: 100%;
+}
+
+@media screen and (min-width: 480px) {
+  .img-location {
+    max-height: 30vh;
+    max-width: 100%;
+  }
+}
+.description {
+  margin: 1rem 0;
 }
 
 .closing-square {

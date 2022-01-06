@@ -5,6 +5,7 @@
 
 body {
   margin: 0;
+  padding: 0;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -16,10 +17,24 @@ code {
 }
 
 // IMAGE
-.img-location-modal {
-  width: 100%;
-  height: auto;
-  margin-bottom: 1rem;
+.img-location {
+  display: block;
+  margin: auto;
+  max-height: 24vh;
+  max-width: 100%;
+}
+
+@media screen and (min-width: 480px) {
+  .img-location {
+    max-height: 30vh;
+    max-width: 100%;
+
+  }
+}
+
+// MODAL
+.description {
+  margin: 1rem 0;
 }
 
 // SVG
@@ -29,7 +44,6 @@ code {
 }
 
 // FOR MAP
-
 .mapboxgl-ctr .mapboxgl-ctrl-zoom-in .mapboxgl-ctrl-icon button {
   width: 100%;
   height: 100%;
