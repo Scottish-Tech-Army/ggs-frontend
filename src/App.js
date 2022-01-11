@@ -56,42 +56,12 @@ export default function App(props) {
     top: 55,
   };
 
-  // dummy marker data
-  /* const incomingMarkers = [
-    {
-      name: "Grey Friars Bobby Statue",
-      lat: 55.946874,
-      lng: -3.191229,
-      tagged: true,
-    },
-    {
-      name: "Edinburgh Castle Entrance",
-      lat: 55.9484,
-      lng: -3.196334,
-      tagged: false,
-    },
-    {
-      name: "Arthurs Seat Footpath",
-      lat: 55.942384,
-      lng: -3.19736,
-      tagged: false,
-    },
-  ]; */
-
   // dummy coordinates to be replaced with user's location
   // dummy lat Grey Friars
   const myLat = 55.946874;
-  // dummy lat Edinburgh Airport
-  // const myLat = 55.949997;
-  // near Edinburgh Airport
-  //const myLat = 55.949996; // REPLACE WITH USER LOCATION
-
+  
   // dummy lng Grey Friars
   const myLng = -3.191229;
-  // dummy lng Edinburgh Airport
-  // const myLng = -3.370165;
-  // near Edinburgh Airport
-  //const myLng = -3.370164; // REPLACE WITH USER LOCATION
 
   // Change this as needed for coordinate distance from landmark. Note 0.00001 is approx equal to 11 metres.
   const locTolerance = 0.00001;
@@ -192,8 +162,7 @@ export default function App(props) {
         scrollable
         className="location-modal"
       >
-        <Modal.Header>
-          <svg
+        <Modal.Header className="border-0"><svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
             height="24"
@@ -233,7 +202,7 @@ export default function App(props) {
         scrollable
         className="leaderboard-modal"
       >
-        <Modal.Header>
+        <Modal.Header className="border-0">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"

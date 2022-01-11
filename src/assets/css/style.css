@@ -11233,6 +11233,12 @@ code {
 .closing-square {
   position: relative;
   left: 93%;
+  z-index: 3;
+}
+@media screen and (min-width: 480px) {
+  .closing-square {
+    left: 95%;
+  }
 }
 
 .mapboxgl-ctr .mapboxgl-ctrl-zoom-in .mapboxgl-ctrl-icon button {

@@ -41,6 +41,10 @@ code {
 .closing-square {
   position: relative;
   left: 93%;
+  z-index: 3;
+  @media screen and (min-width: 480px) {
+  left: 95%;
+  }
 }
 
 // FOR MAP
