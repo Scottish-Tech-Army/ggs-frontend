@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import NavBar from "./components/NavBar";
+import LoginModal from "./components/LoginModal";
 import Pin from "./components/Pin";
 import FilterMarkers from "./components/FilterMarkers";
 import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
@@ -25,19 +26,24 @@ export default function App(props) {
     zoom: 14, // use 14 when zooming to standard view, 9 for wider Edinburgh.
     mapboxApiAccessToken: MAPBOX_TOKEN,
   });
+  const [authToken, setAuthToken] = useState();
+  const [showLogin, setShowLogin] = useState(false);
 
+  const handleLoginClose = () => setShowLogin(false);
+  const handleLoginShow = () => setShowLogin(true);
   const [locations, setLocations] = useState([]);
 
   useEffect(() => {
-    let mounted = true;
-    getLocations().then((items) => {
-      if (mounted) {
-        setLocations(items);
-        console.log(locations);
-      }
-    });
-    return () => (mounted = false);
-  }, []);
+    if(authToken){
+      getLocations().then((items) => {
+          setLocations(items);
+          console.log(locations);
+      });
+    }
+    else{
+      handleLoginShow();
+    }
+  }, [authToken]);
 
   // update modal img src
   const [imgUrl, setImgUrl] = useState("");
@@ -153,6 +159,11 @@ export default function App(props) {
         </Modal.Body>
         <Button onClick={handleClose}>Close</Button>
       </Modal>
+      <LoginModal 
+      setAuthToken={setAuthToken} 
+      showLogin={showLogin} 
+      handleLoginClose={handleLoginClose} 
+      />
       <NavBar />
     </div>
   );
