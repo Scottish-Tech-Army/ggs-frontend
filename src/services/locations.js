@@ -17,3 +17,16 @@ export function createLocation(location) {
     body: JSON.stringify({ location }),
   }).then((data) => data.json());
 }
+
+export function getLocationsAuth(token) {
+  return fetch(baseURL + "locations", {
+    method: 'GET',
+    headers: {
+      'Authorization': 'Bearer ' + token
+    }
+  })
+  .then((data) => data.json())
+  .catch(err => {
+    console.log(err)
+  });
+}

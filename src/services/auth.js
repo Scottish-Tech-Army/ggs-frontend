@@ -7,8 +7,11 @@ export function login(code) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ code }),
-  }).then((data) => data.json()) 
-  .catch(err => {
-    console.log(err)
-  });
+  }).then(response =>{
+    if (response.ok)
+    {
+        return response.json
+    }
+    throw response;
+  })
 }

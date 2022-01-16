@@ -4,7 +4,7 @@ import LoginModal from "./components/LoginModal";
 import Pin from "./components/Pin";
 import FilterMarkers from "./components/FilterMarkers";
 import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
-import { getLocations } from "./services/locations";
+import { getLocationsAuth } from "./services/locations";
 import ReactMapGL, {
   GeolocateControl,
   Marker,
@@ -35,9 +35,8 @@ export default function App(props) {
 
   useEffect(() => {
     if(authToken){
-      getLocations().then((items) => {
+      getLocationsAuth(authToken).then((items) => {
           setLocations(items);
-          console.log(locations);
       });
     }
     else{

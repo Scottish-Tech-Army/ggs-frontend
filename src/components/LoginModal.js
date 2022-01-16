@@ -8,8 +8,6 @@ const LoginModal = ({setAuthToken, showLogin, handleLoginClose}) => {
     const [code, setCode] = useState("");
     const [error, setError] = useState("");
 
-
-
   const handleLogin = (event) => {
       login(code)
       .then((token) => {
@@ -17,8 +15,9 @@ const LoginModal = ({setAuthToken, showLogin, handleLoginClose}) => {
         setCode("");
         handleLoginClose();
       })
-      .catch((error) => {
-        setError(error);
+      .catch(error => {
+          console.error(error);
+        setError(error.status);
       });
     event.preventDefault();
   };
@@ -43,6 +42,7 @@ const LoginModal = ({setAuthToken, showLogin, handleLoginClose}) => {
             </Form.Group>
             <Button type="submit">Start Exploring</Button>
           </Form>
+          {error && <p>{error}</p>}
         </Modal.Body>
       </Modal>
   );
