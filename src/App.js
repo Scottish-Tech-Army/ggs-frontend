@@ -59,7 +59,7 @@ export default function App(props) {
   // dummy coordinates to be replaced with user's location
   // dummy lat Grey Friars
   const myLat = 55.946874;
-  
+
   // dummy lng Grey Friars
   const myLng = -3.191229;
 
@@ -159,31 +159,41 @@ export default function App(props) {
         show={showLocation}
         onHide={handleCloseLocation}
         key={locationData.id}
-        scrollable
-        className="location-modal"
+        className="custom-modal location-modal"
       >
-        <Modal.Header className="border-0"><svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            fill="currentColor"
-            className="bi bi-x-square closing-square"
-            viewBox="0 0 16 16"
+        <Modal.Header className="border-0">
+          <Button
+            variant="outline-primary"
             onClick={handleCloseLocation}
+            style={{
+              fontSize: 30,
+              fontWeight: "bold",
+              lineHeight: 1,
+              position: "relative",
+              top: -40,
+              right: -275,
+              opacity: 1,
+              backgroundColor: "white",
+              paddingTop: 0,
+              paddingBottom: 4,
+              paddingLeft: 4,
+              paddingRight: 4,
+              marginTop: 4,
+            }}
+            bsPrefix="closer-color"
           >
-            <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
-            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-          </svg>
+            &times;
+          </Button>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body scrollable>
           <div className="place-name">{locationData.name}</div>
           <div className="city-name">{cityName}</div>
-            <Image
-              className="img-location"
-              src={imgUrl}
-              alt={"image " + imgUrl}
-              rounded
-            />
+          <Image
+            className="img-location"
+            src={imgUrl}
+            alt={"image " + imgUrl}
+            rounded
+          />
           <div className="description">{locationData.description}</div>
         </Modal.Body>
         <Button
@@ -199,24 +209,33 @@ export default function App(props) {
       <Modal
         show={showLeaderboard}
         onHide={handleCloseLeaderboard}
-        scrollable
-        className="leaderboard-modal"
+        className="custom-modal leaderboard-modal"
       >
         <Modal.Header className="border-0">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            fill="currentColor"
-            className="bi bi-x-square closing-square"
-            viewBox="0 0 16 16"
+          <Button
+            variant="outline-primary"
             onClick={handleCloseLeaderboard}
+            style={{
+              fontSize: 30,
+              fontWeight: "bold",
+              lineHeight: 1,
+              position: "relative",
+              top: -40,
+              right: -275,
+              opacity: 1,
+              backgroundColor: "white",
+              paddingTop: 0,
+              paddingBottom: 4,
+              paddingLeft: 4,
+              paddingRight: 4,
+              marginTop: 4,
+            }}
+            bsPrefix="closer-color"
           >
-            <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
-            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-          </svg>
+            &times;
+          </Button>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body scrollable>
           <h1>Leaderboard</h1>
           Generic image followed by top 10 units by number of locations
           collected.

@@ -79,25 +79,39 @@ $black: #000;
 
 // Containers
 .container-fluid {
-  padding-left: 0;
-  padding-right: 0;
+  padding: 0;
+  margin: 0;
 }
 
 // Modals
-.location-modal {
-  margin: 1rem;
+
+.closer-color {
+  color: $primary;
+  border-radius: 5px;
+  border-width: 2px;
+  border-color: $primary;
+}
+
+.custom-modal {
+  margin-top: 3rem;
+  margin-left: 1rem;
   max-height: 95vh;
-  max-width: 95vw;
+  max-width: 90vw;
+}
+
+.location-modal {
+  @media screen and (min-width: 480px) {
+    max-width: 95vw;
+  }
 }
 
 .leaderboard-modal {
-  margin: 1rem;
-  max-height: 95vh;
-  max-width: 95vw;
+  max-width: 90vw;
   h1 {
     color: $primary;
     font-weight: bold;
   }
+
 }
 
 .place-name {
@@ -119,7 +133,7 @@ $black: #000;
 // Icons
 
 .closing-square {
-    color: $primary;
+  color: $primary;
 }
 
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
