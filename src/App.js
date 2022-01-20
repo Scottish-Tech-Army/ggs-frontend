@@ -8,7 +8,6 @@ import ReactMapGL, {
 } from "react-map-gl";
 import { Modal, Button } from "react-bootstrap";
 import Image from "react-bootstrap/Image";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function App(props) {
   // Set up Mapbox credentials and map
@@ -100,7 +99,7 @@ export default function App(props) {
   const [cityName, setCityName] = useState([]);
 
   return (
-    <div className="container-fluid">
+    <div className="container-fluid" style={{paddingLeft: '0px', paddingRight: '0px'}}>
       <ReactMapGL
         {...viewport}
         mapStyle="mapbox://styles/mapbox/streets-v11" // insert choice of map style here from Mapbox Studio
@@ -171,13 +170,13 @@ export default function App(props) {
               lineHeight: 1,
               position: "relative",
               top: -40,
-              right: -275,
+              right: -273,
               opacity: 1,
               backgroundColor: "white",
               paddingTop: 0,
               paddingBottom: 4,
-              paddingLeft: 4,
-              paddingRight: 4,
+              paddingLeft: 6,
+              paddingRight: 6,
               marginTop: 4,
             }}
             bsPrefix="closer-color"
@@ -221,13 +220,13 @@ export default function App(props) {
               lineHeight: 1,
               position: "relative",
               top: -40,
-              right: -275,
+              right: -273,
               opacity: 1,
               backgroundColor: "white",
               paddingTop: 0,
               paddingBottom: 4,
-              paddingLeft: 4,
-              paddingRight: 4,
+              paddingLeft: 6,
+              paddingRight: 6,
               marginTop: 4,
             }}
             bsPrefix="closer-color"

@@ -76,7 +76,6 @@ $black: #000;
 // BOOTSTRAP 4 BSPREFIXES END
 
 // BOOTSTRAP 4 CUSTOMISATIONS
-
 // Containers
 .container-fluid {
   padding: 0;
@@ -97,6 +96,8 @@ $black: #000;
   margin-left: 1rem;
   max-height: 95vh;
   max-width: 90vw;
+  overflow-x: visible !important; // This allows close buttons to position and display beyond the modal border
+  overflow-y: visible !important; // This allows close buttons to position and display beyond the modal border
 }
 
 .location-modal {
@@ -111,7 +112,6 @@ $black: #000;
     color: $primary;
     font-weight: bold;
   }
-
 }
 
 .place-name {
@@ -128,12 +128,6 @@ $black: #000;
   font-size: large;
   text-align: center;
   margin-bottom: 0.5rem;
-}
-
-// Icons
-
-.closing-square {
-  color: $primary;
 }
 
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";

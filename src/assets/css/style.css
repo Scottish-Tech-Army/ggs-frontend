@@ -63,6 +63,8 @@
   margin-left: 1rem;
   max-height: 95vh;
   max-width: 90vw;
+  overflow-x: visible !important;
+  overflow-y: visible !important;
 }
 
 @media screen and (min-width: 480px) {
@@ -93,10 +95,6 @@
   font-size: large;
   text-align: center;
   margin-bottom: 0.5rem;
-}
-
-.closing-square {
-  color: #009cac;
 }
 
 /*!
@@ -11214,8 +11212,8 @@ textarea.form-control-lg {
   }
 }
 body {
-  margin: 0;
-  padding: 0;
+  margin: 0px !important;
+  padding: 0px !important;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -11240,19 +11238,6 @@ code {
 }
 .description {
   margin: 1rem 0;
-}
-
-.modal-header .closing-square {
-  position: relative;
-  right: -295px;
-  top: -25px;
-  opacity: 1;
-  background-color: white;
-}
-@media screen and (min-width: 480px) {
-  .modal-header .closing-square {
-    left: 95%;
-  }
 }
 
 .mapboxgl-ctr .mapboxgl-ctrl-zoom-in .mapboxgl-ctrl-icon button {
