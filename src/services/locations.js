@@ -4,7 +4,7 @@ export function getLocations() {
   return fetch(baseURL + "locations")
   .then((data) => data.json())
   .catch(err => {
-    console.log(err)
+    console.error(err)
   });
 }
 
@@ -27,6 +27,20 @@ export function getLocationsAuth(token) {
   })
   .then((data) => data.json())
   .catch(err => {
-    console.log(err)
+    console.error(err)
+  });
+}
+
+export function collectLocation(token, id) {
+  return fetch(baseURL + "unit/collect", {
+    method: 'POST',
+    headers: {
+      'Authorization': 'Bearer ' + token
+    },
+    body: JSON.stringify({ id }),
+  })
+  .then((data) => data.json())
+  .catch(err => {
+    console.error(err)
   });
 }

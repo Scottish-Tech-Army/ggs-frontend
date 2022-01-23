@@ -14,7 +14,6 @@ const AuthProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-      console.log(JSON.stringify(token.data))
     window.localStorage.setItem('ggsToken', JSON.stringify(token.data));
   }, [token.data]);
 
