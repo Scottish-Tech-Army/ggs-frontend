@@ -19,8 +19,8 @@
 
 .btn-leaderboard {
   position: relative;
-  margin-top: 92.5vh;
-  margin-left: 30vw;
+  top: 93%;
+  left: 31%;
   border-radius: 5px;
   border-style: solid;
   border-width: 0.2rem;
@@ -33,6 +33,30 @@
   color: #c40063;
   font-weight: bold;
 }
+@media screen and (min-width: 480px) {
+  .btn-leaderboard {
+    top: 95%;
+    left: 40%;
+  }
+}
+@media screen and (min-width: 1080px) {
+  .btn-leaderboard {
+    top: 93%;
+    left: 41%;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .btn-leaderboard {
+    top: 93%;
+    left: 45%;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .btn-leaderboard {
+    top: 94%;
+    left: 45%;
+  }
+}
 
 .btn-leaderboard:active {
   background-color: #c40063;
@@ -40,12 +64,6 @@
   border-color: #fff;
 }
 
-@media screen and (min-width: 480px) {
-  .btn-leaderboard {
-    margin-top: 93vh;
-    margin-left: 47vw;
-  }
-}
 .container-fluid, .container-xxl, .container-xl, .container-lg, .container-md, .container-sm {
   padding: 0;
   margin: 0;
@@ -11238,6 +11256,22 @@ code {
 }
 .description {
   margin: 1rem 0;
+}
+
+.closer-position {
+  font-size: 30px;
+  font-weight: bold;
+  line-height: 1;
+  position: relative;
+  opacity: 1;
+  background-color: white;
+  padding-top: 0px;
+  padding-bottom: 4px;
+  padding-left: 6px;
+  padding-right: 6px;
+  margin-top: 4px;
+  top: -38px;
+  left: 100%;
 }
 
 .mapboxgl-ctr .mapboxgl-ctrl-zoom-in .mapboxgl-ctrl-icon button {

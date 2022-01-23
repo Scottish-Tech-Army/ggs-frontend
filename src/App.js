@@ -164,21 +164,7 @@ export default function App(props) {
           <Button
             variant="outline-primary"
             onClick={handleCloseLocation}
-            style={{
-              fontSize: 30,
-              fontWeight: "bold",
-              lineHeight: 1,
-              position: "relative",
-              top: -40,
-              right: -273,
-              opacity: 1,
-              backgroundColor: "white",
-              paddingTop: 0,
-              paddingBottom: 4,
-              paddingLeft: 6,
-              paddingRight: 6,
-              marginTop: 4,
-            }}
+            className="closer-position"
             bsPrefix="closer-color"
           >
             &times;
@@ -214,21 +200,7 @@ export default function App(props) {
           <Button
             variant="outline-primary"
             onClick={handleCloseLeaderboard}
-            style={{
-              fontSize: 30,
-              fontWeight: "bold",
-              lineHeight: 1,
-              position: "relative",
-              top: -40,
-              right: -273,
-              opacity: 1,
-              backgroundColor: "white",
-              paddingTop: 0,
-              paddingBottom: 4,
-              paddingLeft: 6,
-              paddingRight: 6,
-              marginTop: 4,
-            }}
+            className="closer-position"
             bsPrefix="closer-color"
           >
             &times;
