@@ -1,17 +1,21 @@
-import React, {useState } from "react";
+import React, { useState, useContext } from 'react';
+import { authContext } from '../contexts/AuthContext';
 import { login } from "../services/auth";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form'
 
-const LoginModal = ({setAuthToken, showLogin, handleLoginClose}) => {
+const LoginModal = ({showLogin, handleLoginClose}) => {
+  const { setTokenData} = useContext(authContext);
+
+
     const [code, setCode] = useState("");
     const [error, setError] = useState("");
 
   const handleLogin = (event) => {
       login(code)
       .then((token) => {
-        setAuthToken(token);
+        setTokenData(token);
         setCode("");
         handleLoginClose();
       })

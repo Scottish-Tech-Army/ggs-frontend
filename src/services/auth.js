@@ -8,9 +8,10 @@ export function login(code) {
     },
     body: JSON.stringify({ code }),
   }).then(response =>{
+    console.log(response);
     if (response.ok)
     {
-        return response.json
+        return response.json();
     }
     throw response;
   })
