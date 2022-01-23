@@ -160,7 +160,7 @@ export default function App(props) {
         key={locationData.id}
         className="custom-modal location-modal"
       >
-        <Modal.Header className="border-0">
+        <Modal.Header className="border-0 mb-n4">
           <Button
             variant="outline-primary"
             onClick={handleCloseLocation}
@@ -170,7 +170,7 @@ export default function App(props) {
             &times;
           </Button>
         </Modal.Header>
-        <Modal.Body scrollable>
+        <Modal.Body scrollable className="mt-n5">
           <div className="place-name">{locationData.name}</div>
           <div className="city-name">{cityName}</div>
           <Image
@@ -196,7 +196,7 @@ export default function App(props) {
         onHide={handleCloseLeaderboard}
         className="custom-modal leaderboard-modal"
       >
-        <Modal.Header className="border-0">
+        <Modal.Header className="border-0 mb-n4">
           <Button
             variant="outline-primary"
             onClick={handleCloseLeaderboard}
@@ -206,7 +206,7 @@ export default function App(props) {
             &times;
           </Button>
         </Modal.Header>
-        <Modal.Body scrollable>
+        <Modal.Body scrollable className="mt-n5">
           <h1>Leaderboard</h1>
           Generic image followed by top 10 units by number of locations
           collected.
