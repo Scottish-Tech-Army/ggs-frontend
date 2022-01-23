@@ -19,8 +19,8 @@
 
 .btn-leaderboard {
   position: relative;
-  top: 93%;
-  left: 31%;
+  top: 85%;
+  left: 26%;
   border-radius: 5px;
   border-style: solid;
   border-width: 0.2rem;
@@ -32,6 +32,18 @@
   padding-right: 1rem;
   color: #c40063;
   font-weight: bold;
+}
+@media screen and (min-width: 360px) {
+  .btn-leaderboard {
+    top: 93%;
+    left: 31%;
+  }
+}
+@media screen and (min-width: 393px) {
+  .btn-leaderboard {
+    top: 94%;
+    left: 31%;
+  }
 }
 @media screen and (min-width: 480px) {
   .btn-leaderboard {
