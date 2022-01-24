@@ -1,0 +1,61 @@
+@use "custom";
+
+// CUSTOM ELEMENTS
+// GENERAL
+
+body {
+  margin: 0px !important;
+  padding: 0px !important;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+// IMAGE
+.img-location {
+  display: block;
+  margin: auto;
+  max-height: 24vh;
+  max-width: 100%;
+}
+
+@media screen and (min-width: 480px) {
+  .img-location {
+    max-height: 30vh;
+    max-width: 100%;
+  }
+}
+
+// MODAL
+.description {
+  margin: 1rem 0;
+}
+
+// CLOSING BUTTON
+.closer-position {
+  font-size: 30px;
+  font-weight: bold;
+  line-height: 1;
+  position: relative;
+  opacity: 1;
+  background-color: white;
+  padding-top: 0px;
+  padding-bottom: 4px;
+  padding-left: 6px;
+  padding-right: 6px;
+  margin-top: 4px;
+  top: -38px;
+  left: 100%;
+}
+
+// FOR MAP
+.mapboxgl-ctr .mapboxgl-ctrl-zoom-in .mapboxgl-ctrl-icon button {
+  width: 100%;
+  height: 100%;
+}

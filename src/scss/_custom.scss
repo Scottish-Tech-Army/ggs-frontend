@@ -1,0 +1,150 @@
+// COLOUR OVERRIDES
+$teal: #009cac;
+$pink: #c40063;
+$mutedPink: #ce74a1;
+// theme colours
+$primary: $teal;
+$secondary: $pink;
+$muted-secondary: $mutedPink;
+
+// scss-docs-start gray-color-variables
+$white: #fff;
+$gray-100: #f8f9fa;
+$gray-200: #e9ecef;
+$gray-300: #dee2e6;
+$gray-400: #ced4da;
+$gray-500: #adb5bd;
+$gray-600: #6c757d;
+$gray-700: #495057;
+$gray-800: #343a40;
+$gray-900: #212529;
+$black: #000;
+// scss-docs-end gray-color-variables
+
+// BOOTSTRAP 4 CUSTOMISATIONS
+
+// BOOTSTRAP 4 BSPREFIXES START
+// Buttons
+.btn-branding {
+  background-color: $secondary;
+  color: $white;
+  margin: 0.7rem;
+  border-radius: 5px;
+  border-style: none;
+  padding: 0.4rem;
+  font-weight: bold;
+}
+
+.btn-branding-in-range {
+  background-color: $secondary;
+}
+
+.btn-branding-out-of-range {
+  background-color: $muted-secondary;
+}
+
+.btn-leaderboard {
+  position: relative;
+  top: 85%;
+  left: 26%;
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 0.2rem;
+  border-color: $secondary;
+  background-color: $white;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  color: $secondary;
+  font-weight: bold;
+  @media screen and (min-width: 360px) {
+    top: 93%;
+    left: 31%;
+  }
+  @media screen and (min-width: 393px) {
+    top: 94%;
+    left: 31%;
+  }
+  @media screen and (min-width: 480px) {
+    top: 95%;
+    left: 40%;
+  }
+  @media screen and (min-width: 1080px) {
+    top: 93%;
+    left: 41%;
+  }
+  @media screen and (min-width: 1280px) {
+    top: 93%;
+    left: 45%;
+  }
+  @media screen and (min-width: 1440px) {
+    top: 94%;
+    left: 45%;
+    }
+}
+.btn-leaderboard:active {
+  background-color: $secondary;
+  color: $white;
+  border-color: $white;
+}
+
+// BOOTSTRAP 4 BSPREFIXES END
+
+// BOOTSTRAP 4 CUSTOMISATIONS
+// Containers
+.container-fluid {
+  padding: 0;
+  margin: 0;
+}
+
+// Modals
+
+.closer-color {
+  color: $primary;
+  border-radius: 5px;
+  border-width: 2px;
+  border-color: $primary;
+}
+
+.custom-modal {
+  margin-top: 3rem;
+  margin-left: 1rem;
+  max-height: 95vh;
+  max-width: 90vw;
+  overflow-x: visible !important; // This allows close buttons to position and display beyond the modal border
+  overflow-y: visible !important; // This allows close buttons to position and display beyond the modal border
+}
+
+.location-modal {
+  @media screen and (min-width: 480px) {
+    max-width: 95vw;
+  }
+}
+
+.leaderboard-modal {
+  max-width: 90vw;
+  h1 {
+    color: $primary;
+    font-weight: bold;
+  }
+}
+
+.place-name {
+  color: $primary;
+  font-weight: bold;
+  font-size: x-large;
+  text-align: center;
+  margin-bottom: 0.1rem;
+}
+
+.city-name {
+  color: $primary;
+  font-weight: bold;
+  font-size: large;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+$enable-negative-margins: true;
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
