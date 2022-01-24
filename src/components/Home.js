@@ -21,12 +21,13 @@ export default function App() {
   const [viewport, setViewport] = useState({
     height: "100vh",
     width: "100vw",
+
     latitude: 55.952014,
     longitude: -3.190728,
     zoom: 14, // use 14 when zooming to standard view, 9 for wider Edinburgh.
     mapboxApiAccessToken: MAPBOX_TOKEN,
   });
-
+  
   // Get the locations collection
   const [locations, setLocations] = useState([]);
 
@@ -49,7 +50,7 @@ export default function App() {
 
   // Update currently viewed location's latitude
   const [locLat, setLocLat] = useState("");
-
+  
   const navControlStyle = {
     right: 10,
     top: 10,
@@ -112,6 +113,7 @@ export default function App() {
       className="container-fluid"
       style={{ paddingLeft: "0px", paddingRight: "0px" }}
     >
+
       <ReactMapGL
         {...viewport}
         mapStyle="mapbox://styles/mapbox/streets-v11" // insert choice of map style here from Mapbox Studio
@@ -132,6 +134,7 @@ export default function App() {
                 handleShowLocation();
                 setLocationData(location);
                 console.log(locationData);
+
                 if (location.photos.length > 0) {
                   setImgUrl(location.photos[0].url);
                   // console.log("photo: " + location.photos[0].url);
@@ -186,3 +189,4 @@ export default function App() {
     </div>
   );
 }
+
