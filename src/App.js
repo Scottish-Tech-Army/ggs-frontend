@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from "react";
 import Pin from "./components/Pin";
+import LeaderboardModal from "./components/LeaderboardModal";
+import LocationModal from "./components/LocationModal";
 import { getLocations } from "./services/locations";
 import ReactMapGL, {
   GeolocateControl,
   Marker,
   NavigationControl,
 } from "react-map-gl";
-import { Modal, Button } from "react-bootstrap";
-import Image from "react-bootstrap/Image";
+import Button from "react-bootstrap/Button";
 
-export default function App(props) {
+
+export default function App() {
   // Set up Mapbox credentials and map
   const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 
   const [viewport, setViewport] = useState({
-    height: "99vh",
-    width: "99vw",
+    height: "100vh",
+    width: "100vw",
     latitude: 55.952014,
     longitude: -3.190728,
     zoom: 14, // use 14 when zooming to standard view, 9 for wider Edinburgh.
@@ -99,7 +101,10 @@ export default function App(props) {
   const [cityName, setCityName] = useState([]);
 
   return (
-    <div className="container-fluid" style={{paddingLeft: '0px', paddingRight: '0px'}}>
+    <div
+      className="container-fluid"
+      style={{ paddingLeft: "0px", paddingRight: "0px" }}
+    >
       <ReactMapGL
         {...viewport}
         mapStyle="mapbox://styles/mapbox/streets-v11" // insert choice of map style here from Mapbox Studio
@@ -154,65 +159,19 @@ export default function App(props) {
           Leaderboard
         </Button>
       </ReactMapGL>
-      <Modal
-        show={showLocation}
-        onHide={handleCloseLocation}
-        key={locationData.id}
-        className="custom-modal location-modal"
-      >
-        <Modal.Header className="border-0 mb-n4">
-          <Button
-            variant="outline-primary"
-            onClick={handleCloseLocation}
-            className="closer-position"
-            bsPrefix="closer-color"
-          >
-            &times;
-          </Button>
-        </Modal.Header>
-        <Modal.Body scrollable className="mt-n5">
-          <div className="place-name">{locationData.name}</div>
-          <div className="city-name">{cityName}</div>
-          <Image
-            className="img-location"
-            src={imgUrl}
-            alt={"image " + imgUrl}
-            rounded
-          />
-          <div className="description">{locationData.description}</div>
-        </Modal.Body>
-        <Button
-          bsPrefix="btn-branding"
-          onClick={handleCloseLocation}
-          className={
-            isOutOfRange ? "btn-branding-out-of-range" : "btn-branding-in-range"
-          }
-        >
-          {collectButtonText}
-        </Button>
-      </Modal>
-      <Modal
-        show={showLeaderboard}
-        onHide={handleCloseLeaderboard}
-        className="custom-modal leaderboard-modal"
-      >
-        <Modal.Header className="border-0 mb-n4">
-          <Button
-            variant="outline-primary"
-            onClick={handleCloseLeaderboard}
-            className="closer-position"
-            bsPrefix="closer-color"
-          >
-            &times;
-          </Button>
-        </Modal.Header>
-        <Modal.Body scrollable className="mt-n5">
-          <h1>Leaderboard</h1>
-          Generic image followed by top 10 units by number of locations
-          collected.
-          <div className="units-list"></div>
-        </Modal.Body>
-      </Modal>
+      <LocationModal
+        showLocation={showLocation}
+        handleCloseLocation={handleCloseLocation}
+        collectButtonText={collectButtonText}
+        locationData={locationData}
+        cityName={cityName}
+        imgUrl={imgUrl}
+        isOutOfRange={isOutOfRange}
+      />
+      <LeaderboardModal
+        showLeaderboard={showLeaderboard}
+        handleCloseLeaderboard={handleCloseLeaderboard}
+      />
     </div>
   );
 }
