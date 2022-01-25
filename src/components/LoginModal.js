@@ -31,8 +31,6 @@ const LoginModal = ({showLogin, handleLoginClose}) => {
         onHide={handleLoginClose}
         backdrop="static"
         keyboard={false}
-        //centered
-        //size="lg"
         className="custom-modal login-modal"
       >
         <Modal.Header className="border-0 mb-n4">
@@ -58,7 +56,7 @@ const LoginModal = ({showLogin, handleLoginClose}) => {
             </Form.Group>
             <Button bsPrefix="btn-branding w-75 my-2 mx-4" type="submit">Start Exploring</Button>
           </Form>
-          {error && <p>{error}: Please enter your membership number.</p>}
+          {error && <p style={{color: "red"}}>{error}: Please enter your membership number.</p>}
         </Modal.Body>
       </Modal>
   );
