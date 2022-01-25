@@ -115,6 +115,10 @@
   font-weight: bold;
 }
 
+.error-text {
+  color: #c40063;
+}
+
 .place-name {
   color: #009cac;
   font-weight: bold;

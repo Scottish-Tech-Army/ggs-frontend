@@ -44,19 +44,20 @@ const LoginModal = ({showLogin, handleLoginClose}) => {
           </Button>
         </Modal.Header>
         <Modal.Body scrollable className="mt-n5">
-          <h1 style={{textAlign: "center"}}>Girl Guiding Scotland Treasure Hunt</h1>
-          <Form className="m-3" onSubmit={handleLogin}>
+          <h1 style={{textAlign: "center"}}>Ready to explore?</h1>
+          <p className="text-center mb-5">Visit and collect all of the sights in your region or explore others</p>
+          {error && <p className="error-text text-center mt-n5">Invalid code - please try again.</p>}
+          <Form className="m-2" onSubmit={handleLogin}>
             <Form.Group controlId="formBasicCode">
                 <Form.Control 
                 value={code} 
                 onChange={(e) => setCode(e.target.value)}
                 type="password" 
                 placeholder="Enter code"
-                className="w-75 my-2 mx-4" />
+                className="w-100 my-2 mx-auto" />
             </Form.Group>
-            <Button bsPrefix="btn-branding w-75 my-2 mx-4" type="submit">Start Exploring</Button>
+            <Button bsPrefix="btn-branding w-100 my-2 mx-auto" type="submit">Start Exploring</Button>
           </Form>
-          {error && <p style={{color: "red"}}>{error}: Please enter your membership number.</p>}
         </Modal.Body>
       </Modal>
   );
