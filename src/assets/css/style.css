@@ -2,7 +2,6 @@
 .btn-branding {
   background-color: #c40063;
   color: #fff;
-  margin: 0.7rem;
   border-radius: 5px;
   border-style: none;
   padding: 0.4rem;
@@ -107,6 +106,11 @@
   max-width: 90vw;
 }
 .leaderboard-modal h1, .leaderboard-modal .h1 {
+  color: #009cac;
+  font-weight: bold;
+}
+
+.login-modal h1, .login-modal .h1 {
   color: #009cac;
   font-weight: bold;
 }

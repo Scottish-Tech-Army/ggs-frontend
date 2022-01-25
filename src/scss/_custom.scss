@@ -28,7 +28,6 @@ $black: #000;
 .btn-branding {
   background-color: $secondary;
   color: $white;
-  margin: 0.7rem;
   border-radius: 5px;
   border-style: none;
   padding: 0.4rem;
@@ -124,6 +123,13 @@ $black: #000;
 
 .leaderboard-modal {
   max-width: 90vw;
+  h1 {
+    color: $primary;
+    font-weight: bold;
+  }
+}
+
+.login-modal {
   h1 {
     color: $primary;
     font-weight: bold;

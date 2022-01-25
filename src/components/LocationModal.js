@@ -36,7 +36,7 @@ const LocationModal = ({ showLocation, handleCloseLocation, locationData, cityNa
           bsPrefix="btn-branding"
           onClick={handleCloseLocation}
           className={
-            isOutOfRange ? "btn-branding-out-of-range" : "btn-branding-in-range"
+            isOutOfRange ? "btn-branding-out-of-range m-3" : "btn-branding-in-range m-3"
           }
         >
           {collectButtonText}

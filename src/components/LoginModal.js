@@ -31,22 +31,34 @@ const LoginModal = ({showLogin, handleLoginClose}) => {
         onHide={handleLoginClose}
         backdrop="static"
         keyboard={false}
-        centered
-        size="lg"
+        //centered
+        //size="lg"
+        className="custom-modal login-modal"
       >
-        <Modal.Body>
-          <Modal.Title>Modal title</Modal.Title>
-          <Form onSubmit={handleLogin}>
-            <Form.Group className="mb-3" controlId="formBasicCode">
+        <Modal.Header className="border-0 mb-n4">
+          <Button
+            variant="outline-primary"
+            onClick={handleLoginClose}
+            className="closer-position"
+            bsPrefix="closer-color"
+          >
+            &times;
+          </Button>
+        </Modal.Header>
+        <Modal.Body scrollable className="mt-n5">
+          <h1 style={{textAlign: "center"}}>Girl Guiding Scotland Treasure Hunt</h1>
+          <Form className="m-3" onSubmit={handleLogin}>
+            <Form.Group controlId="formBasicCode">
                 <Form.Control 
                 value={code} 
                 onChange={(e) => setCode(e.target.value)}
                 type="password" 
-                placeholder="Enter code" />
+                placeholder="Enter code"
+                className="w-75 my-2 mx-4" />
             </Form.Group>
-            <Button type="submit">Start Exploring</Button>
+            <Button bsPrefix="btn-branding w-75 my-2 mx-4" type="submit">Start Exploring</Button>
           </Form>
-          {error && <p>{error}</p>}
+          {error && <p>{error}: Please enter your membership number.</p>}
         </Modal.Body>
       </Modal>
   );
