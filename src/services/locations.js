@@ -32,14 +32,16 @@ export function getLocationsAuth(token) {
 }
 
 export function collectLocation(token, id) {
+  console.log( JSON.stringify({ id }))
   return fetch(baseURL + "unit/collect", {
     method: 'POST',
     headers: {
+      "Content-Type": "application/json",
       'Authorization': 'Bearer ' + token
     },
     body: JSON.stringify({ id }),
   })
-  .then((data) => data.json())
+  .then((data) => data)
   .catch(err => {
     console.error(err)
   });

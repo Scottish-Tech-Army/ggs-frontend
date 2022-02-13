@@ -1,13 +1,39 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Image from "react-bootstrap/Image";
+import { collectLocation } from "../services/locations";
+import { authContext } from '../contexts/AuthContext';
 
 const LocationModal = ({ showLocation, handleCloseLocation, locationData, cityName, imgUrl, collectButtonText, isOutOfRange }) => {
+  const { token } = useContext(authContext);
+  const [message, setMessage] = useState("");
+  const handleCollectLocation = (event) => {
+    collectLocation(token.data, locationData.id)
+    .then((response) => {
+      response.json()
+      .then(data => {
+        setMessage(data.message);
+        if (response.ok)
+        {      
+          setTimeout(closeLocationModel, 1000);
+        }
+      })
+    })
+    .catch(error => {
+        console.error(error);
+    });
+    event.preventDefault();
+    };
+
+    const closeLocationModel = () => {
+      setMessage("");
+      handleCloseLocation();
+    } 
   return (
     <Modal
         show={showLocation}
-        onHide={handleCloseLocation}
+        onHide={closeLocationModel}
         key={locationData.id}
         className="custom-modal location-modal"
       >
@@ -34,13 +60,15 @@ const LocationModal = ({ showLocation, handleCloseLocation, locationData, cityNa
         </Modal.Body>
         <Button
           bsPrefix="btn-branding"
-          onClick={handleCloseLocation}
+          onClick={handleCollectLocation}
+          disabled={isOutOfRange}
           className={
             isOutOfRange ? "btn-branding-out-of-range" : "btn-branding-in-range"
           }
         >
           {collectButtonText}
         </Button>
+        {message && <p>{message}</p>}
       </Modal>
   );
 };

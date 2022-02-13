@@ -33,7 +33,8 @@ export default function App() {
 
   useEffect(() => {
     if(token.data){
-      getLocationsAuth(token).then((items) => {
+      getLocationsAuth(token.data)
+      .then((items) => {
           setLocations(items);
       });
     }
