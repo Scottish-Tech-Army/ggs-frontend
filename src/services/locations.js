@@ -41,7 +41,6 @@ export function collectLocation(token, id) {
     },
     body: JSON.stringify({ id }),
   })
-  .then((data) => data)
   .catch(err => {
     console.error(err)
   });

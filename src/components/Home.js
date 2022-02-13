@@ -109,6 +109,15 @@ export default function App() {
   // Retrieve city name to match modal data
   const [cityName, setCityName] = useState([]);
 
+  const updateLocation = (id) => {
+    const index = locations.findIndex(i => i.id === id);
+    console.log(index)
+    let location = locations[index]
+    if(location){
+      location.Collected = true
+    }
+  }
+
   return (
     <div
       className="container-fluid"
@@ -178,6 +187,7 @@ export default function App() {
         cityName={cityName}
         imgUrl={imgUrl}
         isOutOfRange={isOutOfRange}
+        updateLocation={updateLocation}
       />
       <LeaderboardModal
         showLeaderboard={showLeaderboard}

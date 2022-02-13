@@ -5,7 +5,7 @@ import Image from "react-bootstrap/Image";
 import { collectLocation } from "../services/locations";
 import { authContext } from '../contexts/AuthContext';
 
-const LocationModal = ({ showLocation, handleCloseLocation, locationData, cityName, imgUrl, collectButtonText, isOutOfRange }) => {
+const LocationModal = ({ showLocation, handleCloseLocation, locationData, cityName, imgUrl, collectButtonText, isOutOfRange, updateLocation }) => {
   const { token } = useContext(authContext);
   const [message, setMessage] = useState("");
   const handleCollectLocation = (event) => {
@@ -16,6 +16,7 @@ const LocationModal = ({ showLocation, handleCloseLocation, locationData, cityNa
         setMessage(data.message);
         if (response.ok)
         {      
+          updateLocation(locationData.id)
           setTimeout(closeLocationModel, 1000);
         }
       })
