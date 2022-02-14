@@ -73,8 +73,8 @@ const LocationModal = ({
         disabled={isCollected || isOutOfRange}
         className={
           isCollected || isOutOfRange
-            ? "btn-branding-out-of-range"
-            : "btn-branding-in-range"
+            ? "btn-branding-disabled"
+            : "btn-branding-enabled"
         }
         
       >

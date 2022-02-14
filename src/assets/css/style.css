@@ -9,11 +9,11 @@
   font-weight: bold;
 }
 
-.btn-branding-in-range {
+.btn-branding-enabled {
   background-color: #c40063;
 }
 
-.btn-branding-out-of-range {
+.btn-branding-disabled {
   background-color: #ce74a1;
 }
 
