@@ -4,14 +4,13 @@ import LeaderboardModal from "./LeaderboardModal";
 import LocationModal from "./LocationModal";
 import LoginModal from "./LoginModal";
 import { getLocationsAuth } from "../services/locations";
-import { authContext } from '../contexts/AuthContext';
+import { authContext } from "../contexts/AuthContext";
 import ReactMapGL, {
   GeolocateControl,
   Marker,
   NavigationControl,
 } from "react-map-gl";
 import Button from "react-bootstrap/Button";
-
 
 export default function App() {
   const { token } = useContext(authContext);
@@ -27,18 +26,16 @@ export default function App() {
     zoom: 14, // use 14 when zooming to standard view, 9 for wider Edinburgh.
     mapboxApiAccessToken: MAPBOX_TOKEN,
   });
-  
+
   // Get the locations collection
   const [locations, setLocations] = useState([]);
 
   useEffect(() => {
-    if(token.data){
-      getLocationsAuth(token.data)
-      .then((items) => {
-          setLocations(items);
+    if (token.data) {
+      getLocationsAuth(token.data).then((items) => {
+        setLocations(items);
       });
-    }
-    else{
+    } else {
       handleLoginShow();
     }
   }, [token]);
@@ -51,7 +48,7 @@ export default function App() {
 
   // Update currently viewed location's latitude
   const [locLat, setLocLat] = useState("");
-  
+
   const navControlStyle = {
     right: 10,
     top: 10,
@@ -73,7 +70,11 @@ export default function App() {
   const locTolerance = 0.00001;
 
   // Adapt the collecting button depending on user's proximity to the landmark location
-  const [collectButtonText, setCollectButtonText] = useState("Start Exploring"); // default button text
+  // and the collection status of the landmark location
+  const [collectButtonText, setCollectButtonText] = useState(
+    "Start Exploring"
+  ); // default button text
+  const [isCollected, setIsCollected] = useState([]);
   const [isOutOfRange, setIsOutOfRange] = useState(false);
   const userRangeCheck = () => {
     if (
@@ -110,20 +111,19 @@ export default function App() {
   const [cityName, setCityName] = useState([]);
 
   const updateLocation = (id) => {
-    const index = locations.findIndex(i => i.id === id);
-    console.log(index)
-    let location = locations[index]
-    if(location){
-      location.Collected = true
+    const index = locations.findIndex((i) => i.id === id);
+    console.log(index);
+    let location = locations[index];
+    if (location) {
+      location.Collected = true;
     }
-  }
+  };
 
   return (
     <div
       className="container-fluid"
       style={{ paddingLeft: "0px", paddingRight: "0px" }}
     >
-
       <ReactMapGL
         {...viewport}
         mapStyle="mapbox://styles/mapbox/streets-v11" // insert choice of map style here from Mapbox Studio
@@ -140,11 +140,16 @@ export default function App() {
               onClick={() => {
                 setLocLng(location.longitude);
                 setLocLat(location.latitude);
-                userRangeCheck();
                 handleShowLocation();
                 setLocationData(location);
                 console.log(locationData);
-
+                setIsCollected(location.collected); // set isCollected here so can dynamically set button text for related modal
+                if (!isCollected) {
+                  userRangeCheck();
+                }
+                else {
+                  setCollectButtonText("Location collected");
+                }
                 if (location.photos.length > 0) {
                   setImgUrl(location.photos[0].url);
                   // console.log("photo: " + location.photos[0].url);
@@ -165,7 +170,9 @@ export default function App() {
                   });
               }}
             >
-              <Pin />
+              <Pin
+                isCollected={location.collected} // dynamically apply colour without triggering rerenders
+              />
             </Marker>
           ))}
         <NavigationControl style={navControlStyle} showCompass={false} />
@@ -187,17 +194,14 @@ export default function App() {
         cityName={cityName}
         imgUrl={imgUrl}
         isOutOfRange={isOutOfRange}
+        isCollected={isCollected}
         updateLocation={updateLocation}
       />
       <LeaderboardModal
         showLeaderboard={showLeaderboard}
         handleCloseLeaderboard={handleCloseLeaderboard}
       />
-            <LoginModal 
-      showLogin={showLogin} 
-      handleLoginClose={handleLoginClose} 
-      />
+      <LoginModal showLogin={showLogin} handleLoginClose={handleLoginClose} />
     </div>
   );
 }
-
