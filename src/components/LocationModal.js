@@ -14,7 +14,6 @@ const LocationModal = ({
   imgUrl,
   collectButtonText,
   isCollected,
-  setIsCollected,
   isOutOfRange,
   updateLocation,
 }) => {
@@ -28,7 +27,6 @@ const LocationModal = ({
           if (response.ok) {
             updateLocation(locationData.id);
             setTimeout(closeLocationModal, 1000);
-            setIsCollected(true);
           }
         });
       })

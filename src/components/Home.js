@@ -34,6 +34,7 @@ export default function App() {
     if (token.data) {
       getLocationsAuth(token.data).then((items) => {
         setLocations(items);
+        console.log(items); // temporary log
       });
     } else {
       handleLoginShow();
@@ -74,7 +75,6 @@ export default function App() {
   const [collectButtonText, setCollectButtonText] = useState(
     "Start Exploring"
   ); // default button text
-  const [isCollected, setIsCollected] = useState([]);
   const [isOutOfRange, setIsOutOfRange] = useState(false);
   const userRangeCheck = () => {
     if (
@@ -129,7 +129,7 @@ export default function App() {
         mapStyle="mapbox://styles/mapbox/streets-v11" // insert choice of map style here from Mapbox Studio
         onViewportChange={setViewport}
       >
-        {locations &&
+        { locations &&
           locations.map((location, index) => (
             <Marker
               key={location.id}
@@ -143,7 +143,6 @@ export default function App() {
                 handleShowLocation();
                 setLocationData(location);
                 console.log(locationData);
-                setIsCollected(location.collected); // set isCollected here so can dynamically set button text for related modal
                 userRangeCheck();
                 if (location.photos.length > 0) {
                   setImgUrl(location.photos[0].url);
@@ -167,9 +166,12 @@ export default function App() {
             >
               <Pin
                 isCollected={location.collected} // dynamically apply colour without triggering rerenders
+                locations={locations}
+                locId={location.id}
               />
             </Marker>
-          ))}
+          ))
+          }
         <NavigationControl style={navControlStyle} showCompass={false} />
         <GeolocateControl
           style={geolocateControlStyle}
@@ -189,8 +191,7 @@ export default function App() {
         cityName={cityName}
         imgUrl={imgUrl}
         isOutOfRange={isOutOfRange}
-        isCollected={isCollected}
-        setIsCollected={setIsCollected}
+        isCollected={locationData.collected}
         updateLocation={updateLocation}
       />
       <LeaderboardModal
