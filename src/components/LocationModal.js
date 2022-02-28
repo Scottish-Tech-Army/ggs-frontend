@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import Image from "react-bootstrap/Image";
 import { collectLocation } from "../services/locations";
 import { authContext } from "../contexts/AuthContext";
+import dividerLine from "./divider-line.svg";
 
 const LocationModal = ({
   showLocation,
@@ -13,6 +14,7 @@ const LocationModal = ({
   imgUrl,
   collectButtonText,
   isCollected,
+  setIsCollected,
   isOutOfRange,
   updateLocation,
 }) => {
@@ -25,7 +27,8 @@ const LocationModal = ({
           setMessage(data.message);
           if (response.ok) {
             updateLocation(locationData.id);
-            setTimeout(closeLocationModel, 1000);
+            setTimeout(closeLocationModal, 1000);
+            setIsCollected(true);
           }
         });
       })
@@ -35,28 +38,28 @@ const LocationModal = ({
     event.preventDefault();
   };
 
-  const closeLocationModel = () => {
+  const closeLocationModal = () => {
     setMessage("");
     handleCloseLocation();
   };
   return (
     <Modal
       show={showLocation}
-      onHide={closeLocationModel}
+      onHide={closeLocationModal}
       key={locationData.id}
       className="custom-modal location-modal"
     >
       <Modal.Header className="border-0 mb-n4">
         <Button
           variant="outline-primary"
-          onClick={handleCloseLocation}
+          onClick={closeLocationModal}
           className="closer-position"
           bsPrefix="closer-color"
         >
           &times;
         </Button>
       </Modal.Header>
-      <Modal.Body scrollable className="mt-n5">
+      <Modal.Body /* scrollable */ className="mt-n5">
         <div className="place-name">{locationData.name}</div>
         <div className="city-name">{cityName}</div>
         <Image
@@ -70,7 +73,7 @@ const LocationModal = ({
       <Button
         bsPrefix="btn-branding"
         onClick={handleCollectLocation}
-        disabled={isCollected || isOutOfRange}
+        disabled={isOutOfRange}
         className={
           isCollected || isOutOfRange
             ? "btn-branding-disabled"
@@ -80,7 +83,7 @@ const LocationModal = ({
       >
         {collectButtonText}
       </Button>
-      {message && <p>{message}</p>}
+      {message && <div className="container"><img src={dividerLine} style={{width: "100%"}} className="mx-auto d-block" alt="decorative pink line" /><p className="feedback-branding">{message}</p></div>}
     </Modal>
   );
 };

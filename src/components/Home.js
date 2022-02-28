@@ -144,12 +144,7 @@ export default function App() {
                 setLocationData(location);
                 console.log(locationData);
                 setIsCollected(location.collected); // set isCollected here so can dynamically set button text for related modal
-                if (!isCollected) {
-                  userRangeCheck();
-                }
-                else {
-                  setCollectButtonText("Location collected");
-                }
+                userRangeCheck();
                 if (location.photos.length > 0) {
                   setImgUrl(location.photos[0].url);
                   // console.log("photo: " + location.photos[0].url);
@@ -195,6 +190,7 @@ export default function App() {
         imgUrl={imgUrl}
         isOutOfRange={isOutOfRange}
         isCollected={isCollected}
+        setIsCollected={setIsCollected}
         updateLocation={updateLocation}
       />
       <LeaderboardModal
