@@ -16,6 +16,7 @@ const LocationModal = ({
   isCollected,
   isOutOfRange,
   updateLocation,
+  renderPins
 }) => {
   const { token } = useContext(authContext);
   const [message, setMessage] = useState("");
@@ -77,11 +78,20 @@ const LocationModal = ({
             ? "btn-branding-disabled"
             : "btn-branding-enabled"
         }
-        
       >
         {collectButtonText}
       </Button>
-      {message && <div className="container"><img src={dividerLine} style={{width: "100%"}} className="mx-auto d-block" alt="decorative pink line" /><p className="feedback-branding">{message}</p></div>}
+      {message && (
+        <div className="container">
+          <img
+            src={dividerLine}
+            style={{ width: "100%" }}
+            className="mx-auto d-block"
+            alt="decorative pink line"
+          />
+          <p className="feedback-branding">{message}</p>
+        </div>
+      )}
     </Modal>
   );
 };

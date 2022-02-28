@@ -72,9 +72,7 @@ export default function App() {
 
   // Adapt the collecting button depending on user's proximity to the landmark location
   // and the collection status of the landmark location
-  const [collectButtonText, setCollectButtonText] = useState(
-    "Start Exploring"
-  ); // default button text
+  const [collectButtonText, setCollectButtonText] = useState("Start Exploring"); // default button text
   const [isOutOfRange, setIsOutOfRange] = useState(false);
   const userRangeCheck = () => {
     if (
@@ -110,6 +108,54 @@ export default function App() {
   // Retrieve city name to match modal data
   const [cityName, setCityName] = useState([]);
 
+  // Render pins over the map
+  const renderPins = () => {
+    return (
+      locations &&
+      locations.map((location, index) => (
+        <Marker
+          key={location.id}
+          index={index}
+          marker={location}
+          latitude={location.latitude}
+          longitude={location.longitude}
+          onClick={() => {
+            setLocLng(location.longitude);
+            setLocLat(location.latitude);
+            handleShowLocation();
+            setLocationData(location);
+            console.log(locationData);
+            userRangeCheck();
+            if (location.photos.length > 0) {
+              setImgUrl(location.photos[0].url);
+              // console.log("photo: " + location.photos[0].url);
+            } else {
+              setImgUrl("missing");
+            }
+            fetch(
+              "https://api.mapbox.com/geocoding/v5/mapbox.places/" +
+                location.longitude +
+                "," +
+                location.latitude +
+                ".json?access_token=" +
+                MAPBOX_TOKEN
+            )
+              .then((response) => response.json())
+              .then((json) => {
+                setCityName(json.features[3].text);
+              });
+          }}
+        >
+          <Pin
+            isCollected={location.collected} // dynamically apply colour without triggering rerenders
+            locations={locations}
+            locId={location.id}
+          />
+        </Marker>
+      ))
+    );
+  };
+
   const updateLocation = (id) => {
     const index = locations.findIndex((i) => i.id === id);
     console.log(index);
@@ -129,49 +175,7 @@ export default function App() {
         mapStyle="mapbox://styles/mapbox/streets-v11" // insert choice of map style here from Mapbox Studio
         onViewportChange={setViewport}
       >
-        { locations &&
-          locations.map((location, index) => (
-            <Marker
-              key={location.id}
-              index={index}
-              marker={location}
-              latitude={location.latitude}
-              longitude={location.longitude}
-              onClick={() => {
-                setLocLng(location.longitude);
-                setLocLat(location.latitude);
-                handleShowLocation();
-                setLocationData(location);
-                console.log(locationData);
-                userRangeCheck();
-                if (location.photos.length > 0) {
-                  setImgUrl(location.photos[0].url);
-                  // console.log("photo: " + location.photos[0].url);
-                } else {
-                  setImgUrl("missing");
-                }
-                fetch(
-                  "https://api.mapbox.com/geocoding/v5/mapbox.places/" +
-                    location.longitude +
-                    "," +
-                    location.latitude +
-                    ".json?access_token=" +
-                    MAPBOX_TOKEN
-                )
-                  .then((response) => response.json())
-                  .then((json) => {
-                    setCityName(json.features[3].text);
-                  });
-              }}
-            >
-              <Pin
-                isCollected={location.collected} // dynamically apply colour without triggering rerenders
-                locations={locations}
-                locId={location.id}
-              />
-            </Marker>
-          ))
-          }
+        {renderPins()}
         <NavigationControl style={navControlStyle} showCompass={false} />
         <GeolocateControl
           style={geolocateControlStyle}
@@ -193,6 +197,7 @@ export default function App() {
         isOutOfRange={isOutOfRange}
         isCollected={locationData.collected}
         updateLocation={updateLocation}
+        renderPins={renderPins}
       />
       <LeaderboardModal
         showLeaderboard={showLeaderboard}
