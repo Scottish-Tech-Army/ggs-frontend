@@ -40,7 +40,6 @@ export default function App() {
       });
       getLeaderboardAuth(token.data).then((entries) => {
         setLeaderboard(entries);
-        console.log("Token used to getLeaderboardAuth: " + token.data);
       });
     } else {
       handleLoginShow();
