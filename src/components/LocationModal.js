@@ -13,10 +13,8 @@ const LocationModal = ({
   cityName,
   imgUrl,
   collectButtonText,
-  isCollected,
   isOutOfRange,
   updateLocation,
-  renderPins
 }) => {
   const { token } = useContext(authContext);
   const [message, setMessage] = useState("");
@@ -72,12 +70,12 @@ const LocationModal = ({
       <Button
         bsPrefix="btn-branding"
         onClick={handleCollectLocation}
-        disabled={isOutOfRange}
-        className={
-          isCollected || isOutOfRange
-            ? "btn-branding-disabled"
-            : "btn-branding-enabled"
-        }
+        disabled={false}
+        // className={
+        //   locationData.collected || isOutOfRange
+        //     ? "btn-branding-disabled"
+        //     : "btn-branding-enabled"
+        // }
       >
         {collectButtonText}
       </Button>

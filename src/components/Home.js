@@ -1,13 +1,13 @@
 import React, { useEffect, useState, useContext } from "react";
-import Pin from "./Pin";
+
 import LeaderboardModal from "./LeaderboardModal";
 import LocationModal from "./LocationModal";
 import LoginModal from "./LoginModal";
+import Markers from "./Markers";
 import { getLocationsAuth } from "../services/locations";
 import { authContext } from "../contexts/AuthContext";
 import ReactMapGL, {
   GeolocateControl,
-  Marker,
   NavigationControl,
 } from "react-map-gl";
 import Button from "react-bootstrap/Button";
@@ -40,7 +40,7 @@ export default function App() {
       handleLoginShow();
     }
   }, [token]);
-
+  useEffect(()=>{},[locations])
   // Update modal img src
   const [imgUrl, setImgUrl] = useState("");
 
@@ -108,62 +108,12 @@ export default function App() {
   // Retrieve city name to match modal data
   const [cityName, setCityName] = useState([]);
 
-  // Render pins over the map
-  const renderPins = () => {
-    return (
-      locations &&
-      locations.map((location, index) => (
-        <Marker
-          key={location.id}
-          index={index}
-          marker={location}
-          latitude={location.latitude}
-          longitude={location.longitude}
-          onClick={() => {
-            setLocLng(location.longitude);
-            setLocLat(location.latitude);
-            handleShowLocation();
-            setLocationData(location);
-            console.log(locationData);
-            userRangeCheck();
-            if (location.photos.length > 0) {
-              setImgUrl(location.photos[0].url);
-              // console.log("photo: " + location.photos[0].url);
-            } else {
-              setImgUrl("missing");
-            }
-            fetch(
-              "https://api.mapbox.com/geocoding/v5/mapbox.places/" +
-                location.longitude +
-                "," +
-                location.latitude +
-                ".json?access_token=" +
-                MAPBOX_TOKEN
-            )
-              .then((response) => response.json())
-              .then((json) => {
-                setCityName(json.features[3].text);
-              });
-          }}
-        >
-          <Pin
-            isCollected={location.collected} // dynamically apply colour without triggering rerenders
-            locations={locations}
-            locId={location.id}
-          />
-        </Marker>
-      ))
-    );
-  };
-
   const updateLocation = (id) => {
     const index = locations.findIndex((i) => i.id === id);
-    console.log(index);
-    let location = locations[index];
-    if (location) {
-      location.Collected = true;
-    }
-  };
+    const locationList = [...locations];
+    locationList[index].collected = true;
+    setLocations(locationList);
+    };
 
   return (
     <div
@@ -175,7 +125,16 @@ export default function App() {
         mapStyle="mapbox://styles/mapbox/streets-v11" // insert choice of map style here from Mapbox Studio
         onViewportChange={setViewport}
       >
-        {renderPins()}
+        <Markers
+         locations={locations}
+         setLocLng={setLocLng}
+         setLocLat={setLocLat}
+         handleShowLocation={handleShowLocation}
+         setLocationData={setLocationData}
+         userRangeCheck={userRangeCheck}
+         setImgUrl={setImgUrl}
+         setCityName={setCityName}
+        />
         <NavigationControl style={navControlStyle} showCompass={false} />
         <GeolocateControl
           style={geolocateControlStyle}
@@ -195,9 +154,7 @@ export default function App() {
         cityName={cityName}
         imgUrl={imgUrl}
         isOutOfRange={isOutOfRange}
-        isCollected={locationData.collected}
         updateLocation={updateLocation}
-        renderPins={renderPins}
       />
       <LeaderboardModal
         showLeaderboard={showLeaderboard}
