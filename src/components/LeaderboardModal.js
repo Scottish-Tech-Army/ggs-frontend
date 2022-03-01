@@ -22,12 +22,12 @@ const LeaderboardModal = ({ showLeaderboard, handleCloseLeaderboard, leaderboard
       <Modal.Body className="mt-n5">
         <h1>Leaderboard</h1>
         <div className="generic-photo" style={{height:"100px", width: "100%", backgroundColor: "teal", color: "white", textAlign: "center", fontSize: "20px"}}>A photo from the GGS collection will appear here.</div>
-        <ol class="list-group list-group-numbered">
+        <ol className="list-group list-group-numbered">
         {
           leaderboard &&
-          leaderboard.sort((a, b) => (a.percentageCollected < b.percentageCollected) ? 1 : -1).map((data) => (
-            <li className="list-group-item d-flex justify-content-evenly align-items-center">{data.area} 
-            <span>{data.percentageCollected}%</span>
+          leaderboard.sort((a, b) => (a.percentageCollected < b.percentageCollected) ? 1 : -1).map((data, index) => (
+            <li className="list-group-item d-flex justify-content-evenly align-items-center" key={index}>{data.area} 
+            <span className="color-primary">{data.percentageCollected}%</span>
             </li>
           ))
         }
