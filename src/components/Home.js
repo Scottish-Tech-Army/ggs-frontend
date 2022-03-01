@@ -4,14 +4,14 @@ import LeaderboardModal from "./LeaderboardModal";
 import LocationModal from "./LocationModal";
 import LoginModal from "./LoginModal";
 import { getLocationsAuth } from "../services/locations";
-import { authContext } from '../contexts/AuthContext';
+import { authContext } from "../contexts/AuthContext";
 import ReactMapGL, {
   GeolocateControl,
   Marker,
   NavigationControl,
 } from "react-map-gl";
 import Button from "react-bootstrap/Button";
-
+import { getLeaderboardAuth } from "../services/leaderboard";
 
 export default function App() {
   const { token } = useContext(authContext);
@@ -27,17 +27,22 @@ export default function App() {
     zoom: 14, // use 14 when zooming to standard view, 9 for wider Edinburgh.
     mapboxApiAccessToken: MAPBOX_TOKEN,
   });
-  
+
   // Get the locations collection
   const [locations, setLocations] = useState([]);
+  // Get the leaderboard collection
+  const [leaderboard, setLeaderboard] = useState([]);
 
   useEffect(() => {
-    if(token.data){
-      getLocationsAuth(token).then((items) => {
-          setLocations(items);
+    if (token.data) {
+      getLocationsAuth(token.data).then((items) => {
+        setLocations(items);
       });
-    }
-    else{
+      getLeaderboardAuth(token.data).then((entries) => {
+        setLeaderboard(entries);
+        console.log("Token used to getLeaderboardAuth: " + token.data);
+      });
+    } else {
       handleLoginShow();
     }
   }, [token]);
@@ -50,7 +55,7 @@ export default function App() {
 
   // Update currently viewed location's latitude
   const [locLat, setLocLat] = useState("");
-  
+
   const navControlStyle = {
     right: 10,
     top: 10,
@@ -113,7 +118,6 @@ export default function App() {
       className="container-fluid"
       style={{ paddingLeft: "0px", paddingRight: "0px" }}
     >
-
       <ReactMapGL
         {...viewport}
         mapStyle="mapbox://styles/mapbox/streets-v11" // insert choice of map style here from Mapbox Studio
@@ -181,12 +185,9 @@ export default function App() {
       <LeaderboardModal
         showLeaderboard={showLeaderboard}
         handleCloseLeaderboard={handleCloseLeaderboard}
+        leaderboard={leaderboard}
       />
-            <LoginModal 
-      showLogin={showLogin} 
-      handleLoginClose={handleLoginClose} 
-      />
+      <LoginModal showLogin={showLogin} handleLoginClose={handleLoginClose} />
     </div>
   );
 }
-
