@@ -32,7 +32,6 @@ export function getLocationsAuth(token) {
 }
 
 export function collectLocation(token, id) {
-  console.log(JSON.stringify({ id }));
   return fetch(baseURL + "unit/collect", {
     method: "POST",
     headers: {

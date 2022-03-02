@@ -70,12 +70,12 @@ const LocationModal = ({
       <Button
         bsPrefix="btn-branding"
         onClick={handleCollectLocation}
-        disabled={false}
-        // className={
-        //   locationData.collected || isOutOfRange
-        //     ? "btn-branding-disabled"
-        //     : "btn-branding-enabled"
-        // }
+        disabled={isOutOfRange}
+        className={
+          locationData.collected || isOutOfRange
+            ? "btn-branding-disabled"
+            : "btn-branding-enabled"
+        }
       >
         {collectButtonText}
       </Button>
