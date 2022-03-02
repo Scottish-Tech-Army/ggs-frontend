@@ -27,7 +27,7 @@ const LeaderboardModal = ({ showLeaderboard, handleCloseLeaderboard, leaderboard
           leaderboard &&
           leaderboard.sort((a, b) => (a.percentageCollected < b.percentageCollected) ? 1 : -1).map((data, index) => (
             <li className="list-group-item d-flex justify-content-evenly align-items-center" key={index}>{data.area} 
-            <span className="color-primary">{data.percentageCollected}%</span>
+            <span className="badge bg-primary rounded-pill">{data.percentageCollected}%</span>
             </li>
           ))
         }
