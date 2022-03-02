@@ -1,17 +1,16 @@
 import React, { useEffect, useState, useContext } from "react";
-import Pin from "./Pin";
+
 import LeaderboardModal from "./LeaderboardModal";
 import LocationModal from "./LocationModal";
 import LoginModal from "./LoginModal";
+import Markers from "./Markers";
 import { getLocationsAuth } from "../services/locations";
-import { authContext } from '../contexts/AuthContext';
+import { authContext } from "../contexts/AuthContext";
 import ReactMapGL, {
   GeolocateControl,
-  Marker,
   NavigationControl,
 } from "react-map-gl";
 import Button from "react-bootstrap/Button";
-
 
 export default function App() {
   const { token } = useContext(authContext);
@@ -27,21 +26,21 @@ export default function App() {
     zoom: 14, // use 14 when zooming to standard view, 9 for wider Edinburgh.
     mapboxApiAccessToken: MAPBOX_TOKEN,
   });
-  
+
   // Get the locations collection
   const [locations, setLocations] = useState([]);
 
   useEffect(() => {
-    if(token.data){
-      getLocationsAuth(token).then((items) => {
-          setLocations(items);
+    if (token.data) {
+      getLocationsAuth(token.data).then((items) => {
+        setLocations(items);
+        console.log(items); // temporary log
       });
-    }
-    else{
+    } else {
       handleLoginShow();
     }
   }, [token]);
-
+  useEffect(()=>{},[locations])
   // Update modal img src
   const [imgUrl, setImgUrl] = useState("");
 
@@ -50,7 +49,7 @@ export default function App() {
 
   // Update currently viewed location's latitude
   const [locLat, setLocLat] = useState("");
-  
+
   const navControlStyle = {
     right: 10,
     top: 10,
@@ -72,6 +71,7 @@ export default function App() {
   const locTolerance = 0.00001;
 
   // Adapt the collecting button depending on user's proximity to the landmark location
+  // and the collection status of the landmark location
   const [collectButtonText, setCollectButtonText] = useState("Start Exploring"); // default button text
   const [isOutOfRange, setIsOutOfRange] = useState(false);
   const userRangeCheck = () => {
@@ -108,56 +108,33 @@ export default function App() {
   // Retrieve city name to match modal data
   const [cityName, setCityName] = useState([]);
 
+  const updateLocation = (id) => {
+    const index = locations.findIndex((i) => i.id === id);
+    const locationList = [...locations];
+    locationList[index].collected = true;
+    setLocations(locationList);
+    };
+
   return (
     <div
       className="container-fluid"
       style={{ paddingLeft: "0px", paddingRight: "0px" }}
     >
-
       <ReactMapGL
         {...viewport}
         mapStyle="mapbox://styles/mapbox/streets-v11" // insert choice of map style here from Mapbox Studio
         onViewportChange={setViewport}
       >
-        {locations &&
-          locations.map((location, index) => (
-            <Marker
-              key={location.id}
-              index={index}
-              marker={location}
-              latitude={location.latitude}
-              longitude={location.longitude}
-              onClick={() => {
-                setLocLng(location.longitude);
-                setLocLat(location.latitude);
-                userRangeCheck();
-                handleShowLocation();
-                setLocationData(location);
-                console.log(locationData);
-
-                if (location.photos.length > 0) {
-                  setImgUrl(location.photos[0].url);
-                  // console.log("photo: " + location.photos[0].url);
-                } else {
-                  setImgUrl("missing");
-                }
-                fetch(
-                  "https://api.mapbox.com/geocoding/v5/mapbox.places/" +
-                    location.longitude +
-                    "," +
-                    location.latitude +
-                    ".json?access_token=" +
-                    MAPBOX_TOKEN
-                )
-                  .then((response) => response.json())
-                  .then((json) => {
-                    setCityName(json.features[3].text);
-                  });
-              }}
-            >
-              <Pin />
-            </Marker>
-          ))}
+        <Markers
+         locations={locations}
+         setLocLng={setLocLng}
+         setLocLat={setLocLat}
+         handleShowLocation={handleShowLocation}
+         setLocationData={setLocationData}
+         userRangeCheck={userRangeCheck}
+         setImgUrl={setImgUrl}
+         setCityName={setCityName}
+        />
         <NavigationControl style={navControlStyle} showCompass={false} />
         <GeolocateControl
           style={geolocateControlStyle}
@@ -177,16 +154,13 @@ export default function App() {
         cityName={cityName}
         imgUrl={imgUrl}
         isOutOfRange={isOutOfRange}
+        updateLocation={updateLocation}
       />
       <LeaderboardModal
         showLeaderboard={showLeaderboard}
         handleCloseLeaderboard={handleCloseLeaderboard}
       />
-            <LoginModal 
-      showLogin={showLogin} 
-      handleLoginClose={handleLoginClose} 
-      />
+      <LoginModal showLogin={showLogin} handleLoginClose={handleLoginClose} />
     </div>
   );
 }
-
