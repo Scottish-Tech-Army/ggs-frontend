@@ -59,3 +59,35 @@ code {
   width: 100%;
   height: 100%;
 }
+
+// LOADING WELCOME GRAPHIC
+.loading {
+  display: visible;
+  position: fixed;
+  top: 0; left: 0; z-index: 9999;
+  width: 100vw; height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  transition: opacity 0.2s;
+}
+
+.not-loading {
+  display: none;
+}
+
+.loading-img {
+  width: 5rem;
+  height: 5rem;
+}
+
+.logo-frame {
+  position: fixed;
+  top: calc(50vh - 4rem); left: calc(50vw - 4rem);
+  background-color: white;
+  margin: auto;
+  padding: 1rem;
+  border-radius: 50%;
+  width: 8rem;
+  height: 8rem;
+  text-align: center;
+}
+

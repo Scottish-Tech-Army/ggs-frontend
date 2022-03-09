@@ -3,7 +3,7 @@ import { authContext } from '../contexts/AuthContext';
 import { login } from "../services/auth";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import Form from 'react-bootstrap/Form'
+import Form from 'react-bootstrap/Form';
 
 const LoginModal = ({showLogin, handleLoginClose}) => {
   const { setTokenData} = useContext(authContext);
