@@ -88,8 +88,28 @@ export default function App() {
     }
   };
 
-  // Loading graphic controls
+  // Loading-graphic controls
   const [showLoading, setShowLoading] = useState(false);
+  const [loadingText, setLoadingText] = useState("Working"); // default message
+  const [loadingTimer, setLoadingTimer] = useState(10000); // default display time set long because used when disconnect experienced
+  // passing a long time to setLoadingTimer within handleDelay was failing despite console.logs within the Loading component picking 
+  // up the updated loading time
+  useEffect(() => {
+    const handleDelay = async () => {
+      // uses default time
+      console.log("Running with no locations and timer set to " + loadingTimer);
+      setLoadingText("Landmarks unavailable");
+    };
+    if (token.data && !locations) {
+      console.log("Delay applied");
+      handleDelay();
+      setShowLoading(true);
+    } else {
+      setTimeout(setShowLoading, loadingTimer, false);
+      console.log("Default process");
+    }
+    console.log("Loading timer updated to " + loadingTimer);
+  }, [locations, token]);
 
   // Modal controls
   const [showLocation, setShowLocation] = useState(false);
@@ -185,14 +205,25 @@ export default function App() {
       <LeaderboardModal
         showLeaderboard={showLeaderboard}
         handleCloseLeaderboard={handleCloseLeaderboard}
-        showLoading={showLoading}
-        setShowLoading={setShowLoading}
       />
       <LoginModal
         showLogin={showLogin}
+        loadingText={loadingText}
+        setLoadingText={setLoadingText}
+        loadingTimer={loadingTimer}
+        setLoadingTimer={setLoadingTimer}
         handleLoginClose={handleLoginClose}
       />
-      <Loading showLoading={showLoading} setShowLoading={setShowLoading} />
+      <Loading
+        showLoading={showLoading}
+        setShowLoading={setShowLoading}
+        loadingText={loadingText}
+        setLoadingText={setLoadingText}
+        loadingTimer={loadingTimer}
+        setLoadingTimer={setLoadingTimer}
+        locations={locations}
+        token={token}
+      />
     </div>
   );
 }
