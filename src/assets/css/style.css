@@ -12244,7 +12244,6 @@ code {
   text-align: center;
   display: grid;
   grid-template-areas: "loading-logo";
-  height: auto;
   align-content: center;
 }
 
