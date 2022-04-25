@@ -21,14 +21,11 @@ $gray-900: #212529;
 $black: #000;
 // scss-docs-end gray-color-variables
 
-// BOOTSTRAP 5 CUSTOMISATIONS
-
 // BOOTSTRAP 5 BSPREFIXES START
 // Buttons
 .btn-branding {
   background-color: $secondary;
   color: $white;
-  margin: 0.7rem;
   border-radius: 5px;
   border-style: none;
   padding: 0.4rem;
@@ -97,6 +94,8 @@ $black: #000;
 // BOOTSTRAP 5 BSPREFIXES END
 
 // BOOTSTRAP 5 CUSTOMISATIONS
+// Contains overrides for Bootstrap classes, and custom classes that use Bootstrap variables
+
 // Containers
 .container-fluid {
   padding: 0;
@@ -137,6 +136,17 @@ $black: #000;
     color: $primary;
     font-weight: bold;
   }
+}
+
+.login-modal {
+  h1 {
+    color: $primary;
+    font-weight: bold;
+  }
+}
+
+.error-text {
+  color: $secondary;
 }
 
 .place-name {

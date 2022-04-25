@@ -3,6 +3,7 @@ import React, { useEffect, useState, useContext } from "react";
 import LeaderboardModal from "./LeaderboardModal";
 import LocationModal from "./LocationModal";
 import LoginModal from "./LoginModal";
+import Loading from "./Loading";
 import Markers from "./Markers";
 import { getLocationsAuth } from "../services/locations";
 import { authContext } from "../contexts/AuthContext";
@@ -35,6 +36,9 @@ export default function App() {
 
   useEffect(() => {
     if (token.data) {
+      getLocationsAuth(token).then((items) => {
+        setLocations(items);
+      });
       getLocationsAuth(token.data).then((items) => {
         setLocations(items);
       });
@@ -96,6 +100,29 @@ export default function App() {
     }
   };
 
+  // Loading-graphic controls
+  const [showLoading, setShowLoading] = useState(false);
+  const [loadingText, setLoadingText] = useState("Working"); // default message
+  const [loadingTimer, setLoadingTimer] = useState(10000); // default display time set long because used when disconnect experienced
+  // passing a long time to setLoadingTimer within handleDelay was failing despite console.logs within the Loading component picking 
+  // up the updated loading time
+  useEffect(() => {
+    const handleDelay = async () => {
+      // uses default time
+      console.log("Running with no locations and timer set to " + loadingTimer);
+      setLoadingText("Landmarks unavailable");
+    };
+    if (token.data && !locations) {
+      console.log("Delay applied");
+      handleDelay();
+      setShowLoading(true);
+    } else {
+      setTimeout(setShowLoading, loadingTimer, false);
+      console.log("Default process");
+    }
+    console.log("Loading timer updated to " + loadingTimer);
+  }, [locations, token]);
+
   // Modal controls
   const [showLocation, setShowLocation] = useState(false);
   const handleCloseLocation = () => setShowLocation(false);
@@ -106,7 +133,10 @@ export default function App() {
   const handleShowLeaderboard = () => setShowLeaderboard(true);
 
   const [showLogin, setShowLogin] = useState(false);
-  const handleLoginClose = () => setShowLogin(false);
+  const handleLoginClose = () => {
+    setShowLogin(false);
+    setShowLoading(true);
+  };
   const handleLoginShow = () => setShowLogin(true);
 
   // Retrieve modal data for selected pin
@@ -168,7 +198,24 @@ export default function App() {
         handleCloseLeaderboard={handleCloseLeaderboard}
         leaderboard={leaderboard}
       />
-      <LoginModal showLogin={showLogin} handleLoginClose={handleLoginClose} />
+      <LoginModal
+        showLogin={showLogin}
+        loadingText={loadingText}
+        setLoadingText={setLoadingText}
+        loadingTimer={loadingTimer}
+        setLoadingTimer={setLoadingTimer}
+        handleLoginClose={handleLoginClose}
+      />
+      <Loading
+        showLoading={showLoading}
+        setShowLoading={setShowLoading}
+        loadingText={loadingText}
+        setLoadingText={setLoadingText}
+        loadingTimer={loadingTimer}
+        setLoadingTimer={setLoadingTimer}
+        locations={locations}
+        token={token}
+      />
     </div>
   );
 }
