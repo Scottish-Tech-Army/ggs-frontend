@@ -21,9 +21,9 @@ $gray-900: #212529;
 $black: #000;
 // scss-docs-end gray-color-variables
 
-// BOOTSTRAP 4 CUSTOMISATIONS
+// BOOTSTRAP 5 CUSTOMISATIONS
 
-// BOOTSTRAP 4 BSPREFIXES START
+// BOOTSTRAP 5 BSPREFIXES START
 // Buttons
 .btn-branding {
   background-color: $secondary;
@@ -35,11 +35,11 @@ $black: #000;
   font-weight: bold;
 }
 
-.btn-branding-in-range {
+.btn-branding-enabled {
   background-color: $secondary;
 }
 
-.btn-branding-out-of-range {
+.btn-branding-disabled {
   background-color: $muted-secondary;
 }
 
@@ -89,9 +89,14 @@ $black: #000;
   border-color: $white;
 }
 
-// BOOTSTRAP 4 BSPREFIXES END
+// FEEDBACK FORMATTING
+.feedback-branding {
+  color: $secondary;
+}
 
-// BOOTSTRAP 4 CUSTOMISATIONS
+// BOOTSTRAP 5 BSPREFIXES END
+
+// BOOTSTRAP 5 CUSTOMISATIONS
 // Containers
 .container-fluid {
   padding: 0;
@@ -108,12 +113,16 @@ $black: #000;
 }
 
 .custom-modal {
-  margin-top: 3rem;
+  margin-top: 1rem;
   margin-left: 1rem;
   max-height: 95vh;
   max-width: 90vw;
-  overflow-x: visible !important; // This allows close buttons to position and display beyond the modal border
-  overflow-y: visible !important; // This allows close buttons to position and display beyond the modal border
+  @media screen and (min-width: 241px) {
+    overflow-x: visible !important; // This allows close buttons to position and display beyond the modal border
+    overflow-y: visible !important; // This allows close buttons to position and display beyond the modal border
+    margin-top: 3rem;
+  }
+  
 }
 
 .location-modal {
