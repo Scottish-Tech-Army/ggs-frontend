@@ -8,11 +8,11 @@
   font-weight: bold;
 }
 
-.btn-branding-in-range {
+.btn-branding-enabled {
   background-color: #c40063;
 }
 
-.btn-branding-out-of-range {
+.btn-branding-disabled {
   background-color: #ce74a1;
 }
 
@@ -75,6 +75,10 @@
   border-color: #fff;
 }
 
+.feedback-branding {
+  color: #c40063;
+}
+
 .container-fluid, .container-xxl, .container-xl, .container-lg, .container-md, .container-sm {
   padding: 0;
   margin: 0;
@@ -88,12 +92,17 @@
 }
 
 .custom-modal {
-  margin-top: 3rem;
+  margin-top: 1rem;
   margin-left: 1rem;
   max-height: 95vh;
   max-width: 90vw;
-  overflow-x: visible !important;
-  overflow-y: visible !important;
+}
+@media screen and (min-width: 241px) {
+  .custom-modal {
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+    margin-top: 3rem;
+  }
 }
 
 @media screen and (min-width: 480px) {
@@ -12183,22 +12192,40 @@ code {
   margin: 1rem 0;
 }
 
-.closer-position {
-  font-size: 30px;
-  font-weight: bold;
-  line-height: 1;
-  position: relative;
-  opacity: 1;
-  background-color: white;
-  padding-top: 0px;
-  padding-bottom: 4px;
-  padding-left: 6px;
-  padding-right: 6px;
-  margin-top: 4px;
-  top: -38px;
-  left: 100%;
+@media screen and (max-width: 240px) {
+  .closer-position {
+    font-size: 30px;
+    font-weight: bold;
+    line-height: 1;
+    position: relative;
+    opacity: 1;
+    background-color: white;
+    padding-top: 0px;
+    padding-bottom: 4px;
+    padding-left: 6px;
+    padding-right: 6px;
+    margin-top: 4px;
+    top: -28px;
+    left: 95%;
+  }
 }
-
+@media screen and (min-width: 241px) {
+  .closer-position {
+    font-size: 30px;
+    font-weight: bold;
+    line-height: 1;
+    position: relative;
+    opacity: 1;
+    background-color: white;
+    padding-top: 0px;
+    padding-bottom: 4px;
+    padding-left: 6px;
+    padding-right: 6px;
+    margin-top: 4px;
+    top: -38px;
+    left: 100%;
+  }
+}
 .mapboxgl-ctr .mapboxgl-ctrl-zoom-in .mapboxgl-ctrl-icon button {
   width: 100%;
   height: 100%;
