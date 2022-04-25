@@ -11,6 +11,7 @@ import ReactMapGL, {
   NavigationControl,
 } from "react-map-gl";
 import Button from "react-bootstrap/Button";
+import { getLeaderboardAuth } from "../services/leaderboard";
 
 export default function App() {
   const { token } = useContext(authContext);
@@ -29,11 +30,17 @@ export default function App() {
 
   // Get the locations collection
   const [locations, setLocations] = useState([]);
+  // Get the leaderboard collection
+  const [leaderboard, setLeaderboard] = useState([]);
 
   useEffect(() => {
     if (token.data) {
       getLocationsAuth(token.data).then((items) => {
         setLocations(items);
+      });
+      getLeaderboardAuth(token.data).then((entries) => {
+        setLeaderboard(entries);
+      });
         console.log(items); // temporary log
       });
     } else {
@@ -159,6 +166,7 @@ export default function App() {
       <LeaderboardModal
         showLeaderboard={showLeaderboard}
         handleCloseLeaderboard={handleCloseLeaderboard}
+        leaderboard={leaderboard}
       />
       <LoginModal showLogin={showLogin} handleLoginClose={handleLoginClose} />
     </div>
