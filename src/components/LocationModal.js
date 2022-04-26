@@ -48,11 +48,6 @@ const LocationModal = ({
     >
       <Modal.Header className="border-0 mb-n4">
         <Button
-          bsPrefix="btn-branding"
-          onClick={handleCloseLocation}
-          className={
-            isOutOfRange ? "btn-branding-out-of-range m-3" : "btn-branding-in-range m-3"
-          }
           variant="outline-primary"
           onClick={closeLocationModal}
           className="closer-position"

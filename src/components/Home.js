@@ -7,10 +7,7 @@ import Loading from "./Loading";
 import Markers from "./Markers";
 import { getLocationsAuth } from "../services/locations";
 import { authContext } from "../contexts/AuthContext";
-import ReactMapGL, {
-  GeolocateControl,
-  NavigationControl,
-} from "react-map-gl";
+import ReactMapGL, { GeolocateControl, NavigationControl } from "react-map-gl";
 import Button from "react-bootstrap/Button";
 import { getLeaderboardAuth } from "../services/leaderboard";
 
@@ -36,22 +33,17 @@ export default function App() {
 
   useEffect(() => {
     if (token.data) {
-      getLocationsAuth(token).then((items) => {
-        setLocations(items);
-      });
       getLocationsAuth(token.data).then((items) => {
         setLocations(items);
       });
       getLeaderboardAuth(token.data).then((entries) => {
         setLeaderboard(entries);
       });
-        console.log(items); // temporary log
-      });
     } else {
       handleLoginShow();
     }
   }, [token]);
-  useEffect(()=>{},[locations])
+  useEffect(() => {}, [locations]);
   // Update modal img src
   const [imgUrl, setImgUrl] = useState("");
 
@@ -150,7 +142,7 @@ export default function App() {
     const locationList = [...locations];
     locationList[index].collected = true;
     setLocations(locationList);
-    };
+  };
 
   return (
     <div
@@ -163,14 +155,14 @@ export default function App() {
         onViewportChange={setViewport}
       >
         <Markers
-         locations={locations}
-         setLocLng={setLocLng}
-         setLocLat={setLocLat}
-         handleShowLocation={handleShowLocation}
-         setLocationData={setLocationData}
-         userRangeCheck={userRangeCheck}
-         setImgUrl={setImgUrl}
-         setCityName={setCityName}
+          locations={locations}
+          setLocLng={setLocLng}
+          setLocLat={setLocLat}
+          handleShowLocation={handleShowLocation}
+          setLocationData={setLocationData}
+          userRangeCheck={userRangeCheck}
+          setImgUrl={setImgUrl}
+          setCityName={setCityName}
         />
         <NavigationControl style={navControlStyle} showCompass={false} />
         <GeolocateControl
