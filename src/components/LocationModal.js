@@ -73,8 +73,8 @@ const LocationModal = ({
         disabled={isOutOfRange}
         className={
           locationData.collected || isOutOfRange
-            ? "btn-branding-disabled"
-            : "btn-branding-enabled"
+            ? "btn-branding-disabled mx-2 mb-2"
+            : "btn-branding-enabled mx-2 mb-2"
         }
       >
         {collectButtonText}
@@ -84,7 +84,6 @@ const LocationModal = ({
           <img
             src={dividerLine}
             style={{ width: "100%" }}
-            className="mx-auto d-block"
             alt="decorative pink line"
           />
           <p className="feedback-branding">{message}</p>
