@@ -20,13 +20,13 @@ export function createLeaderboardEntry(leaderboardEntry) {
 
 export function getLeaderboardAuth(token) {
   return fetch(baseURL + "unit/leaderboard", {
-    method: 'GET',
+    method: "GET",
     headers: {
-      'Authorization': 'Bearer ' + token
-    }
+      Authorization: "Bearer " + token,
+    },
   })
-  .then((data) => data.json())
-  .catch(err => {
-    console.error(err)
-  });
+    .then((data) => data.json())
+    .catch((err) => {
+      console.error(err);
+    });
 }

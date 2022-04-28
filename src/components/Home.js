@@ -35,9 +35,11 @@ export default function App() {
     if (token.data) {
       getLocationsAuth(token.data).then((items) => {
         setLocations(items);
+        //console.log(items);
       });
-      getLeaderboardAuth(token.data).then((entries) => {
-        setLeaderboard(entries);
+      getLeaderboardAuth(token.data).then((items) => {
+        setLeaderboard(items);
+        //console.log(items);
       });
     } else {
       handleLoginShow();
@@ -53,6 +55,12 @@ export default function App() {
   // Update currently viewed location's latitude
   const [locLat, setLocLat] = useState("");
 
+  // Update user's longitude
+  const [myLng, setMyLng] = useState("");
+
+  // Update user's latitude
+  const [myLat, setMyLat] = useState("");
+
   const navControlStyle = {
     right: 10,
     top: 10,
@@ -65,10 +73,26 @@ export default function App() {
 
   // dummy coordinates to be replaced with user's location
   // dummy lat Grey Friars
-  const myLat = 55.946874;
+  // const myLat = 55.946874;
 
   // dummy lng Grey Friars
-  const myLng = -3.191229;
+  // const myLng = -3.191229;
+
+  // get user coordinates
+
+  useEffect(() => {
+    if ("geolocation" in navigator) {
+      console.log("Geolocation available");
+      navigator.geolocation.getCurrentPosition(function (position) {
+        console.log("Latitude: " + position.coords.latitude);
+        console.log("Longitude: " + position.coords.longitude);
+        setMyLng(position.coords.longitude);
+        setMyLat(position.coords.latitude);
+      });
+    } else {
+      console.log("Geolocation is not supported by this browser.");
+    }
+  }, [navigator.geolocation]);
 
   // Change this as needed for coordinate distance from landmark. Note 0.00001 is approx equal to 11 metres.
   const locTolerance = 0.00001;
@@ -96,7 +120,7 @@ export default function App() {
   const [showLoading, setShowLoading] = useState(false);
   const [loadingText, setLoadingText] = useState("Working"); // default message
   const [loadingTimer, setLoadingTimer] = useState(10000); // default display time set long because used when disconnect experienced
-  // passing a long time to setLoadingTimer within handleDelay was failing despite console.logs within the Loading component picking 
+  // passing a long time to setLoadingTimer within handleDelay was failing despite console.logs within the Loading component picking
   // up the updated loading time
   useEffect(() => {
     const handleDelay = async () => {
@@ -169,6 +193,7 @@ export default function App() {
           style={geolocateControlStyle}
           positionOptions={{ enableHighAccuracy: true }}
           trackUserLocation={true}
+          showUserHeading={true}
           auto
         />
         <Button bsPrefix="btn-leaderboard" onClick={handleShowLeaderboard}>
