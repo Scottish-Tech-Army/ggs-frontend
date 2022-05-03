@@ -127,7 +127,7 @@ To get a local copy up and running follow these steps.
 <!-- USAGE EXAMPLES -->
 
 ## Usage
-
+### Working on the Project
 When working on this project, you will need to: 
 1. Run the ggs-backend server by navigating to that directory on your machine's CLI. Checkout the appropriate branch and run `dotnet run`.
 2. Run the ggs-frontend server by navigating to that directory on your machine's CLI in a new window/tab. Checkout the appropriate branch and run `npm run`. If the backend database has been updated you may need to use `npm run start`.
@@ -135,6 +135,10 @@ When working on this project, you will need to:
 
 To view the working application, complete steps 1 and 2. 
 You will be presented with a web application which can request your location information and display landmarks marked on a map. Touching or clicking on the markers will bring up a modal giving information about the landmarks and a button to add that location to a collection of visited places.
+
+### Using and Testing the Application
+To access the location data, the application requires a login code. When prompted, please enter `Pa22w0rd`. On submission of this password, the application will retrieve the data from the backend server to display the location map markers.
+
 
 
 
