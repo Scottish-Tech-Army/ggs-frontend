@@ -14,24 +14,24 @@
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
 
-[![Contributors][contributors-shield]][contributors-url]
+<!-- [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
+[![LinkedIn][linkedin-shield]][linkedin-url] -->
 
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
   <a href="https://github.com/Scottish-Tech-Army/ggs-frontend">
-    <img src="temp-logo.jpg" alt="Logo" width="auto" height="80">
+    <img src="src/assets/images/gg-logo.png" alt="Logo" width="auto" height="80">
   </a>
 
-<h3 align="center">project_title</h3>
+<h3 align="center">Girl Guiding Scotland Treasure Hunt</h3>
 
   <p align="center">
-    project_description
+    Web application developed for mobile providing a treasure hunt of Scottish landmarks, where girl guides can interact and compete with units across the organisation. This application can be extended for different events.
     <br />
     <a href="https://github.com/Scottish-Tech-Army/ggs-frontend"><strong>Explore the docs »</strong></a>
     <br />
@@ -62,13 +62,14 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
+    <!-- <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
+    <li><a href="#acknowledgments">Acknowledgments</a></li> -->
   </ol>
 </details>
+<br>
 
 <!-- ABOUT THE PROJECT -->
 
@@ -77,9 +78,9 @@
 <p>This is a treasure hunting progressive web app for Girl Guiding Scotland.</p>
 <p>The front end and back end code bases are stored in separate repositories. This is the frontend project. You can find the backend project <a href="https://github.com/Scottish-Tech-Army/ggs-backend">here</a>.</p>
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+<!-- [![Product Name Screen Shot][product-screenshot]](https://example.com) -->
 
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email`, `email_client`, `project_title`, `project_description`
+<!-- Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email`, `email_client`, `project_title`, `project_description` -->
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -90,6 +91,7 @@ Here's a blank template to get started: To avoid retyping too much info. Do a se
 - [Bootstrap](https://getbootstrap.com)
 - [Sass](https://sass-lang.com/dart-sass)
 - [Mapbox](https://www.mapbox.com/) 
+- [React Map GL](https://visgl.github.io/react-map-gl/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -115,7 +117,7 @@ To get a local copy up and running follow these steps.
    ```sh
    npm install
    ```
-3. Enter your Mapbox environment token in an env.local file.
+3. Enter your Mapbox environment token in an env.local file. This will sit in the same level as the package.json.
    ```js
    REACT_APP_MAPBOX_ACCESS_TOKEN = "your-token-here"
    ```
