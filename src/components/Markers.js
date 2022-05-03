@@ -13,7 +13,6 @@ const Markers = ({
   setCityName,
   MAPBOX_TOKEN
 }) => {
-  //const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
   return (
     locations &&
     locations.map((location, index) => (
