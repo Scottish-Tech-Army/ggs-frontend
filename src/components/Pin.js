@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import brandedMarker from "./mapbox-marker-branded.svg";
 import mutedBrandedMarker from "./mapbox-marker-branded-muted.svg";
 

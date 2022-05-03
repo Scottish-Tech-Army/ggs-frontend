@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext } from "react";
-
 import LeaderboardModal from "./LeaderboardModal";
 import LocationModal from "./LocationModal";
 import LoginModal from "./LoginModal";
@@ -79,18 +78,19 @@ export default function App() {
   // const myLng = -3.191229;
 
   // get user coordinates
-
   useEffect(() => {
     if ("geolocation" in navigator) {
-      console.log("Geolocation available");
       navigator.geolocation.getCurrentPosition(function (position) {
-        console.log("Latitude: " + position.coords.latitude);
-        console.log("Longitude: " + position.coords.longitude);
+        //console.log("Geolocation available");
+        //console.log("Latitude: " + position.coords.latitude);
+        //console.log("Longitude: " + position.coords.longitude);
         setMyLng(position.coords.longitude);
         setMyLat(position.coords.latitude);
       });
     } else {
-      console.log("Geolocation is not supported by this browser.");
+      //console.log("Geolocation is not supported by this browser.");
+      setMyLng("");
+      setMyLat("");
     }
   }, [navigator.geolocation]);
 
@@ -110,9 +110,13 @@ export default function App() {
     ) {
       setIsOutOfRange(false);
       setCollectButtonText("Start Exploring"); // text when user in range
+      //console.log("Location coords: " + locLat + "" + locLng);
+      //console.log("Latitude: " + myLat);
+      //console.log("Longitude: " + myLng);
     } else {
       setIsOutOfRange(true);
       setCollectButtonText("Please come closer to this location"); // text when user not in range
+      //console.log("User is out of range");
     }
   };
 
@@ -125,18 +129,18 @@ export default function App() {
   useEffect(() => {
     const handleDelay = async () => {
       // uses default time
-      console.log("Running with no locations and timer set to " + loadingTimer);
+      //console.log("Running with no locations and timer set to " + loadingTimer);
       setLoadingText("Landmarks unavailable");
     };
     if (token.data && !locations) {
-      console.log("Delay applied");
+      //console.log("Delay applied");
       handleDelay();
       setShowLoading(true);
     } else {
       setTimeout(setShowLoading, loadingTimer, false);
-      console.log("Default process");
+      //console.log("Default process");
     }
-    console.log("Loading timer updated to " + loadingTimer);
+    //console.log("Loading timer updated to " + loadingTimer);
   }, [locations, token]);
 
   // Modal controls
@@ -161,6 +165,7 @@ export default function App() {
   // Retrieve city name to match modal data
   const [cityName, setCityName] = useState([]);
 
+  // Update the frontend locations with the collected marker to match the backend status
   const updateLocation = (id) => {
     const index = locations.findIndex((i) => i.id === id);
     const locationList = [...locations];
@@ -187,6 +192,7 @@ export default function App() {
           userRangeCheck={userRangeCheck}
           setImgUrl={setImgUrl}
           setCityName={setCityName}
+          MAPBOX_TOKEN={MAPBOX_TOKEN}
         />
         <NavigationControl style={navControlStyle} showCompass={false} />
         <GeolocateControl

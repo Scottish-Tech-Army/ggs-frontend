@@ -44,7 +44,7 @@ const LoginModal = ({
         console.error(error);
         setError(error.status);
         console.log("Error registered: " + error.status);
-        if (error.status == 401) {
+        if (error.status === 401) {
           setIncorrect(true);
         }
         setLoginError(true);
