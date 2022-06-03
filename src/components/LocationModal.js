@@ -15,6 +15,7 @@ const LocationModal = ({
   collectButtonText,
   isOutOfRange,
   updateLocation,
+  deviceErrMsg,
 }) => {
   const { token } = useContext(authContext);
   const [message, setMessage] = useState("");
@@ -89,6 +90,14 @@ const LocationModal = ({
           <p className="feedback-branding">{message}</p>
         </div>
       )}
+      {deviceErrMsg && ( <div className="container">
+        <img
+          src={dividerLine}
+          style={{ width: "100%" }}
+          alt="decorative pink line"
+        />
+        <p className="feedback-branding">{deviceErrMsg}</p>
+      </div>)}
     </Modal>
   );
 };

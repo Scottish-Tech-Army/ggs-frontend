@@ -77,46 +77,77 @@ export default function App() {
   // dummy lng Grey Friars
   // const myLng = -3.191229;
 
-  // get user coordinates
-  useEffect(() => {
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(function (position) {
-        //console.log("Geolocation available");
-        //console.log("Latitude: " + position.coords.latitude);
-        //console.log("Longitude: " + position.coords.longitude);
-        setMyLng(position.coords.longitude);
-        setMyLat(position.coords.latitude);
-      });
-    } else {
-      //console.log("Geolocation is not supported by this browser.");
-      setMyLng("");
-      setMyLat("");
+  // set up device coordinate collection
+  // helper
+  var options = {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 0,
+  };
+  // helper
+  function success(position) {
+    //console.log("Geolocation available");
+    let crd = position.coords;
+    console.log("Latitude: " + crd.latitude);
+    console.log("Longitude: " + crd.longitude);
+    setMyLng(crd.longitude);
+    setMyLat(crd.latitude);
+    setDeviceErrMsg("");
+  }
+  // helper
+  function showError(error) {
+    //console.log("You have reached the error handler");
+    switch (error.code) {
+      case error.PERMISSION_DENIED:
+        console.log("User denied the request for Geolocation.");
+        break;
+      case error.POSITION_UNAVAILABLE:
+        console.log("Location information is unavailable.");
+        break;
+      case error.TIMEOUT:
+        console.log("The request to get user location timed out.");
+        break;
+      case error.UNKNOWN_ERROR:
+        console.log("An unknown error occurred.");
+        break;
     }
-  }, [navigator.geolocation]);
+  }
+  // get user coordinates (uses above helpers)
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(success, showError, options);
+  }, []);
 
   // Change this as needed for coordinate distance from landmark. Note 0.00001 is approx equal to 11 metres.
   const locTolerance = 0.00001;
 
   // Adapt the collecting button depending on user's proximity to the landmark location
   // and the collection status of the landmark location
-  const [collectButtonText, setCollectButtonText] = useState("Start Exploring"); // default button text
-  const [isOutOfRange, setIsOutOfRange] = useState(false);
+  const [collectButtonText, setCollectButtonText] = useState(
+    "Please come closer to this location"
+  ); // default button text
+  const [isOutOfRange, setIsOutOfRange] = useState(true);
+  const [deviceErrMsg, setDeviceErrMsg] = useState();
   const userRangeCheck = () => {
-    if (
-      locLng >= myLng - locTolerance &&
-      locLat >= myLat - locTolerance &&
-      locLng <= myLng + locTolerance &&
-      locLat <= myLat + locTolerance
-    ) {
-      setIsOutOfRange(false);
-      setCollectButtonText("Start Exploring"); // text when user in range
-      //console.log("Location coords: " + locLat + "" + locLng);
-      //console.log("Latitude: " + myLat);
-      //console.log("Longitude: " + myLng);
-    } else {
-      setIsOutOfRange(true);
-      setCollectButtonText("Please come closer to this location"); // text when user not in range
-      //console.log("User is out of range");
+    try {
+      if (myLng == "" || myLat == "") {
+        throw new Error("Please turn on location tracking");
+      } else {
+        console.log("comparing coords");
+        if (
+          locLng >= myLng - locTolerance &&
+          locLat >= myLat - locTolerance &&
+          locLng <= myLng + locTolerance &&
+          locLat <= myLat + locTolerance
+        ) {
+          setIsOutOfRange(false);
+          setCollectButtonText("Start Exploring"); // text when user in range
+        } else {
+          setIsOutOfRange(true);
+          setCollectButtonText("Please come closer to this location"); // text when user not in range
+        }
+      }
+    } catch (Error) {
+      setDeviceErrMsg(Error.message.toString());
     }
   };
 
@@ -215,6 +246,7 @@ export default function App() {
         imgUrl={imgUrl}
         isOutOfRange={isOutOfRange}
         updateLocation={updateLocation}
+        deviceErrMsg={deviceErrMsg}
       />
       <LeaderboardModal
         showLeaderboard={showLeaderboard}
