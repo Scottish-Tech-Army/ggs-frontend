@@ -70,28 +70,30 @@ describe("Home component elements", () => {
   const locTolerance = 0.00001;
   // Adapt the collecting button depending on user's proximity to the landmark location
   // and the collection status of the landmark location
-  let collectButtonText = "Start Exploring"; // default button text
-  let isOutOfRange = false;
+  let collectButtonText = "Please come closer to this location"; // default button text
+  let isOutOfRange = true;
   const userRangeCheck = () => {
     if (myLng == "" || myLat == "") {
       //window.alert("Please turn on location tracking"); // something the test suite cannot print out
       throw new Error("Please turn on location tracking");
     }
-    if (
-      locLng >= myLng - locTolerance &&
-      locLat >= myLat - locTolerance &&
-      locLng <= myLng + locTolerance &&
-      locLat <= myLat + locTolerance
-    ) {
-      isOutOfRange = false;
-      collectButtonText = "Start Exploring"; // text when user in range
-      //console.log("Location coords: " + locLat + "" + locLng);
-      //console.log("Latitude: " + myLat);
-      //console.log("Longitude: " + myLng);
-    } else {
-      isOutOfRange = true;
-      collectButtonText = "Please come closer to this location"; // text when user not in range
-      //console.log("User is out of range");
+    else {
+      if (
+        locLng >= myLng - locTolerance &&
+        locLat >= myLat - locTolerance &&
+        locLng <= myLng + locTolerance &&
+        locLat <= myLat + locTolerance
+      ) {
+        isOutOfRange = false;
+        collectButtonText = "Start Exploring"; // text when user in range
+        //console.log("Location coords: " + locLat + "" + locLng);
+        console.log("Latitude: " + myLat);
+        console.log("Longitude: " + myLng);
+      } else {
+        isOutOfRange = true;
+        collectButtonText = "Please come closer to this location"; // text when user not in range
+        //console.log("User is out of range");
+      }
     }
   };
 
