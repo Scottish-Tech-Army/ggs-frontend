@@ -112,7 +112,7 @@ export default function App() {
         break;
     }
   }
-  // get user coordinates
+  // get user coordinates (uses above helpers)
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(success, showError, options);
   }, []);
