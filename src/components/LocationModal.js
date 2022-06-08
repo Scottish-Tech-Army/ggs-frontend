@@ -5,6 +5,7 @@ import Image from "react-bootstrap/Image";
 import { collectLocation } from "../services/locations";
 import { authContext } from "../contexts/AuthContext";
 import dividerLine from "./divider-line.svg";
+import xPrimary from "./x-primary.svg";
 
 const LocationModal = ({
   showLocation,
@@ -52,12 +53,15 @@ const LocationModal = ({
           variant="outline-primary"
           onClick={closeLocationModal}
           className="closer-position"
-          bsPrefix="closer-color"
+          aria-label="Close"
         >
-          &times;
+          <img src={xPrimary} style={{
+          width: "200%",
+          height: "200%",
+          }}/>
         </Button>
       </Modal.Header>
-      <Modal.Body /* scrollable */ className="mt-n5">
+      <Modal.Body className="mt-n3">
         <div className="place-name">{locationData.name}</div>
         <div className="city-name">{cityName}</div>
         <Image
@@ -68,18 +72,6 @@ const LocationModal = ({
         />
         <div className="description">{locationData.description}</div>
       </Modal.Body>
-      <Button
-        bsPrefix="btn-branding"
-        onClick={handleCollectLocation}
-        disabled={isOutOfRange}
-        className={
-          locationData.collected || isOutOfRange
-            ? "btn-branding-disabled mx-2 mb-2"
-            : "btn-branding-enabled mx-2 mb-2"
-        }
-      >
-        {collectButtonText}
-      </Button>
       {message && (
         <div className="container">
           <img
@@ -98,6 +90,18 @@ const LocationModal = ({
         />
         <p className="feedback-branding">{deviceErrMsg}</p>
       </div>)}
+      <Button
+        bsPrefix="btn-branding"
+        onClick={handleCollectLocation}
+        disabled={isOutOfRange}
+        className={
+          locationData.collected || isOutOfRange
+            ? "btn-branding-disabled mx-2 mb-2"
+            : "btn-branding-enabled mx-2 mb-2"
+        }
+      >
+        {collectButtonText}
+      </Button>
     </Modal>
   );
 };

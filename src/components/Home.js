@@ -88,8 +88,8 @@ export default function App() {
   function success(position) {
     //console.log("Geolocation available");
     let crd = position.coords;
-    console.log("Latitude: " + crd.latitude);
-    console.log("Longitude: " + crd.longitude);
+    /* console.log("Latitude: " + crd.latitude);
+    console.log("Longitude: " + crd.longitude); */
     setMyLng(crd.longitude);
     setMyLat(crd.latitude);
     setDeviceErrMsg("");
@@ -132,7 +132,7 @@ export default function App() {
       if (myLng == "" || myLat == "") {
         throw new Error("Please turn on location tracking");
       } else {
-        console.log("comparing coords");
+        //console.log("comparing coords");
         if (
           locLng >= myLng - locTolerance &&
           locLat >= myLat - locTolerance &&
