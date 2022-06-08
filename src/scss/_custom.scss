@@ -103,6 +103,7 @@ $black: #000;
 }
 
 // Modals
+
 .closer-color {
   color: $primary;
   border-radius: 5px;
@@ -110,13 +111,9 @@ $black: #000;
   border-color: $primary;
 }
 
-.btn-outline-primary {
-  border-width: revert !important;
-}
-
 .custom-modal {
-  margin-top: 1.2rem;
-  margin-left: 0.5rem;
+  margin-top: 1rem;
+  margin-left: 1rem;
   max-height: 95vh;
   max-width: 90vw;
   @media screen and (min-width: 241px) {
