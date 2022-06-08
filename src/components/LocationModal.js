@@ -5,6 +5,7 @@ import Image from "react-bootstrap/Image";
 import { collectLocation } from "../services/locations";
 import { authContext } from "../contexts/AuthContext";
 import dividerLine from "./divider-line.svg";
+import xPrimary from "./x-primary.svg";
 
 const LocationModal = ({
   showLocation,
@@ -15,6 +16,7 @@ const LocationModal = ({
   collectButtonText,
   isOutOfRange,
   updateLocation,
+  deviceErrMsg,
 }) => {
   const { token } = useContext(authContext);
   const [message, setMessage] = useState("");
@@ -51,12 +53,15 @@ const LocationModal = ({
           variant="outline-primary"
           onClick={closeLocationModal}
           className="closer-position"
-          bsPrefix="closer-color"
+          aria-label="Close"
         >
-          &times;
+          <img src={xPrimary} style={{
+          width: "200%",
+          height: "200%",
+          }}/>
         </Button>
       </Modal.Header>
-      <Modal.Body /* scrollable */ className="mt-n5">
+      <Modal.Body className="mt-n3">
         <div className="place-name">{locationData.name}</div>
         <div className="city-name">{cityName}</div>
         <Image
@@ -67,6 +72,24 @@ const LocationModal = ({
         />
         <div className="description">{locationData.description}</div>
       </Modal.Body>
+      {message && (
+        <div className="container">
+          <img
+            src={dividerLine}
+            style={{ width: "100%" }}
+            alt="decorative pink line"
+          />
+          <p className="feedback-branding">{message}</p>
+        </div>
+      )}
+      {deviceErrMsg && ( <div className="container">
+        <img
+          src={dividerLine}
+          style={{ width: "100%" }}
+          alt="decorative pink line"
+        />
+        <p className="feedback-branding">{deviceErrMsg}</p>
+      </div>)}
       <Button
         bsPrefix="btn-branding"
         onClick={handleCollectLocation}
@@ -79,16 +102,6 @@ const LocationModal = ({
       >
         {collectButtonText}
       </Button>
-      {message && (
-        <div className="container">
-          <img
-            src={dividerLine}
-            style={{ width: "100%" }}
-            alt="decorative pink line"
-          />
-          <p className="feedback-branding">{message}</p>
-        </div>
-      )}
     </Modal>
   );
 };
