@@ -91,9 +91,13 @@
   border-color: #009cac;
 }
 
+.btn-outline-primary {
+  border-width: revert !important;
+}
+
 .custom-modal {
-  margin-top: 1rem;
-  margin-left: 1rem;
+  margin-top: 1.2rem;
+  margin-left: 0.5rem;
   max-height: 95vh;
   max-width: 90vw;
 }
@@ -12194,35 +12198,29 @@ code {
 
 @media screen and (max-width: 240px) {
   .closer-position {
-    font-size: 30px;
-    font-weight: bold;
-    line-height: 1;
     position: relative;
     opacity: 1;
     background-color: white;
-    padding-top: 0px;
-    padding-bottom: 4px;
-    padding-left: 6px;
-    padding-right: 6px;
-    margin-top: 4px;
-    top: -28px;
+    padding-top: 0rem;
+    padding-bottom: 0rem;
+    padding-left: 0rem;
+    padding-right: 0.8rem;
+    margin-top: 0.2rem;
+    top: -1.8rem;
     left: 95%;
   }
 }
 @media screen and (min-width: 241px) {
   .closer-position {
-    font-size: 30px;
-    font-weight: bold;
-    line-height: 1;
     position: relative;
     opacity: 1;
     background-color: white;
-    padding-top: 0px;
-    padding-bottom: 4px;
-    padding-left: 6px;
-    padding-right: 6px;
-    margin-top: 4px;
-    top: -38px;
+    padding-top: 0rem;
+    padding-bottom: 0rem;
+    padding-left: 0rem;
+    padding-right: 1rem;
+    margin-top: 0.1rem;
+    top: -2.2rem;
     left: 100%;
   }
 }
