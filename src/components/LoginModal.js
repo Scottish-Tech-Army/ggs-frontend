@@ -4,6 +4,7 @@ import { login } from "../services/auth";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
+import xPrimary from "./x-primary.svg";
 
 const LoginModal = ({
   showLogin,
@@ -59,30 +60,30 @@ const LoginModal = ({
       keyboard={false}
       className="custom-modal login-modal"
     >
-      <Modal.Header className="border-0 mb-n4">
-        <Button
+      <Modal.Header className="border-0 mb-n3">
+      <Button
           variant="outline-primary"
-          onClick={() => {
-            console.log("Closer clicked");
-            handleLoginClose();
-          }}
+          onClick={handleLoginClose}
           className="closer-position"
-          bsPrefix="closer-color"
+          aria-label="Close"
         >
-          &times;
+          <img src={xPrimary} style={{
+          width: "200%",
+          height: "200%",
+          }}/>
         </Button>
       </Modal.Header>
-      <Modal.Body scrollable className="mt-n5">
+      <Modal.Body className="mt-n3">
         <h1 style={{ textAlign: "center" }}>Ready to explore?</h1>
-        <p className="text-center mb-5">
+        <p className="text-center mb-3">
           Visit and collect all of the sights in your region or explore others
         </p>
         {error && (
-          <p className="error-text text-center mt-n5">
+          <p className="error-text text-center mt-n3">
             Invalid code - please try again.
           </p>
         )}
-        <Form className="m-2" onSubmit={handleLogin}>
+        <Form className="m-2 mt-n2" onSubmit={handleLogin}>
           <Form.Group controlId="formBasicCode">
             <Form.Control
               value={code}
