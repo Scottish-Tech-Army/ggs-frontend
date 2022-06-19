@@ -24,3 +24,7 @@ yarn-error.log*
 .vscode*
 src/ggs.code-workspace
 **.css.map
+
+cdk.out
+.env.ggs.test.local
+.env.ggs.live.local

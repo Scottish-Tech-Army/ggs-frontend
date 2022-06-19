@@ -7,19 +7,17 @@ import Form from "react-bootstrap/Form";
 import xPrimary from "./x-primary.svg";
 
 const LoginModal = ({
-  showLogin,
-  loadingText,
   setLoadingText,
-  loadingTimer,
   setLoadingTimer,
   handleLoginClose,
 }) => {
-  const { setTokenData } = useContext(authContext);
+  const { setUnitName } = useContext(authContext);
 
   const [code, setCode] = useState("");
   const [error, setError] = useState("");
   const [loginError, setLoginError] = useState(false); // flags if a log in error
   const [incorrect, setIncorrect] = useState(false); // specifically flags if user error
+  
   useEffect(() => {
     const fetchError = async () => {
       if (incorrect) {
@@ -30,12 +28,12 @@ const LoginModal = ({
     };
     loginError && fetchError();
     !loginError && setLoadingText("Log in to access landmarks");
-  }, [loginError]);
+  }, [loginError, incorrect, setLoadingText]);
 
   const handleLogin = (event) => {
     login(code)
-      .then((token) => {
-        setTokenData(token);
+      .then(({unitName}) => {
+        setUnitName(unitName);
         setCode("");
         setLoadingText("Logging in"); // Message for signed in users only
         setLoadingTimer(500);
@@ -45,7 +43,7 @@ const LoginModal = ({
         console.error(error);
         setError(error.status);
         console.log("Error registered: " + error.status);
-        if (error.status === 401) {
+        if (error.status === 404) {
           setIncorrect(true);
         }
         setLoginError(true);
@@ -54,7 +52,7 @@ const LoginModal = ({
   };
   return (
     <Modal
-      show={showLogin}
+      show={true}
       onHide={handleLoginClose}
       backdrop="static"
       keyboard={false}
@@ -70,7 +68,8 @@ const LoginModal = ({
           <img src={xPrimary} style={{
           width: "200%",
           height: "200%",
-          }}/>
+          }}
+          alt=""/>
         </Button>
       </Modal.Header>
       <Modal.Body className="mt-n3">
@@ -88,8 +87,7 @@ const LoginModal = ({
             <Form.Control
               value={code}
               onChange={(e) => setCode(e.target.value)}
-              type="password"
-              placeholder="Enter code"
+              placeholder="Enter unit name"
               className="w-100 my-2 mx-auto"
             />
           </Form.Group>

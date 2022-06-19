@@ -1,13 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import brandedMarker from "./mapbox-marker-branded.svg";
 import mutedBrandedMarker from "./mapbox-marker-branded-muted.svg";
 
 const Pin = ({ location }) => {
-  useEffect(() => {
-  }, [location.collected]);
+
+  // styles adjusted to enlarge map pins with margins compensated 
   return (
     <div className="pin">
-      {/* styles adjusted to enlarge map pins with margins compensated */}
       <img
         src={location.collected ? mutedBrandedMarker : brandedMarker}
         alt="map pin"

@@ -2,23 +2,26 @@ import React, { createContext, useState, useEffect } from 'react';
 
 export const authContext = createContext({});
 
-const AuthProvider = ({ children }) => {
-  const [token, setToken] = useState({ loading: true, data: null });
+const UNIT_NAME_KEY = "ggsUnitName"
 
-  const setTokenData = (data) => {
-    setToken({data: data.token});
-  };
+const AuthProvider = ({ children }) => {
+  const [unitName, setUnitName] = useState();
 
   useEffect(() => {
-    setToken({ loading: false, data: JSON.parse(window.localStorage.getItem('ggsToken'))});
+    const storedUnitName = window.localStorage.getItem(UNIT_NAME_KEY)
+    console.log("Retrieved stored unitname", storedUnitName);
+    storedUnitName && setUnitName(storedUnitName);
   }, []);
 
   useEffect(() => {
-    window.localStorage.setItem('ggsToken', JSON.stringify(token.data));
-  }, [token.data]);
+    const storedUnitName = window.localStorage.getItem(UNIT_NAME_KEY)
+    if (unitName && unitName !== storedUnitName) {
+      window.localStorage.setItem(UNIT_NAME_KEY, unitName);
+    }
+  }, [unitName]);
 
   return (
-    <authContext.Provider value={{ token, setTokenData }}>
+    <authContext.Provider value={{ unitName, setUnitName }}>
       {children}
     </authContext.Provider>
   );
