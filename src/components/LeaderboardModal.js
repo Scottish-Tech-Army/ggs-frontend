@@ -3,10 +3,10 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import xPrimary from "./x-primary.svg";
 
-const LeaderboardModal = ({ showLeaderboard, handleCloseLeaderboard, leaderboard }) => {
+const LeaderboardModal = ({ handleCloseLeaderboard, leaderboard }) => {
   return (
     <Modal
-      show={showLeaderboard}
+      show={true}
       onHide={handleCloseLeaderboard}
       className="custom-modal leaderboard-modal"
     >
@@ -20,7 +20,8 @@ const LeaderboardModal = ({ showLeaderboard, handleCloseLeaderboard, leaderboard
           <img src={xPrimary} style={{
           width: "200%",
           height: "200%",
-          }}/>
+          }}
+          alt=""/>
         </Button>
       </Modal.Header>
       <Modal.Body className="mt-n3">
@@ -29,11 +30,13 @@ const LeaderboardModal = ({ showLeaderboard, handleCloseLeaderboard, leaderboard
         <ol className="list-group list-group-numbered">
         {
           leaderboard &&
-          leaderboard.sort((a, b) => (a.percentageCollected < b.percentageCollected) ? 1 : -1).map((data, index) => (
-            <li className="list-group-item d-flex justify-content-evenly align-items-center" key={index}>{data.area} 
-            <span className="badge bg-primary rounded-pill">{data.percentageCollected}%</span>
-            </li>
-          ))
+          leaderboard
+            .sort((a, b) => (a.percentageCollected < b.percentageCollected) ? 1 : -1)
+            .map((data, index) => (
+              <li className="list-group-item d-flex justify-content-evenly align-items-center" key={index}>{data.area} 
+                <span className="badge bg-primary rounded-pill">{data.percentageCollected}%</span>
+              </li>
+            ))
         }
         </ol>
         <div className="units-list"></div>

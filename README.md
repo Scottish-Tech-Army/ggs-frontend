@@ -122,6 +122,11 @@ To get a local copy up and running follow these steps.
    REACT_APP_MAPBOX_ACCESS_TOKEN = "your-token-here"
    ```
 
+4. Enter your API Gateway GGS backend URL in the env.local file. This will sit in the same level as the package.json.
+   ```js
+   REACT_APP_AWS_CLIENT_API_ENDPOINT = "API URL"
+   ```
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- USAGE EXAMPLES -->

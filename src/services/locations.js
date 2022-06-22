@@ -1,28 +1,10 @@
-const baseURL = "https://localhost:5001/api/";
+const BASE_URL = process.env.REACT_APP_AWS_CLIENT_API_ENDPOINT;
 
-export function getLocations() {
-  return fetch(baseURL + "locations")
-    .then((data) => data.json())
-    .catch((err) => {
-      console.error(err);
-    });
-}
-
-export function createLocation(location) {
-  return fetch(baseURL + "locations", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ location }),
-  }).then((data) => data.json());
-}
-
-export function getLocationsAuth(token) {
-  return fetch(baseURL + "locations", {
+export function getLocations(unitName) {
+  return fetch(BASE_URL + "locations", {
     method: "GET",
     headers: {
-      Authorization: "Bearer " + token,
+      GGSUnit: unitName,
     },
   })
     .then((data) => data.json())
@@ -31,12 +13,12 @@ export function getLocationsAuth(token) {
     });
 }
 
-export function collectLocation(token, id) {
-  return fetch(baseURL + "unit/collect", {
+export function collectLocation(unitName, id) {
+  return fetch(BASE_URL + "unit/collect", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: "Bearer " + token,
+      GGSUnit: unitName,
     },
     body: JSON.stringify({ id })
   }).catch((err) => {

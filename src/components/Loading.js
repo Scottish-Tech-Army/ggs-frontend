@@ -1,24 +1,22 @@
+/* eslint-disable import/no-webpack-loader-syntax */
 import React, { useState } from "react";
-import ggsLogoStd from "./ggs-logo-std.svg";
-import ggsLogoPrimary from "./ggs-logo-primary.svg";
-import ggsLogoSecondary from "./ggs-logo-secondary.svg";
+import ggsLogoStd from "!file-loader!./ggs-logo-std.svg";
+import ggsLogoPrimary from "!file-loader!./ggs-logo-primary.svg";
+import ggsLogoSecondary from "!file-loader!./ggs-logo-secondary.svg";
 import { CSSTransition } from "react-transition-group";
 
 export default function Loading({
-  showLoading,
-  setShowLoading,
+  handleCloseLoading,
   loadingText,
   loadingTimer,
 }) {
   const [ShowTeal, setShowTeal] = useState(true);
-  //const [ShowStd, setShowStd] = useState(false);
   const [ShowPink, setShowPink] = useState(false);
-  //console.log("loadingTimer received by Loading is " + loadingTimer);
-  setTimeout(setShowLoading, loadingTimer, false);
-  //console.log("loadingTimer after timeout is " + loadingTimer);
+
+  setTimeout(handleCloseLoading, loadingTimer);
 
   return (
-    <div className={showLoading ? "loading" : "not-loading"}>
+    <div className="loading">
       <div className="logo-frame">
         <img
           src={ggsLogoStd}
