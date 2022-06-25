@@ -11,15 +11,17 @@ import xPrimary from "./x-primary.svg";
 const LOCATION_TOLERANCE = 0.00001;
 
 const isLocationInRange = (location, userLatLong) => {
-  return Math.abs(location.latitude - userLatLong.latitude) <= LOCATION_TOLERANCE &&
+  return (
+    Math.abs(location.latitude - userLatLong.latitude) <= LOCATION_TOLERANCE &&
     Math.abs(location.longitude - userLatLong.longitude) <= LOCATION_TOLERANCE
+  );
 };
 
 const LocationModal = ({
   selectedLocation,
   handleCloseLocation,
   setLocations,
-  userLatLong
+  userLatLong,
 }) => {
   const { unitName } = useContext(authContext);
   const [message, setMessage] = useState("");
@@ -33,11 +35,11 @@ const LocationModal = ({
 
   // Update the frontend locations with the collected marker to match the backend status
   const updateLocation = (locationId) => {
-    setLocations(locations => {
+    setLocations((locations) => {
       const index = locations.findIndex((i) => i.locationId === locationId);
       const locationList = [...locations];
       locationList[index].collected = true;
-      return locationList
+      return locationList;
     });
   };
 
@@ -62,7 +64,7 @@ const LocationModal = ({
     } else {
       setImgUrl("missing");
     }
-  }, [selectedLocation])
+  }, [selectedLocation]);
 
   useEffect(() => {
     try {
@@ -75,16 +77,21 @@ const LocationModal = ({
         if (selectedLocation.collected) {
           setCollectButtonText("Collected");
         } else {
-          setCollectButtonText(inRange ? "Start Exploring" : "Please come closer to this location");
+          setCollectButtonText(
+            inRange ? "Start Exploring" : "Please come closer to this location"
+          );
         }
       }
     } catch (Error) {
       setDeviceErrMsg(Error.message.toString());
     }
-
-  }, [selectedLocation, userLatLong])
+  }, [selectedLocation, userLatLong]);
 
   const collectButtonDisabled = selectedLocation.collected || isOutOfRange;
+  const areaName =
+    selectedLocation.city && selectedLocation.city !== selectedLocation.county
+      ? `${selectedLocation.city}, ${selectedLocation.county}`
+      : selectedLocation.county;
 
   return (
     <Modal
@@ -100,12 +107,16 @@ const LocationModal = ({
           className="closer-position"
           aria-label="Close"
         >
-          <img src={xPrimary} style={{ width: "200%", height: "200%" }} alt="" />
+          <img
+            src={xPrimary}
+            style={{ width: "200%", height: "200%" }}
+            alt=""
+          />
         </Button>
       </Modal.Header>
       <Modal.Body className="mt-n3">
         <div className="place-name">{selectedLocation.name}</div>
-        <div className="city-name">{selectedLocation.area}</div>
+        <div className="city-name">{areaName}</div>
         <Image
           className="img-location"
           src={imgUrl}
@@ -113,6 +124,7 @@ const LocationModal = ({
           rounded
         />
         <div className="description">{selectedLocation.description}</div>
+        <div className="challenge">{selectedLocation.challenge}</div>
       </Modal.Body>
       {message && (
         <div className="container">
@@ -120,10 +132,12 @@ const LocationModal = ({
           <p className="feedback-branding">{message}</p>
         </div>
       )}
-      {deviceErrMsg && (<div className="container">
-        <img src={dividerLine} style={{ width: "100%" }} alt="" />
-        <p className="feedback-branding">{deviceErrMsg}</p>
-      </div>)}
+      {deviceErrMsg && (
+        <div className="container">
+          <img src={dividerLine} style={{ width: "100%" }} alt="" />
+          <p className="feedback-branding">{deviceErrMsg}</p>
+        </div>
+      )}
       <Button
         bsPrefix="btn-branding"
         onClick={handleCollectLocation}

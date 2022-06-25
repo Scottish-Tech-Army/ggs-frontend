@@ -11,33 +11,55 @@ const LeaderboardModal = ({ handleCloseLeaderboard, leaderboard }) => {
       className="custom-modal leaderboard-modal"
     >
       <Modal.Header className="border-0 mb-n4">
-      <Button
+        <Button
           variant="outline-primary"
           onClick={handleCloseLeaderboard}
           className="closer-position"
           aria-label="Close"
         >
-          <img src={xPrimary} style={{
-          width: "200%",
-          height: "200%",
-          }}
-          alt=""/>
+          <img
+            src={xPrimary}
+            style={{
+              width: "200%",
+              height: "200%",
+            }}
+            alt=""
+          />
         </Button>
       </Modal.Header>
       <Modal.Body className="mt-n3">
         <h1>Leaderboard</h1>
-        <div className="generic-photo" style={{height:"100px", width: "100%", backgroundColor: "teal", color: "white", textAlign: "center", fontSize: "20px"}}>A photo from the GGS collection will appear here.</div>
+        <div
+          className="generic-photo"
+          style={{
+            height: "100px",
+            width: "100%",
+            backgroundColor: "teal",
+            color: "white",
+            textAlign: "center",
+            fontSize: "20px",
+          }}
+        >
+          A photo from the GGS collection will appear here.
+        </div>
         <ol className="list-group list-group-numbered">
-        {
-          leaderboard &&
-          leaderboard
-            .sort((a, b) => (a.percentageCollected < b.percentageCollected) ? 1 : -1)
-            .map((data, index) => (
-              <li className="list-group-item d-flex justify-content-evenly align-items-center" key={index}>{data.area} 
-                <span className="badge bg-primary rounded-pill">{data.percentageCollected}%</span>
-              </li>
-            ))
-        }
+          {leaderboard &&
+            leaderboard
+              .sort((a, b) =>
+                a.percentageCollected < b.percentageCollected ? 1 : -1
+              )
+              .slice(0, 10)
+              .map((data, index) => (
+                <li
+                  className="list-group-item d-flex justify-content-evenly align-items-center"
+                  key={index}
+                >
+                  {data.area}
+                  <span className="badge bg-primary rounded-pill">
+                    {data.percentageCollected}%
+                  </span>
+                </li>
+              ))}
         </ol>
         <div className="units-list"></div>
       </Modal.Body>
