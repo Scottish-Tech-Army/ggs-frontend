@@ -31,7 +31,6 @@ const LocationModal = ({
   const [collectButtonText, setCollectButtonText] = useState();
   const [isOutOfRange, setIsOutOfRange] = useState(true);
   const [deviceErrMsg, setDeviceErrMsg] = useState();
-  const [imgUrl, setImgUrl] = useState();
 
   // Update the frontend locations with the collected marker to match the backend status
   const updateLocation = (locationId) => {
@@ -58,13 +57,7 @@ const LocationModal = ({
     event.preventDefault();
   };
 
-  useEffect(() => {
-    if (selectedLocation.photos.length > 0) {
-      setImgUrl(selectedLocation.photos[0].url);
-    } else {
-      setImgUrl("missing");
-    }
-  }, [selectedLocation]);
+  const photo = selectedLocation.photos[0];
 
   useEffect(() => {
     try {
@@ -117,12 +110,21 @@ const LocationModal = ({
       <Modal.Body className="mt-n3">
         <div className="place-name">{selectedLocation.name}</div>
         <div className="city-name">{areaName}</div>
-        <Image
-          className="img-location"
-          src={imgUrl}
-          alt={selectedLocation.name}
-          rounded
-        />
+        {photo && (
+          <>
+            <Image
+              className="img-location"
+              src={photo.url}
+              alt={selectedLocation.name}
+              rounded
+            />
+            {photo.attribution && (
+              <div className="img-location-credit">
+                Credit: {photo.attribution}
+              </div>
+            )}
+          </>
+        )}
         <div className="description">{selectedLocation.description}</div>
         <div className="challenge">{selectedLocation.challenge}</div>
       </Modal.Body>
