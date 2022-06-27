@@ -86,6 +86,22 @@ const LocationModal = ({
       ? `${selectedLocation.city}, ${selectedLocation.county}`
       : selectedLocation.county;
 
+  let creditLine = null;
+  if (photo.attribution || photo.copyright) {
+    let attributionElement = photo.originalUrl ? (
+      <a href={photo.originalUrl} target="_blank" rel="noreferrer">
+        {photo.attribution} {photo.copyright}
+      </a>
+    ) : (
+      <>
+        {photo.attribution} {photo.copyright}
+      </>
+    );
+    creditLine = (
+      <div className="img-location-credit">Credit: {attributionElement}</div>
+    );
+  }
+
   return (
     <Modal
       show={true}
@@ -118,11 +134,7 @@ const LocationModal = ({
               alt={selectedLocation.name}
               rounded
             />
-            {photo.attribution && (
-              <div className="img-location-credit">
-                Credit: {photo.attribution}
-              </div>
-            )}
+            {creditLine}
           </>
         )}
         <div className="description">{selectedLocation.description}</div>

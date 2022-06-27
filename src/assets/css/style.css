@@ -12186,6 +12186,10 @@ code {
   max-width: 100%;
 }
 
+.img-location-credit {
+  text-align: center;
+}
+
 @media screen and (min-width: 480px) {
   .img-location {
     max-height: 30vh;
