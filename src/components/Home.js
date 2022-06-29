@@ -9,12 +9,36 @@ import { authContext } from "../contexts/AuthContext";
 import ReactMapGL, { GeolocateControl, NavigationControl } from "react-map-gl";
 import Button from "react-bootstrap/Button";
 import { getLeaderboard } from "../services/leaderboard";
-import maplibregl from 'maplibre-gl';
-
-import 'maplibre-gl/dist/maplibre-gl.css';
+import 'mapbox-gl/dist/mapbox-gl.css';
 
 // Start app centred on Old College, Edinburgh
 const START_LOCATION = { latitude: 55.9472096, longitude: -3.1892527 };
+
+const OPENSTREETMAP_MAPSTYLE = {
+  version: 8,
+  sources: {
+    "raster-tiles": {
+      type: "raster",
+      tiles: [
+        "https://a.tile.openstreetmap.org/{z}/{x}/{y}.png",
+        "https://b.tile.openstreetmap.org/{z}/{x}/{y}.png",
+        "https://c.tile.openstreetmap.org/{z}/{x}/{y}.png",
+      ],
+      tileSize: 256,
+    },
+  },
+  layers: [
+    {
+      id: "osm-tiles",
+      type: "raster",
+      source: "raster-tiles",
+      minzoom: 0,
+      maxzoom: 19,
+    },
+  ],
+};
+
+const MAPBOX_MAPSTYLE = "mapbox://styles/mapbox/streets-v11";
 
 export default function App() {
   const { unitName } = useContext(authContext);
@@ -42,7 +66,6 @@ export default function App() {
 
   // get user coordinates
   useEffect(() => {
-
     // set up device coordinate collection
     var options = {
       enableHighAccuracy: true,
@@ -53,10 +76,11 @@ export default function App() {
     function success(position) {
       console.log("Geolocation available", position);
       setUserLatLong(position.coords);
-      mapRef.current && mapRef.current.flyTo({
-        center: [position.coords.longitude, position.coords.latitude],
-        duration: 2000
-      });
+      mapRef.current &&
+        mapRef.current.flyTo({
+          center: [position.coords.longitude, position.coords.latitude],
+          duration: 2000,
+        });
     }
 
     function showError(error) {
@@ -84,7 +108,7 @@ export default function App() {
   const [loadingText, setLoadingText] = useState("Working"); // default message
   const [loadingTimer, setLoadingTimer] = useState(10000);
   // default display time set long because used when disconnect experienced
-  // passing a long time to setLoadingTimer within handleDelay 
+  // passing a long time to setLoadingTimer within handleDelay
   // was failing despite console.logs within the Loading component picking
   // up the updated loading time
   useEffect(() => {
@@ -106,29 +130,14 @@ export default function App() {
   // Retrieve modal data for selected pin
   const [selectedLocation, setSelectedLocation] = useState();
 
-  const STYLE = {
-    version: 8,
-    sources: {
-      "raster-tiles": {
-        type: "raster",
-        tiles: [
-          "https://a.tile.openstreetmap.org/{z}/{x}/{y}.png",
-          "https://b.tile.openstreetmap.org/{z}/{x}/{y}.png",
-          "https://c.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        ],
-        tileSize: 256
-      }
-    },
-    layers: [
-      {
-        id: "osm-tiles",
-        type: "raster",
-        source: "raster-tiles",
-        minzoom: 0,
-        maxzoom: 19
-      }
-    ]
-  };
+  const mapboxAccessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
+  const mapStyle = mapboxAccessToken ? MAPBOX_MAPSTYLE : OPENSTREETMAP_MAPSTYLE;
+
+  console.log(
+    mapboxAccessToken
+      ? `Using Mapbox with access token ${mapboxAccessToken}`
+      : "Using OpenStreetMap"
+  );
 
   return (
     <div
@@ -141,10 +150,10 @@ export default function App() {
         initialViewState={{
           latitude: START_LOCATION.latitude,
           longitude: START_LOCATION.longitude,
-          zoom: 14
+          zoom: 14,
         }}
-        mapStyle={STYLE}
-        mapLib={maplibregl}
+        mapStyle={mapStyle}
+        mapboxAccessToken={mapboxAccessToken}
       >
         <Markers
           locations={locations}
@@ -166,26 +175,34 @@ export default function App() {
           Leaderboard
         </Button>
       </ReactMapGL>
-      {selectedLocation && <LocationModal
-        handleCloseLocation={() => setSelectedLocation(undefined)}
-        selectedLocation={selectedLocation}
-        setLocations={setLocations}
-        userLatLong={userLatLong}
-      />}
-      {leaderboard && <LeaderboardModal
-        handleCloseLeaderboard={() => setLeaderboard(undefined)}
-        leaderboard={leaderboard}
-      />}
-      {showLogin && <LoginModal
-        setLoadingText={setLoadingText}
-        setLoadingTimer={setLoadingTimer}
-        handleLoginClose={handleLoginClose}
-      />}
-      {showLoading && <Loading
-        handleCloseLoading={() => setShowLoading(false)}
-        loadingText={loadingText}
-        loadingTimer={loadingTimer}
-      />}
+      {selectedLocation && (
+        <LocationModal
+          handleCloseLocation={() => setSelectedLocation(undefined)}
+          selectedLocation={selectedLocation}
+          setLocations={setLocations}
+          userLatLong={userLatLong}
+        />
+      )}
+      {leaderboard && (
+        <LeaderboardModal
+          handleCloseLeaderboard={() => setLeaderboard(undefined)}
+          leaderboard={leaderboard}
+        />
+      )}
+      {showLogin && (
+        <LoginModal
+          setLoadingText={setLoadingText}
+          setLoadingTimer={setLoadingTimer}
+          handleLoginClose={handleLoginClose}
+        />
+      )}
+      {showLoading && (
+        <Loading
+          handleCloseLoading={() => setShowLoading(false)}
+          loadingText={loadingText}
+          loadingTimer={loadingTimer}
+        />
+      )}
     </div>
   );
 }

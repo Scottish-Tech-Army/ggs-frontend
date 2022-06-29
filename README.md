@@ -90,7 +90,7 @@
 - [React.js](https://reactjs.org/)
 - [Bootstrap](https://getbootstrap.com)
 - [Sass](https://sass-lang.com/dart-sass)
-- [Mapbox](https://www.mapbox.com/) 
+- [Mapbox](https://www.mapbox.com/)
 - [React Map GL](https://visgl.github.io/react-map-gl/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -117,14 +117,15 @@ To get a local copy up and running follow these steps.
    ```sh
    npm install
    ```
-3. Enter your Mapbox environment token in an env.local file. This will sit in the same level as the package.json.
+3. Enter your Mapbox environment token in an env.local file. This will sit in the same level as the package.json. If this environment variable is unset, the app will use OpenStreetMap tiles - recommended for development only.
+
    ```js
-   REACT_APP_MAPBOX_ACCESS_TOKEN = "your-token-here"
+   REACT_APP_MAPBOX_ACCESS_TOKEN = "your-token-here";
    ```
 
 4. Enter your API Gateway GGS backend URL in the env.local file. This will sit in the same level as the package.json.
    ```js
-   REACT_APP_AWS_CLIENT_API_ENDPOINT = "API URL"
+   REACT_APP_AWS_CLIENT_API_ENDPOINT = "API URL";
    ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -132,18 +133,18 @@ To get a local copy up and running follow these steps.
 <!-- USAGE EXAMPLES -->
 
 ## Usage
+
 ### Working on the Project
-When working on this project, you will need to: 
+
+When working on this project, you will need to:
+
 1. Run the ggs-backend server by navigating to that directory on your machine's CLI. Checkout the appropriate branch and run `dotnet run`.
 2. Run the ggs-frontend server by navigating to that directory on your machine's CLI in a new window/tab. Checkout the appropriate branch and run `npm run`. If the backend database has been updated you may need to use `npm run start`.
 3. Run the compile:sass script by navigating to the ggs-frontend directory on your machine's CLI in a new window/tab. Checkout the appropriate branch and run `compile:sass`. This will allow live updates to the style sheet based on instructions written in the src/scss directory.
 
-To view the working application, complete steps 1 and 2. 
+To view the working application, complete steps 1 and 2.
 You will be presented with a web application which can request your location information and display landmarks marked on a map. Touching or clicking on the markers will bring up a modal giving information about the landmarks and a button to add that location to a collection of visited places.
 
 ### Using and Testing the Application
-To access the location data, the application requires a login code. When prompted, please enter `Pa22w0rd`. On submission of this password, the application will retrieve the data from the backend server to display the location map markers.
 
-
-
-
+To access the location data, the application requires a team name. On submission of this name, the application will retrieve the data from the backend server to display the location map markers.
