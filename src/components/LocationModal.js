@@ -126,19 +126,26 @@ const LocationModal = ({
       <Modal.Body className="mt-n3">
         <div className="place-name">{selectedLocation.name}</div>
         <div className="city-name">{areaName}</div>
-        {photo && (
-          <>
-            <Image
-              className="img-location"
-              src={photo.url}
-              alt={selectedLocation.name}
-              rounded
-            />
-            {creditLine}
-          </>
-        )}
-        <div className="description">{selectedLocation.description}</div>
-        <div className="challenge">{selectedLocation.challenge}</div>
+        <div className="scroll-container">
+          <div className="scroll">
+            {photo && (
+              <>
+                <Image
+                  className="img-location"
+                  src={photo.url}
+                  alt={selectedLocation.name}
+                  rounded
+                />
+                {creditLine}
+              </>
+            )}
+            <div className="description">{selectedLocation.description}</div>
+            <div className="challenge">
+              <h2>Challenge</h2>
+              <div className="content">{selectedLocation.challenge}</div>
+            </div>
+          </div>
+        </div>
       </Modal.Body>
       {message && (
         <div className="container">

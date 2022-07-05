@@ -78,7 +78,7 @@ $black: #000;
   @media screen and (min-width: 1440px) {
     top: 94%;
     left: 45%;
-    }
+  }
 }
 .btn-leaderboard:active {
   background-color: $secondary;
@@ -124,7 +124,6 @@ $black: #000;
     overflow-y: visible !important; // This allows close buttons to position and display beyond the modal border
     margin-top: 3rem;
   }
-  
 }
 
 .location-modal {
@@ -166,6 +165,40 @@ $black: #000;
   font-size: large;
   text-align: center;
   margin-bottom: 0.5rem;
+}
+
+.modal-body .scroll-container {
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 333px);
+}
+
+.modal-body .scroll {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.description {
+  margin: 1rem 0;
+}
+
+.challenge {
+  border: 4px $primary solid;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.challenge h2 {
+  color: $primary;
+  font-weight: bold;
+  font-size: x-large;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.challenge .content {
+  text-align: center;
 }
 
 $enable-negative-margins: true;
