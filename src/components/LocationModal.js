@@ -24,7 +24,6 @@ const LocationModal = ({
   userLatLong,
 }) => {
   const { unitName } = useContext(authContext);
-  const [message, setMessage] = useState("");
 
   // Adapt the collecting button depending on user's proximity to the landmark location
   // and the collection status of the landmark location
@@ -32,23 +31,19 @@ const LocationModal = ({
   const [isOutOfRange, setIsOutOfRange] = useState(true);
   const [deviceErrMsg, setDeviceErrMsg] = useState();
 
-  // Update the frontend locations with the collected marker to match the backend status
-  const updateLocation = (locationId) => {
-    setLocations((locations) => {
-      const index = locations.findIndex((i) => i.locationId === locationId);
-      const locationList = [...locations];
-      locationList[index].collected = true;
-      return locationList;
-    });
-  };
-
   const handleCollectLocation = (event) => {
     collectLocation(unitName, selectedLocation.locationId)
       .then((response) => {
         if (response.ok) {
-          setMessage("Collected!");
-          setTimeout(handleCloseLocation, 1000);
-          updateLocation(selectedLocation.locationId);
+          // Update the frontend locations with the collected marker to match the backend status
+          setLocations((locations) => {
+            const index = locations.findIndex(
+              (i) => i.locationId === selectedLocation.locationId
+            );
+            const locationList = [...locations];
+            locationList[index].collected = true;
+            return locationList;
+          });
         }
       })
       .catch((error) => {
@@ -140,37 +135,35 @@ const LocationModal = ({
               </>
             )}
             <div className="description">{selectedLocation.description}</div>
-            <div className="challenge">
-              <h2>Challenge</h2>
-              <div className="content">{selectedLocation.challenge}</div>
-            </div>
+            {selectedLocation.collected && (
+              <div className="challenge">
+                <h2>Challenge</h2>
+                <div className="content">{selectedLocation.challenge}</div>
+              </div>
+            )}
           </div>
         </div>
       </Modal.Body>
-      {message && (
-        <div className="container">
-          <img src={dividerLine} style={{ width: "100%" }} alt="" />
-          <p className="feedback-branding">{message}</p>
-        </div>
-      )}
       {deviceErrMsg && (
         <div className="container">
           <img src={dividerLine} style={{ width: "100%" }} alt="" />
           <p className="feedback-branding">{deviceErrMsg}</p>
         </div>
       )}
-      <Button
-        bsPrefix="btn-branding"
-        onClick={handleCollectLocation}
-        disabled={collectButtonDisabled}
-        className={
-          collectButtonDisabled
-            ? "btn-branding-disabled mx-2 mb-2"
-            : "btn-branding-enabled mx-2 mb-2"
-        }
-      >
-        {collectButtonText}
-      </Button>
+      {!selectedLocation.collected && (
+        <Button
+          bsPrefix="btn-branding"
+          onClick={handleCollectLocation}
+          disabled={collectButtonDisabled}
+          className={
+            collectButtonDisabled
+              ? "btn-branding-disabled mx-2 mb-2"
+              : "btn-branding-enabled mx-2 mb-2"
+          }
+        >
+          {collectButtonText}
+        </Button>
+      )}
     </Modal>
   );
 };

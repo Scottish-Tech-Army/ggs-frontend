@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`component LocationModal show location information 1`] = `
+<div
+  class="modal-dialog"
+>
+  <div
+    class="modal-content"
+  >
+    <div
+      class="border-0 mb-n4 modal-header"
+    >
+      <button
+        aria-label="Close"
+        class="closer-position btn btn-outline-primary"
+        type="button"
+      >
+        <img
+          alt=""
+          src="x-primary.svg"
+          style="width: 200%; height: 200%;"
+        />
+      </button>
+    </div>
+    <div
+      class="mt-n3 modal-body"
+    >
+      <div
+        class="place-name"
+      >
+        Test location name
+      </div>
+      <div
+        class="city-name"
+      >
+        Edinburgh
+      </div>
+      <div
+        class="scroll-container"
+      >
+        <div
+          class="scroll"
+        >
+          <img
+            alt="Test location name"
+            class="img-location rounded"
+            src="https://localhost/photo.jpg"
+          />
+          <div
+            class="description"
+          >
+            This is the location description.
+          </div>
+        </div>
+      </div>
+    </div>
+    <button
+      class="btn-branding-enabled mx-2 mb-2 btn-branding btn-branding-primary"
+      type="button"
+    >
+      Start Exploring
+    </button>
+  </div>
+</div>
+`;
