@@ -121,6 +121,8 @@
 .leaderboard-modal h1, .leaderboard-modal .h1 {
   color: #009cac;
   font-weight: bold;
+  font-size: x-large;
+  text-align: center;
 }
 
 .login-modal h1, .login-modal .h1 {

@@ -29,19 +29,6 @@ const LeaderboardModal = ({ handleCloseLeaderboard, leaderboard }) => {
       </Modal.Header>
       <Modal.Body className="mt-n3">
         <h1>Leaderboard</h1>
-        <div
-          className="generic-photo"
-          style={{
-            height: "100px",
-            width: "100%",
-            backgroundColor: "teal",
-            color: "white",
-            textAlign: "center",
-            fontSize: "20px",
-          }}
-        >
-          A photo from the GGS collection will appear here.
-        </div>
         <ol className="list-group list-group-numbered">
           {leaderboard &&
             leaderboard
@@ -51,7 +38,7 @@ const LeaderboardModal = ({ handleCloseLeaderboard, leaderboard }) => {
               .slice(0, 10)
               .map((data, index) => (
                 <li
-                  className="list-group-item d-flex justify-content-evenly align-items-center"
+                  className="list-group-item d-flex justify-content-between align-items-center"
                   key={index}
                 >
                   {data.area}
