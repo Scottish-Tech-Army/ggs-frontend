@@ -1,55 +1,61 @@
 import React, { useState, useContext, useEffect } from "react";
 import { authContext } from "../contexts/AuthContext";
-import { login } from "../services/auth";
+import { login, register } from "../services/auth";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
-import xPrimary from "./x-primary.svg";
 
-const LoginModal = ({
-  setLoadingText,
-  setLoadingTimer,
-  handleLoginClose,
-}) => {
-  const { setUnitName } = useContext(authContext);
+const LOGIN = "login";
+const REGISTER = "register";
 
-  const [code, setCode] = useState("");
+const LoginModal = ({ handleLoginClose }) => {
+  const { setUnit } = useContext(authContext);
+
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [error, setError] = useState("");
-  const [loginError, setLoginError] = useState(false); // flags if a log in error
-  const [incorrect, setIncorrect] = useState(false); // specifically flags if user error
-  
+  const [state, setState] = useState(LOGIN);
+
   useEffect(() => {
-    const fetchError = async () => {
-      if (incorrect) {
-        setLoadingText("Log in to access landmarks");
-      } else {
-        setLoadingText("Landmarks unavailable, try logging in later");
-      }
-    };
-    loginError && fetchError();
-    !loginError && setLoadingText("Log in to access landmarks");
-  }, [loginError, incorrect, setLoadingText]);
+    setError("");
+  }, [state]);
 
   const handleLogin = (event) => {
-    login(code)
-      .then(({unitName}) => {
-        setUnitName(unitName);
-        setCode("");
-        setLoadingText("Logging in"); // Message for signed in users only
-        setLoadingTimer(500);
+    login(email)
+      .then((unit) => {
+        setUnit(unit);
         handleLoginClose();
       })
       .catch((error) => {
         console.error(error);
-        setError(error.status);
-        console.log("Error registered: " + error.status);
         if (error.status === 404) {
-          setIncorrect(true);
+          setError(
+            "Email address not found. If this is your first visit, please register first."
+          );
+        } else {
+          setError("Problem logging in. Please try again.");
         }
-        setLoginError(true);
       });
     event.preventDefault();
   };
+
+  const handleRegister = (event) => {
+    register(email, name)
+      .then((unit) => {
+        setUnit(unit);
+        handleLoginClose();
+      })
+      .catch((error) => {
+        console.error(error);
+        if (error.status === 409) {
+          setError("Email address already registered. Please log in instead.");
+        } else {
+          setError("Problem registering. Please try again.");
+        }
+      });
+    event.preventDefault();
+  };
+
   return (
     <Modal
       show={true}
@@ -58,43 +64,87 @@ const LoginModal = ({
       keyboard={false}
       className="custom-modal login-modal"
     >
-      <Modal.Header className="border-0 mb-n3">
-      <Button
-          variant="outline-primary"
-          onClick={handleLoginClose}
-          className="closer-position"
-          aria-label="Close"
-        >
-          <img src={xPrimary} style={{
-          width: "200%",
-          height: "200%",
-          }}
-          alt=""/>
-        </Button>
-      </Modal.Header>
+      <Modal.Header className="border-0 mb-n3"></Modal.Header>
       <Modal.Body className="mt-n3">
-        <h1 style={{ textAlign: "center" }}>Ready to explore?</h1>
-        <p className="text-center mb-3">
-          Visit and collect all of the sights in your region or explore others
-        </p>
-        {error && (
-          <p className="error-text text-center mt-n3">
-            Invalid code - please try again.
-          </p>
+        {state === LOGIN && (
+          <>
+            <h1 style={{ textAlign: "center" }}>Ready to explore?</h1>
+            <p className="text-center mb-3">
+              Visit and collect all of the sights in your region or explore
+              others
+            </p>
+            {error && <p className="error-text text-center mt-n3">{error}</p>}
+            <Form className="m-2 mt-n2" onSubmit={handleLogin}>
+              <Form.Group controlId="formBasicCode">
+                <Form.Control
+                  value={email}
+                  type="email"
+                  onChange={(e) => setEmail(e.target.value)}
+                  label="email address"
+                  placeholder="Enter email address"
+                  className="w-100 my-2 mx-auto"
+                />
+              </Form.Group>
+              <Button bsPrefix="btn-branding w-100 my-2 mx-auto" type="submit">
+                Start Exploring
+              </Button>
+            </Form>
+            <p className="text-center mt-3">
+              Is this your first visit? Please{" "}
+              <span className="switch-mode" onClick={() => setState(REGISTER)}>
+                register first
+              </span>
+              .
+            </p>
+          </>
         )}
-        <Form className="m-2 mt-n2" onSubmit={handleLogin}>
-          <Form.Group controlId="formBasicCode">
-            <Form.Control
-              value={code}
-              onChange={(e) => setCode(e.target.value)}
-              placeholder="Enter unit name"
-              className="w-100 my-2 mx-auto"
-            />
-          </Form.Group>
-          <Button bsPrefix="btn-branding w-100 my-2 mx-auto" type="submit">
-            Start Exploring
-          </Button>
-        </Form>
+        {state === REGISTER && (
+          <>
+            <h1 style={{ textAlign: "center" }}>Register Team</h1>
+            <p className="text-center mb-3">
+              Enter an email and optional name to register your team. We will
+              hold your email address in accordance with our{" "}
+              <a
+                href="https://www.girlguidingscotland.org.uk/privacy/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                privacy policy
+              </a>
+              .
+            </p>
+            {error && <p className="error-text text-center mt-n3">{error}</p>}
+            <Form className="m-2 mt-n2" onSubmit={handleRegister}>
+              <Form.Group controlId="formBasicCode">
+                <Form.Control
+                  value={email}
+                  type="email"
+                  onChange={(e) => setEmail(e.target.value)}
+                  label="email address"
+                  placeholder="Enter email address"
+                  className="w-100 my-2 mx-auto"
+                />
+                <Form.Control
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  label="team name"
+                  placeholder="Enter team name (optional)"
+                  className="w-100 my-2 mx-auto"
+                />
+              </Form.Group>
+              <Button bsPrefix="btn-branding w-100 my-2 mx-auto" type="submit">
+                Register
+              </Button>
+            </Form>
+            <p className="text-center mt-3">
+              Already registered? Please{" "}
+              <span className="switch-mode" onClick={() => setState(LOGIN)}>
+                log in
+              </span>
+              .
+            </p>
+          </>
+        )}
       </Modal.Body>
     </Modal>
   );

@@ -1,0 +1,143 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`component LoginModal switch between views 1`] = `
+<div
+  class="modal-dialog"
+>
+  <div
+    class="modal-content"
+  >
+    <div
+      class="border-0 mb-n3 modal-header"
+    />
+    <div
+      class="mt-n3 modal-body"
+    >
+      <h1
+        style="text-align: center;"
+      >
+        Ready to explore?
+      </h1>
+      <p
+        class="text-center mb-3"
+      >
+        Visit and collect all of the sights in your region or explore others
+      </p>
+      
+      <form
+        class="m-2 mt-n2"
+      >
+        <div
+          class="form-group"
+        >
+          <input
+            class="w-100 my-2 mx-auto form-control"
+            id="formBasicCode"
+            label="email address"
+            placeholder="Enter email address"
+            type="email"
+            value=""
+          />
+        </div>
+        <button
+          class="btn-branding w-100 my-2 mx-auto btn-branding w-100 my-2 mx-auto-primary"
+          type="submit"
+        >
+          Start Exploring
+        </button>
+      </form>
+      <p
+        class="text-center mt-3"
+      >
+        Is this your first visit? Please
+         
+        <span
+          class="switch-mode"
+        >
+          register first
+        </span>
+        .
+      </p>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`component LoginModal switch between views 2`] = `
+<div
+  class="modal-dialog"
+>
+  <div
+    class="modal-content"
+  >
+    <div
+      class="border-0 mb-n3 modal-header"
+    />
+    <div
+      class="mt-n3 modal-body"
+    >
+      <h1
+        style="text-align: center;"
+      >
+        Register Team
+      </h1>
+      <p
+        class="text-center mb-3"
+      >
+        Enter an email and optional name to register your team. We will hold your email address in accordance with our
+         
+        <a
+          href="https://www.girlguidingscotland.org.uk/privacy/"
+          rel="noreferrer"
+          target="_blank"
+        >
+          privacy policy
+        </a>
+        .
+      </p>
+      
+      <form
+        class="m-2 mt-n2"
+      >
+        <div
+          class="form-group"
+        >
+          <input
+            class="w-100 my-2 mx-auto form-control"
+            id="formBasicCode"
+            label="email address"
+            placeholder="Enter email address"
+            type="email"
+            value=""
+          />
+          <input
+            class="w-100 my-2 mx-auto form-control"
+            id="formBasicCode"
+            label="team name"
+            placeholder="Enter team name (optional)"
+            value=""
+          />
+        </div>
+        <button
+          class="btn-branding w-100 my-2 mx-auto btn-branding w-100 my-2 mx-auto-primary"
+          type="submit"
+        >
+          Register
+        </button>
+      </form>
+      <p
+        class="text-center mt-3"
+      >
+        Already registered? Please
+         
+        <span
+          class="switch-mode"
+        >
+          log in
+        </span>
+        .
+      </p>
+    </div>
+  </div>
+</div>
+`;

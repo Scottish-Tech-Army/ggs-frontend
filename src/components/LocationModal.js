@@ -23,16 +23,13 @@ const LocationModal = ({
   setLocations,
   userLatLong,
 }) => {
-  const { unitName } = useContext(authContext);
+  const { unit } = useContext(authContext);
 
-  // Adapt the collecting button depending on user's proximity to the landmark location
-  // and the collection status of the landmark location
-  const [collectButtonText, setCollectButtonText] = useState();
   const [isOutOfRange, setIsOutOfRange] = useState(true);
   const [deviceErrMsg, setDeviceErrMsg] = useState();
 
   const handleCollectLocation = (event) => {
-    collectLocation(unitName, selectedLocation.locationId)
+    collectLocation(unit.email, selectedLocation.locationId)
       .then((response) => {
         if (response.ok) {
           // Update the frontend locations with the collected marker to match the backend status
@@ -55,27 +52,21 @@ const LocationModal = ({
   const photo = selectedLocation.photos[0];
 
   useEffect(() => {
-    try {
-      if (!userLatLong) {
-        throw new Error("Please turn on location tracking");
-      } else {
-        const inRange = isLocationInRange(selectedLocation, userLatLong);
-        setIsOutOfRange(!inRange);
-
-        if (selectedLocation.collected) {
-          setCollectButtonText("Collected");
-        } else {
-          setCollectButtonText(
-            inRange ? "Start Exploring" : "Please come closer to this location"
-          );
-        }
-      }
-    } catch (Error) {
-      setDeviceErrMsg(Error.message.toString());
+    if (!userLatLong) {
+      setDeviceErrMsg("Please turn on location tracking");
+      setIsOutOfRange(true);
+    } else {
+      setIsOutOfRange(!isLocationInRange(selectedLocation, userLatLong));
     }
   }, [selectedLocation, userLatLong]);
 
+  // Adapt the collecting button depending on user's proximity to the landmark location
+  // and the collection status of the landmark location
   const collectButtonDisabled = selectedLocation.collected || isOutOfRange;
+  const collectButtonText = isOutOfRange
+    ? "Please come closer to this location"
+    : "Start Exploring";
+
   const areaName =
     selectedLocation.city && selectedLocation.city !== selectedLocation.county
       ? `${selectedLocation.city}, ${selectedLocation.county}`
@@ -144,13 +135,13 @@ const LocationModal = ({
           </div>
         </div>
       </Modal.Body>
-      {deviceErrMsg && (
+      {!!deviceErrMsg && (
         <div className="container">
           <img src={dividerLine} style={{ width: "100%" }} alt="" />
           <p className="feedback-branding">{deviceErrMsg}</p>
         </div>
       )}
-      {!selectedLocation.collected && (
+      {!selectedLocation.collected && !deviceErrMsg && (
         <Button
           bsPrefix="btn-branding"
           onClick={handleCollectLocation}

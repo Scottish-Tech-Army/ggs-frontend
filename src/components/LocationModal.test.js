@@ -49,8 +49,15 @@ describe("component LocationModal", () => {
   const IN_RANGE_LOCATION = { longitude: -3.213294, latitude: 55.948466 };
   const OUT_OF_RANGE_LOCATION = { longitude: -3.213294, latitude: 55.949 };
 
+  const TEST_EMAIL = "test@example.com";
+
   beforeEach(() => {
-    localStorageGetItem.mockReturnValue("TEST-TEAM");
+    localStorageGetItem.mockReturnValue(
+      JSON.stringify({
+        email: TEST_EMAIL,
+        name: "Test team",
+      })
+    );
   });
 
   afterAll(() => {
@@ -152,7 +159,7 @@ describe("component LocationModal", () => {
 
     expect(collectLocation).toHaveBeenCalledTimes(1);
     expect(collectLocation).toHaveBeenCalledWith(
-      "TEST-TEAM",
+      TEST_EMAIL,
       "edinburgh-edinburgh-testlocation"
     );
 

@@ -9,7 +9,7 @@ import { authContext } from "../contexts/AuthContext";
 import ReactMapGL, { GeolocateControl, NavigationControl } from "react-map-gl";
 import Button from "react-bootstrap/Button";
 import { getLeaderboard } from "../services/leaderboard";
-import 'mapbox-gl/dist/mapbox-gl.css';
+import "mapbox-gl/dist/mapbox-gl.css";
 
 // Start app centred on Old College, Edinburgh
 const START_LOCATION = { latitude: 55.9472096, longitude: -3.1892527 };
@@ -41,7 +41,7 @@ const OPENSTREETMAP_MAPSTYLE = {
 const MAPBOX_MAPSTYLE = "mapbox://styles/mapbox/streets-v11";
 
 export default function App() {
-  const { unitName } = useContext(authContext);
+  const { unit } = useContext(authContext);
 
   const mapRef = useRef();
 
@@ -51,13 +51,13 @@ export default function App() {
   const [leaderboard, setLeaderboard] = useState();
 
   useEffect(() => {
-    if (unitName) {
+    if (unit) {
       setShowLogin(false);
-      getLocations(unitName).then(setLocations);
+      getLocations(unit.email).then(setLocations);
     } else {
       setShowLogin(true);
     }
-  }, [unitName]);
+  }, [unit]);
 
   const [userLatLong, setUserLatLong] = useState();
 
@@ -112,17 +112,19 @@ export default function App() {
   // was failing despite console.logs within the Loading component picking
   // up the updated loading time
   useEffect(() => {
-    if (unitName && !locations) {
+    if (unit && !locations) {
       setLoadingText("Landmarks unavailable");
       setShowLoading(true);
     } else {
       setTimeout(setShowLoading, loadingTimer, false);
     }
-  }, [locations, unitName, loadingTimer]);
+  }, [locations, unit, loadingTimer]);
 
   // Modal controls
   const [showLogin, setShowLogin] = useState(false);
   const handleLoginClose = () => {
+    setLoadingText("Logging in"); // Message for signed in users only
+    setLoadingTimer(500);
     setShowLogin(false);
     setShowLoading(true);
   };
@@ -170,7 +172,7 @@ export default function App() {
         />
         <Button
           bsPrefix="btn-leaderboard"
-          onClick={() => getLeaderboard(unitName).then(setLeaderboard)}
+          onClick={() => getLeaderboard(unit.email).then(setLeaderboard)}
         >
           Leaderboard
         </Button>
@@ -189,13 +191,7 @@ export default function App() {
           leaderboard={leaderboard}
         />
       )}
-      {showLogin && (
-        <LoginModal
-          setLoadingText={setLoadingText}
-          setLoadingTimer={setLoadingTimer}
-          handleLoginClose={handleLoginClose}
-        />
-      )}
+      {showLogin && <LoginModal handleLoginClose={handleLoginClose} />}
       {showLoading && (
         <Loading
           handleCloseLoading={() => setShowLoading(false)}
