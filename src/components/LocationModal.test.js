@@ -46,6 +46,19 @@ describe("component LocationModal", () => {
     name: "Test location name2",
   };
 
+  const LOCATION_WITHOUT_PHOTO = {
+    city: "Edinburgh",
+    photos: [],
+    challenge: "This is the challenge text",
+    county: "Edinburgh",
+    longitude: -3.21329494646239,
+    locationId: "edinburgh-edinburgh-testlocation",
+    region: "Edinburgh",
+    description: "This is the location description.",
+    latitude: 55.94846683803023,
+    name: "Test location name",
+  };
+
   const IN_RANGE_LOCATION = { longitude: -3.213294, latitude: 55.948466 };
   const OUT_OF_RANGE_LOCATION = { longitude: -3.213294, latitude: 55.949 };
 
@@ -172,6 +185,31 @@ describe("component LocationModal", () => {
       { ...TEST_LOCATION, collected: true },
       OTHER_LOCATION,
     ]);
+  });
+
+  it("placeholder image", async () => {
+    collectLocation.mockResolvedValue({ ok: true });
+
+    renderWithUser(
+      <LocationModal
+        selectedLocation={LOCATION_WITHOUT_PHOTO}
+        handleCloseLocation={handleCloseLocation}
+        setLocations={setLocations}
+        userLatLong={IN_RANGE_LOCATION}
+      />
+    );
+
+    const modal = document.querySelector(".modal-dialog");
+
+    expect(screen.getByAltText("no image available")).toHaveAttribute(
+      "src",
+      "image-coming-soon.png"
+    );
+    expect(modal).toHaveTextContent("Take a photo");
+    expect(screen.getByRole("link")).toHaveAttribute(
+      "href",
+      "mailto:web@girlguiding-scot.org.uk"
+    );
   });
 
   it("fire close on clicking close button", async () => {

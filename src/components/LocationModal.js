@@ -6,6 +6,7 @@ import { collectLocation } from "../services/locations";
 import { authContext } from "../contexts/AuthContext";
 import dividerLine from "./divider-line.svg";
 import xPrimary from "./x-primary.svg";
+import placeholderPhoto from "./image-coming-soon.png";
 
 // Change this as needed for coordinate distance from landmark. Note 0.00001 is approx equal to 11 metres.
 const LOCATION_TOLERANCE = 0.00001;
@@ -72,19 +73,56 @@ const LocationModal = ({
       ? `${selectedLocation.city}, ${selectedLocation.county}`
       : selectedLocation.county;
 
-  let creditLine = null;
-  if (photo.attribution || photo.copyright) {
-    let attributionElement = photo.originalUrl ? (
-      <a href={photo.originalUrl} target="_blank" rel="noreferrer">
-        {photo.attribution} {photo.copyright}
-      </a>
-    ) : (
+  function getPhoto(photo) {
+    if (!photo) {
+      return (
+        <>
+          <Image
+            className="img-location"
+            src={placeholderPhoto}
+            alt="no image available"
+            rounded
+          />
+          <div className="challenge">
+            <h2>Bonus Challenge</h2>
+            <div className="content">
+              Will you be the first to take a picture of this location? Take a
+              photo and send it to us at{" "}
+              <a href="mailto:web@girlguiding-scot.org.uk">
+                web@girlguiding-scot.org.uk
+              </a>
+            </div>
+          </div>
+        </>
+      );
+    }
+
+    let creditLine = null;
+    if (photo.attribution || photo.copyright) {
+      let attributionElement = photo.originalUrl ? (
+        <a href={photo.originalUrl} target="_blank" rel="noreferrer">
+          {photo.attribution} {photo.copyright}
+        </a>
+      ) : (
+        <>
+          {photo.attribution} {photo.copyright}
+        </>
+      );
+      creditLine = (
+        <div className="img-location-credit">Credit: {attributionElement}</div>
+      );
+    }
+
+    return (
       <>
-        {photo.attribution} {photo.copyright}
+        <Image
+          className="img-location"
+          src={photo.url}
+          alt={selectedLocation.name}
+          rounded
+        />
+        {creditLine}
       </>
-    );
-    creditLine = (
-      <div className="img-location-credit">Credit: {attributionElement}</div>
     );
   }
 
@@ -114,17 +152,7 @@ const LocationModal = ({
         <div className="city-name">{areaName}</div>
         <div className="scroll-container">
           <div className="scroll">
-            {photo && (
-              <>
-                <Image
-                  className="img-location"
-                  src={photo.url}
-                  alt={selectedLocation.name}
-                  rounded
-                />
-                {creditLine}
-              </>
-            )}
+            {getPhoto(photo)}
             <div className="description">{selectedLocation.description}</div>
             {selectedLocation.collected && (
               <div className="challenge">
