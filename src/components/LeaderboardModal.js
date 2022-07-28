@@ -4,6 +4,10 @@ import Button from "react-bootstrap/Button";
 import xPrimary from "./x-primary.svg";
 
 const LeaderboardModal = ({ handleCloseLeaderboard, leaderboard }) => {
+  if (!leaderboard) {
+    return null;
+  }
+
   return (
     <Modal
       show={true}
@@ -29,9 +33,9 @@ const LeaderboardModal = ({ handleCloseLeaderboard, leaderboard }) => {
       </Modal.Header>
       <Modal.Body className="mt-n3">
         <h1>Leaderboard</h1>
-        <ol className="list-group list-group-numbered">
-          {leaderboard &&
-            leaderboard
+        {leaderboard.length ? (
+          <ol className="list-group list-group-numbered">
+            {leaderboard
               .sort((a, b) =>
                 a.percentageCollected < b.percentageCollected ? 1 : -1
               )
@@ -47,7 +51,13 @@ const LeaderboardModal = ({ handleCloseLeaderboard, leaderboard }) => {
                   </span>
                 </li>
               ))}
-        </ol>
+          </ol>
+        ) : (
+          <div>
+            Collect some locations for them to appear on the leaderboard.
+          </div>
+        )}
+
         <div className="units-list"></div>
       </Modal.Body>
     </Modal>

@@ -1,10 +1,10 @@
 const BASE_URL = process.env.REACT_APP_AWS_CLIENT_API_ENDPOINT;
 
-export function getLeaderboard(unitName) {
+export function getLeaderboard(email) {
   return fetch(BASE_URL + "unit/leaderboard", {
     method: "GET",
     headers: {
-      GGSUnit: unitName,
+      GGSUnit: email,
     },
   })
     .then((data) => data.json())

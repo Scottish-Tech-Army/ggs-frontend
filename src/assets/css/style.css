@@ -129,6 +129,11 @@
   color: #009cac;
   font-weight: bold;
 }
+.login-modal .switch-mode {
+  color: #009cac;
+  font-weight: bold;
+  cursor: pointer;
+}
 
 .error-text {
   color: #c40063;

@@ -147,6 +147,11 @@ $black: #000;
     color: $primary;
     font-weight: bold;
   }
+  .switch-mode {
+    color: $primary;
+    font-weight: bold;
+    cursor: pointer;
+  }
 }
 
 .error-text {
