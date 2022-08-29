@@ -7,13 +7,14 @@ import { authContext } from "../contexts/AuthContext";
 import dividerLine from "./divider-line.svg";
 import xPrimary from "./x-primary.svg";
 
-// Change this as needed for coordinate distance from landmark. Note 0.00001 is approx equal to 11 metres.
-const LOCATION_TOLERANCE = 0.00001;
+// Change this as needed for coordinate distance from landmark.
+const LOCATION_TOLERANCE_LATITUDE = 0.0002; // Note 0.0002 is approx equal to 22 metres.
+const LOCATION_TOLERANCE_LONGITUDE = 0.0004; // Note 0.0004 is approx equal to 24 metres.
 
 const isLocationInRange = (location, userLatLong) => {
   return (
-    Math.abs(location.latitude - userLatLong.latitude) <= LOCATION_TOLERANCE &&
-    Math.abs(location.longitude - userLatLong.longitude) <= LOCATION_TOLERANCE
+    Math.abs(location.latitude - userLatLong.latitude) <= LOCATION_TOLERANCE_LATITUDE &&
+    Math.abs(location.longitude - userLatLong.longitude) <= LOCATION_TOLERANCE_LONGITUDE
   );
 };
 
