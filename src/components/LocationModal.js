@@ -67,7 +67,7 @@ const LocationModal = ({
   const collectButtonDisabled = selectedLocation.collected || isOutOfRange;
   const collectButtonText = isOutOfRange
     ? "Please come closer to this location"
-    : "Start Exploring";
+    : "Tap to reveal challenge";
 
   const areaName =
     selectedLocation.city && selectedLocation.city !== selectedLocation.county

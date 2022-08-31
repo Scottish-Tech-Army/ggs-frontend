@@ -58,7 +58,7 @@ exports[`component LocationModal show location information 1`] = `
       class="btn-branding-enabled mx-2 mb-2 btn-branding btn-branding-primary"
       type="button"
     >
-      Start Exploring
+      Tap to reveal challenge
     </button>
   </div>
 </div>
