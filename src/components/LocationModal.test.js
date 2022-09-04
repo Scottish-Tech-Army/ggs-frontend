@@ -133,7 +133,7 @@ describe("component LocationModal", () => {
 
     const modal = document.querySelector(".modal-dialog");
 
-    const button = screen.getByRole("button", { name: "Start Exploring" });
+    const button = screen.getByRole("button", { name: "Tap to reveal challenge" });
     expect(button).not.toBeDisabled();
     expect(modal).not.toHaveTextContent("This is the challenge text");
   });
@@ -152,7 +152,7 @@ describe("component LocationModal", () => {
     expect(modal).toHaveTextContent("This is the challenge text");
 
     expect(
-      screen.queryByRole("button", { name: "Start Exploring" })
+      screen.queryByRole("button", { name: "Tap to reveal challenge" })
     ).toBeNull();
   });
 
@@ -168,7 +168,7 @@ describe("component LocationModal", () => {
       />
     );
 
-    await user.click(screen.getByRole("button", { name: "Start Exploring" }));
+    await user.click(screen.getByRole("button", { name: "Tap to reveal challenge" }));
 
     expect(collectLocation).toHaveBeenCalledTimes(1);
     expect(collectLocation).toHaveBeenCalledWith(
