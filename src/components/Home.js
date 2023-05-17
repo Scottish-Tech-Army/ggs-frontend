@@ -1,204 +1,206 @@
-import React, { useEffect, useState, useContext, useRef } from "react";
-import LeaderboardModal from "./LeaderboardModal";
-import LocationModal from "./LocationModal";
-import LoginModal from "./LoginModal";
-import Loading from "./Loading";
-import Markers from "./Markers";
-import { getLocations } from "../services/locations";
-import { authContext } from "../contexts/AuthContext";
-import ReactMapGL, { GeolocateControl, NavigationControl } from "react-map-gl";
+import React, { useEffect, useState, useContext, createContext, useRef } from "react";
+
+// import LeaderboardModal from "./LeaderboardModal";
+
+// The components representing the six pages of the app:
+import LandingPage from "./LandingPage";
+import HowToPage from "./HowToPage";
+import ChallengesNearMePage from "./ChallengesNearMePage";
+import UserGuidePage from "./UserGuidePage";
+import CompletedChallengesPage from "./CompletedChallengesPage";
+import LeaderboardPage from "./LeaderboardPage";
+
+// Follownig line must be commented out for production 
+// as it is for field testing only:
+import FormLinkPage from "./FormLinkPage";
+
+
+// Images for the navigation bar and the plus menu:
+import HowToIcon from "../assets/images/howToComplete2.svg";
+import challengesIcon from "../assets/images/challengesNearMeIcon.svg";
+import userGuideIcon from "../assets/images/UserGuideIcon.svg";
+import completedIcon from "../assets/images/completedChallenges.svg";
+import leaderboardIcon from "../assets/images/clipboardIcon3.svg";
+
+// React-bootstrap stuff
 import Button from "react-bootstrap/Button";
-import { getLeaderboard } from "../services/leaderboard";
-import "mapbox-gl/dist/mapbox-gl.css";
 
-// Start app centred on Old College, Edinburgh
-const START_LOCATION = { latitude: 55.9472096, longitude: -3.1892527 };
+// scss stuff:
+import '../scss/style.scss';
 
-const OPENSTREETMAP_MAPSTYLE = {
-  version: 8,
-  sources: {
-    "raster-tiles": {
-      type: "raster",
-      tiles: [
-        "https://a.tile.openstreetmap.org/{z}/{x}/{y}.png",
-        "https://b.tile.openstreetmap.org/{z}/{x}/{y}.png",
-        "https://c.tile.openstreetmap.org/{z}/{x}/{y}.png",
-      ],
-      tileSize: 256,
+
+
+// Create context to share data with all descendants
+// of this component:
+export const MenuContext = createContext() 
+
+
+
+
+
+export default function Home(){
+
+
+
+  const [pageIndex, setPageIndex] = useState(0);
+  
+
+// The big object that is made available
+// to all page components via context.
+// It contains:
+// 1) For every page except the landing page
+// and FormLinkPage: 
+// i)   the click handlers for the navigation bar 
+//      and plus-menu square buttons for each page
+// ii)  srcs for the the square buttons of the 
+//      navigation bar and plus menu for every page 
+//      except the landing page.     
+// 2) For the landing page:
+// i)   the click handlers for the buttons.
+// ii)  the click handler for the field testing button
+//      (this will be commented out for production)
+// Note that code only ever reads this object (ie 
+// never writes to it), so it's fine to put it in 
+// state or not to. 
+// 3) For the FormLink page:
+// i)   a click handler for the home icon
+// ii)  the src for the home icon
+  const myObject = {
+    // p0 is an object that <LandingPage/> will use: 
+p0: {
+      homeIconClickHandler:  ()=> {setPageIndex(0)},
+      howToButtonClickHandler: ()=> {setPageIndex(1)},
+      challengesNearMeButtonClickHandler: ()=> {setPageIndex(2)},
+      userGuideButtonClickHandler: ()=> {setPageIndex(3)},
+      completedChallengesButtonClickHandler: ()=> {setPageIndex(4)},
+      leaderBoardButtonClickHandler: ()=> {setPageIndex(5)},
+      testProperty: ()=> {console.log(`You have fire the function attached to property testProperty`)},
+      // comment out the following line in production;
+      // it is only for field testing:
+      takeTesterToFormLinkPage: ()=> {
+              setPageIndex(6)
+              // console.log(`Inside the bigObject (myObject). Handler takeTesterToFormLinkPage has fired`)
+                                     }
     },
-  },
-  layers: [
-    {
-      id: "osm-tiles",
-      type: "raster",
-      source: "raster-tiles",
-      minzoom: 0,
-      maxzoom: 19,
+    // p1 is an object that <HowToPage/> will use:
+p1: {
+    homeIconClickHandler:  ()=> {setPageIndex(0)},
+    icon1src: challengesIcon,
+    icon1ClickHandler:  ()=> {setPageIndex(2)},
+    icon2src: userGuideIcon,
+    icon2ClickHandler:  ()=> {setPageIndex(3)},
+    icon3src: completedIcon,
+    icon3ClickHandler:  ()=> {setPageIndex(4)},
+    icon4src: leaderboardIcon,
+    icon4ClickHandler:  ()=> {setPageIndex(5)}
     },
-  ],
-};
+    // p2 is an object that <ChallengesNearMePage/> will use:
+p2: {
+    homeIconClickHandler:  ()=> {setPageIndex(0)},
+    icon1src: HowToIcon,
+    icon1ClickHandler:  ()=> {setPageIndex(1)},
+    icon2src: userGuideIcon,
+    icon2ClickHandler:  ()=> {setPageIndex(3)},
+    icon3src: completedIcon,
+    icon3ClickHandler:  ()=> {setPageIndex(4)},
+    icon4src: leaderboardIcon,
+    icon4ClickHandler:  ()=> {setPageIndex(5)}
+    
+    },
+    // p3 is an object that <UserGuidePage/> will use:
+p3: {
+    homeIconClickHandler:  ()=> {setPageIndex(0)},
+    icon1src: HowToIcon,
+    icon1ClickHandler:  ()=> {setPageIndex(1)},
+    icon2src: challengesIcon,
+    icon2ClickHandler:  ()=> {setPageIndex(2)},
+    icon3src: completedIcon,
+    icon3ClickHandler:  ()=> {setPageIndex(4)},
+    icon4src: leaderboardIcon,
+    icon4ClickHandler:  ()=> {setPageIndex(5)}
+    
+    },
+    // p4 is an object that <CompletedChallengesPage/> will use:
+p4: {
+    homeIconClickHandler:  ()=> {setPageIndex(0)},
+    icon1src: HowToIcon,
+    icon1ClickHandler: ()=> {setPageIndex(1)},
+    icon2src: challengesIcon,
+    icon2ClickHandler: ()=> {setPageIndex(2)},
+    icon3src: userGuideIcon,
+    icon3ClickHandler: ()=> {setPageIndex(3)},
+    icon4src: leaderboardIcon,
+    icon4ClickHandler: ()=> {setPageIndex(5)}
+    },
+    // p5 is an object that <LeaderboardPage/> will use:    
+p5: {
+    homeIconClickHandler:  ()=> {setPageIndex(0)},
+    icon1src: HowToIcon,
+    icon1ClickHandler: ()=> {setPageIndex(1)},
+    icon2src: challengesIcon,
+    icon2ClickHandler: ()=> {setPageIndex(2)},
+    icon3src: userGuideIcon,
+    icon3ClickHandler: ()=> {setPageIndex(3)},
+    icon4src: completedIcon,
+    icon4ClickHandler: ()=> {setPageIndex(4)}
+    },
 
-const MAPBOX_MAPSTYLE = "mapbox://styles/mapbox/streets-v11";
+    // Comment out the following for production code;
+    // it is only for field testers:
+    // p6 is an object that <FormLinkPage/> will use:    
+    p6: {
+      homeIconClickHandler:  ()=> {setPageIndex(0)},
+      icon1src: HowToIcon,
+        }
 
-export default function App() {
-  const { unit } = useContext(authContext);
+                    } // end myObject
 
-  const mapRef = useRef();
+// Put myObject into state:
+const [iconsObject, setIconsObject] = useState(myObject);
 
-  // Get the locations collection
-  const [locations, setLocations] = useState([]);
-  // Get the leaderboard collection
-  const [leaderboard, setLeaderboard] = useState();
+   
+    return (
+    <div>
+<MenuContext.Provider value={iconsObject}>
 
-  useEffect(() => {
-    if (unit) {
-      setShowLogin(false);
-      getLocations(unit.email).then(setLocations);
-    } else {
-      setShowLogin(true);
-    }
-  }, [unit]);
+  <LandingPage   
+  isThisPageActive = {pageIndex === 0} 
+  />
 
-  const [userLatLong, setUserLatLong] = useState();
+  <HowToPage 
+  isThisPageActive = {pageIndex === 1}  
+  />
 
-  const navControlStyle = { right: 10, top: 10 };
-  const geolocateControlStyle = { left: 15, top: 55 };
+  <ChallengesNearMePage 
+  isThisPageActive = {pageIndex === 2}  
+  />
+  
+  <UserGuidePage 
+  isThisPageActive = {pageIndex === 3}  
+  />
 
-  // get user coordinates
-  useEffect(() => {
-    // set up device coordinate collection
-    var options = {
-      enableHighAccuracy: true,
-      timeout: 5000,
-      maximumAge: 0,
-    };
+<CompletedChallengesPage
+  isThisPageActive = {pageIndex === 4}  
+  />
 
-    function success(position) {
-      console.log("Geolocation available", position);
-      setUserLatLong(position.coords);
-      mapRef.current &&
-        mapRef.current.flyTo({
-          center: [position.coords.longitude, position.coords.latitude],
-          duration: 2000,
-        });
-    }
+<LeaderboardPage
+  isThisPageActive = {pageIndex === 5}  
+  />
 
-    function showError(error) {
-      switch (error.code) {
-        case error.PERMISSION_DENIED:
-          console.warn("User denied the request for Geolocation.");
-          break;
-        case error.POSITION_UNAVAILABLE:
-          console.warn("Location information is unavailable.");
-          break;
-        case error.TIMEOUT:
-          console.warn("The request to get user location timed out.");
-          break;
-        default:
-          console.error("An unknown error occurred.", error);
-          break;
-      }
-    }
 
-    navigator.geolocation.getCurrentPosition(success, showError, options);
-  }, []);
+<FormLinkPage
+  isThisPageActive = {pageIndex === 6}  
+/>
 
-  // Loading-graphic controls
-  const [showLoading, setShowLoading] = useState(false);
-  const [loadingText, setLoadingText] = useState("Working"); // default message
-  const [loadingTimer, setLoadingTimer] = useState(10000);
-  // default display time set long because used when disconnect experienced
-  // passing a long time to setLoadingTimer within handleDelay
-  // was failing despite console.logs within the Loading component picking
-  // up the updated loading time
-  useEffect(() => {
-    if (unit && !locations) {
-      setLoadingText("Landmarks unavailable");
-      setShowLoading(true);
-    } else {
-      setTimeout(setShowLoading, loadingTimer, false);
-    }
-  }, [locations, unit, loadingTimer]);
 
-  // Modal controls
-  const [showLogin, setShowLogin] = useState(false);
-  const handleLoginClose = () => {
-    setLoadingText("Logging in"); // Message for signed in users only
-    setLoadingTimer(500);
-    setShowLogin(false);
-    setShowLoading(true);
-  };
+</MenuContext.Provider>
+   </div>
+   
+           ); // end return
+ 
+                      } // end <Home/> declaration
 
-  // Retrieve modal data for selected pin
-  const [selectedLocation, setSelectedLocation] = useState();
 
-  const mapboxAccessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
-  const mapStyle = mapboxAccessToken ? MAPBOX_MAPSTYLE : OPENSTREETMAP_MAPSTYLE;
 
-  console.log(
-    mapboxAccessToken
-      ? `Using Mapbox with access token ${mapboxAccessToken}`
-      : "Using OpenStreetMap"
-  );
 
-  return (
-    <div
-      className="container-fluid"
-      style={{ paddingLeft: "0px", paddingRight: "0px" }}
-    >
-      <ReactMapGL
-        ref={mapRef}
-        style={{ height: "100vh", width: "100vw" }}
-        initialViewState={{
-          latitude: START_LOCATION.latitude,
-          longitude: START_LOCATION.longitude,
-          zoom: 14,
-        }}
-        mapStyle={mapStyle}
-        mapboxAccessToken={mapboxAccessToken}
-      >
-        <Markers
-          locations={locations}
-          setSelectedLocation={setSelectedLocation}
-        />
-        <NavigationControl style={navControlStyle} showCompass={false} />
-        <GeolocateControl
-          style={geolocateControlStyle}
-          positionOptions={{ enableHighAccuracy: true }}
-          trackUserLocation={true}
-          showUserHeading={true}
-          onGeolocate={({ coords }) => setUserLatLong(coords)}
-          auto
-        />
-        <Button
-          bsPrefix="btn-leaderboard"
-          onClick={() => getLeaderboard(unit.email).then(setLeaderboard)}
-        >
-          Leaderboard
-        </Button>
-      </ReactMapGL>
-      {selectedLocation && (
-        <LocationModal
-          handleCloseLocation={() => setSelectedLocation(undefined)}
-          selectedLocation={selectedLocation}
-          setLocations={setLocations}
-          userLatLong={userLatLong}
-        />
-      )}
-      {leaderboard && (
-        <LeaderboardModal
-          handleCloseLeaderboard={() => setLeaderboard(undefined)}
-          leaderboard={leaderboard}
-        />
-      )}
-      {showLogin && <LoginModal handleLoginClose={handleLoginClose} />}
-      {showLoading && (
-        <Loading
-          handleCloseLoading={() => setShowLoading(false)}
-          loadingText={loadingText}
-          loadingTimer={loadingTimer}
-        />
-      )}
-    </div>
-  );
-}
+

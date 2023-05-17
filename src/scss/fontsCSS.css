@@ -1,0 +1,50 @@
+/*
+the ggs font is Poppins, the family of which I downloaded from google
+and put in folder fonts in folder assets.
+NOTE: the value for the src attribute below has to be a full path 
+realtive to folder src. a relative path did not work!
+*/
+
+
+
+
+
+
+
+@font-face {
+    font-family: 'ggsFontBlack'; /* This is a name of your choosing*/
+      src: url('/assets/fonts/Poppins/Poppins-Black.ttf') format('truetype');
+      /* font-weight: 600;
+      font-style: normal; */
+           }
+
+  
+  @font-face {
+    font-family: 'ggsFontLight'; /* This is a name of your choosing*/
+      src: url('/assets/fonts/Poppins/Poppins-Light.ttf') format('truetype');
+      /* font-weight: 600;
+      font-style: normal; */
+           }
+  
+  @font-face {
+    font-family: 'ggsFontBlackItalic'; /* This is a name of your choosing*/
+      src: url('/assets/fonts/Poppins/Poppins-BlackItalic.ttf') format('truetype');
+      /* font-weight: 600;
+      font-style: normal; */
+           }
+  
+  
+  @font-face {
+    font-family: 'ggsFontBold'; /* This is a name of your choosing*/
+      src: url('/assets/fonts/Poppins/Poppins-Bold.ttf') format('truetype');
+      /* font-weight: 600;
+      font-style: normal; */
+           }
+  
+  @font-face {
+    font-family: 'ggsFontMedium'; /* This is a name of your choosing*/
+      src: url('/assets/fonts/Poppins/Poppins-Medium.ttf') format('truetype');
+      /* font-weight: 600;
+      font-style: normal; */
+           }
+  

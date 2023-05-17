@@ -1,6 +1,14 @@
 import React from "react";
-import brandedMarker from "./mapbox-marker-branded.svg";
-import mutedBrandedMarker from "./mapbox-marker-branded-muted.svg";
+// The 100% opaque blue marker:
+import brandedMarker from "../assets/images/markerActive.svg";
+// The faded blue marker:
+import mutedBrandedMarker from "../assets/images/markerMuted.svg";
+
+// Old images:
+// import brandedMarker from "./mapbox-marker-branded.svg";
+// import mutedBrandedMarker from "./mapbox-marker-branded-muted.svg";
+
+
 
 const Pin = ({ location }) => {
 
@@ -11,10 +19,10 @@ const Pin = ({ location }) => {
         src={location.collected ? mutedBrandedMarker : brandedMarker}
         alt="map pin"
         style={{
-          width: "150%",
-          height: "150%",
-          marginLeft: "-50%",
-          marginTop: "-50%",
+          width: "100%",
+          height: "100%",
+          marginLeft: "0%",
+          marginTop: "0%",
           cursor: "pointer",
         }}
       />

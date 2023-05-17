@@ -32,7 +32,7 @@ const LeaderboardModal = ({ handleCloseLeaderboard, leaderboard }) => {
         </Button>
       </Modal.Header>
       <Modal.Body className="mt-n3">
-        <h1>Leaderboard</h1>
+        <h1>My completed challenges</h1>
         {leaderboard.length ? (
           <ol className="list-group list-group-numbered">
             {leaderboard

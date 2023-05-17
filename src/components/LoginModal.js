@@ -1,14 +1,19 @@
 import React, { useState, useContext, useEffect } from "react";
+
+// context:
 import { authContext } from "../contexts/AuthContext";
 import { login, register } from "../services/auth";
+
+// components:
 import Button from "react-bootstrap/Button";
+// import Button from "./GGSbuttonOne";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 
 const LOGIN = "login";
 const REGISTER = "register";
 
-const LoginModal = ({ handleLoginClose }) => {
+const LoginModal = ({ handleLoginClose, successOrFailResponse }) => {
   const { setUnit } = useContext(authContext);
 
   const [email, setEmail] = useState("");
@@ -25,8 +30,15 @@ const LoginModal = ({ handleLoginClose }) => {
       .then((unit) => {
         setUnit(unit);
         handleLoginClose();
+        // Call the function that tells parent <LandingPage/>
+        // what to do on successful log in. When the 
+        // arg has value true the response was successful:
+        successOrFailResponse(true)
       })
       .catch((error) => {
+        // The function that tells parent <LandingPage/>
+        // what to do on failure to log in:
+        successOrFailResponse(false)
         console.error(error);
         if (error.status === 404) {
           setError(
@@ -68,8 +80,8 @@ const LoginModal = ({ handleLoginClose }) => {
       <Modal.Body className="mt-n3">
         {state === LOGIN && (
           <>
-            <h1 style={{ textAlign: "center" }}>Ready to explore?</h1>
-            <p className="text-center mb-3">
+            <h1 style={{ textAlign: "left" }}>Ready to explore?</h1>
+            <p className="text-left mb-3">
               Visit and collect all of the sights in your region or explore
               others
             </p>
@@ -85,11 +97,15 @@ const LoginModal = ({ handleLoginClose }) => {
                   className="w-100 my-2 mx-auto"
                 />
               </Form.Group>
-              <Button bsPrefix="btn-branding w-100 my-2 mx-auto" type="submit">
-                Start Exploring
+              <Button 
+              variant = "customGGS"
+              className="buttonOperable" 
+              type="submit"
+              >
+              Start Exploring
               </Button>
-            </Form>
-            <p className="text-center mt-3">
+              </Form>
+            <p className="text-left mt-3">
               Is this your first visit? Please{" "}
               <span className="switch-mode" onClick={() => setState(REGISTER)}>
                 register first
@@ -132,14 +148,17 @@ const LoginModal = ({ handleLoginClose }) => {
                   className="w-100 my-2 mx-auto"
                 />
               </Form.Group>
-              <Button bsPrefix="btn-branding w-100 my-2 mx-auto" type="submit">
+              <Button 
+              variant = "customGGS"
+              className="buttonOperable" 
+              type="submit">
                 Register
               </Button>
             </Form>
             <p className="text-center mt-3">
               Already registered? Please{" "}
               <span className="switch-mode" onClick={() => setState(LOGIN)}>
-                log in
+                <br/>log in
               </span>
               .
             </p>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="20" height="48" viewBox="0 0 20 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+<!--Mukund: I added transform="scale(0.23)" in the group of id 
+"mapbox-marker-icon" because otherwise the marker was too large
+and only some of it showed  -->
+<g id="mapbox-marker-icon" transform="scale(0.23)">
+<!--The following ellipse is the shadow of the marker:-->
+<ellipse id="shadow" cx="41.667" cy="112.5" rx="37.5" ry="20.833" style="fill:#a9a9a9; fill-opacity:0.5;"/>
+<g id="mask" opacity="0.3">
+<g id="group">
+<path id="shadow-2" d="M41.667,133.333c20.833,0 37.5,-9.166 37.5,-20.833c-0,-11.667 -16.667,-20.833 -37.5,-20.833c-20.834,-0 -37.5,9.166 -37.5,20.833c-0,11.667 16.666,20.833 37.5,20.833Z" style="fill:#bfbfbf;"/>
+</g>
+</g>
+<path d="M4.218,47.519c-0.675,-2.719 -1.033,-5.555 -1.033,-8.47c-0,-20.256 17.273,-36.701 38.55,-36.701c21.276,0 38.549,16.445 38.549,36.701c0,3.109 -0.407,6.129 -1.172,9.011c-4.296,22.19 -37.539,66.053 -37.539,66.053c0,-0 -33.681,-42.98 -37.355,-66.594Zm37.517,-23.541c8.737,-0 15.83,6.753 15.83,15.071c0,8.318 -7.093,15.071 -15.83,15.071c-8.738,0 -15.831,-6.753 -15.831,-15.071c-0,-8.318 7.093,-15.071 15.831,-15.071Z" style="fill:#00a7e5;fill-opacity:0.38;stroke:#000;stroke-width:4.17px;"/>
+</g>
+<!--The following box seems to serve no purppose so I commented it out:-->
+<!--<rect x="0" y="0" width="20" height="48" style="fill:none;"/>-->
+</svg>

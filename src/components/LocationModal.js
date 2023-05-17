@@ -51,7 +51,10 @@ const LocationModal = ({
     event.preventDefault();
   };
 
-  const photo = selectedLocation.photos[0];
+  // Mukund: Set a variable to the object that is in array photos 
+  // of object selectedLocation (location). array photos looks like this:
+  // [{url:  "https://dz1ex1yb0vxyz.cloudfront.net/dunbartonshire-bearsden-thegruffalotrail.jpg"}]
+    const photo = selectedLocation.photos[0];
 
   useEffect(() => {
     if (!userLatLong) {

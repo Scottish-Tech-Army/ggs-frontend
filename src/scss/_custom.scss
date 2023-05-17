@@ -1,9 +1,1985 @@
+/*
+Styles added by Mukund March 2023.
+*/
+
+
+
+$guidesDarkBlue: #173a86;
+$guidesMidBlue: #8cb5e2;
+$guidesLightBlue: #b7e2fa;
+
+$browniesBlue: #0067b2;
+$browniesLightBlue: #44bdee;
+$browniesYellow: #ffc80a;
+
+
+$rainbowsBlue: #218ccc;
+$rainbowsLightBlue: #96d3f5;
+
+$girlGuidingDarkBlue: #161b4e;
+$girlGuidingMidBlue: #007bc4;
+$girlGuidingLightBlue: #00a7e5;
+
+$rangersBlue: #4ea5dc;
+
+
+
+/* class to position that button in <ChallengesNearMe/>
+that user clicks to take her to map of her area. */
+.positionButton{
+position: absolute;
+top: 10px;
+left: 10px;
+z-index: 10;
+}
+
+/* the imgs for the icons on the landing page 
+and for the home icon and plus menu icons. */
+.iconImgs{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+         }
+
+
+/* the class for the <LandingPage/> buttons 
+that makes them opaque and gives them
+hover and depress effects. */
+.largeButton1New{
+    
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+          
+  
+  width: fit-content;
+  height: 25px;
+  padding-left: 3px;
+  padding-right: 3px;
+  
+  border: $guidesLightBlue 1.5px outset ;
+  border-radius: 5px 5px 5px 5px ;
+  
+  background-color: $girlGuidingLightBlue;
+  box-shadow: rgb(5, 5, 5) 1px 1px 5px;
+  
+  opacity: 1;
+  pointer-events: auto;
+            }
+          
+.largeButton1New:hover{ 
+  background-color: $guidesLightBlue;
+                }  
+
+/*Now a class code gives to buttons 
+when the user clicks them */
+.largeButton1New:active{   
+  transform: translateY(4px);
+  transform: translateX(4px);
+  box-shadow: black 1px 1px 1px;
+                 } 
+
+
+/* the class for the <LandingPage/> buttons 
+that makes them opaque but gives them no
+hover or depress effects. */
+.largeButtonInoperable{
+    
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+          
+  
+  width: fit-content;
+  height: 25px;
+  padding-left: 3px;
+  padding-right: 3px;
+  
+  border: none ;
+  border-radius: 5px 5px 5px 5px ;
+  
+  background-color: $guidesLightBlue;
+  box-shadow: none;
+  
+  opacity: 1;
+  pointer-events: none;
+            }
+
+
+
+// Styles to do with the RegionsList component
+.regionsListAllEncompassingDiv{
+  border-style: solid;
+  border-width: 2px;
+   border-color: #070707;  
+
+width: 100%;
+height: 100%;
+
+z-index: 20;
+                              }
+
+
+
+
+
+
+
+
+
+
+
+// ------- styles to do with the leader board page -------  -------  ------- 
+
+// The all-encompassing div:
+.leaderboardPageOuterContainer{
+ 
+
+   height: 100vh;
+   width: 100vw;
+ 
+ position: fixed;
+ 
+ border-style: solid;
+ border-color: $browniesLightBlue;
+ border-width: 5px;
+ 
+ padding-top: 10px;
+ padding-left: 2px;
+ padding-right: 2px;
+ padding-bottom: 20px;
+ 
+ overflow-y:scroll;
+    background-color: none;
+ 
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-start;
+ align-items: center;
+
+/*
+ border-style: dotted;
+  border-width: 6px;
+   border-color: #06f3b8;  
+*/
+}
+
+
+// The  div that contains:
+// 1) a div containing the <p> 
+// for text "Digital Safari 
+// Leader Board" :
+.leaderboardPageContainerOne{
+/*  
+  border-style: dotted;
+  border-width: 2px;
+   border-color: #f3df06;  
+*/
+width: 99%;
+height: 10%;
+
+}
+
+// The div that contains the <p>
+// for text "Digital Safari 
+// Leader Board" :
+.leaderBoardPageHeaderContainer{
+  height: 35px;
+  width: 95vw;
+    
+  border-bottom:$girlGuidingDarkBlue;
+  border-top: #fff;
+  border-left: #fff;
+  border-right: #fff;
+  border-style: solid;
+  border-width: 2px;
+  
+  margin-bottom: 20px;
+
+                              }
+
+
+// The <p> for text "Digital 
+// Safari Leader Board"
+.leaderBoardPageHeader{
+  font-size: 26px;
+  line-height: 26px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  color: $girlGuidingDarkBlue;
+                      }
+
+
+// The  div that contains two divs:
+// 1) a div containing the <p> Choose a County
+// 2) a div containing the search field
+.leaderboardPageContainerTwo{
+  /*
+  border-style: dotted;
+  border-width: 2px;
+   border-color: #1703f8;  
+*/
+width: 99%;
+height: 85px;
+
+z-index: 20;
+
+margin-bottom: 30px; 
+
+
+                            }
+
+
+// The div that encloses 
+// i) the <input/> that is the submit button
+// for the form and 
+// ii) the img of the magnifying glass:
+.submitButtonEnclosingDiv{
+  border-style: dotted;
+  border-width: 1px;
+   border-color: $browniesBlue; 
+
+  /*
+   background-color: #da60f2;
+   */
+   height: 35px;
+   width: 35px;
+
+   overflow: hidden
+                         }
+
+// The <input/> that is the submit button
+// for the form:
+.submitButton{
+   height: 100%;
+   width: 100%;
+
+   position: relative;
+   top: -120%;
+   left: 0px;
+
+   background-color: none;
+
+   opacity: 0;
+             }
+
+// The <img/> that goes with the form's submit
+// button: 
+.magGlassImg{
+width: 140%;
+height: 140%;
+
+position: relative;
+top: -1%;
+left: -20%;
+
+            }
+
+
+// For the <form/> element itself:
+.formElement{
+
+width: 100%;
+height: 100%;
+
+display: flex;
+flex-direction: row;
+justify-content: flex-start;
+align-items: center;
+
+
+
+}
+
+
+
+.searchFormOutermostContainer{
+width: 100%;
+height: 100%;
+
+display: flex;
+flex-direction: column;
+justify-content: flex-start;
+align-items: center;
+
+/*
+border-style: double;
+border-width: 6px;
+border-color: #75f803; 
+*/
+}
+
+
+.searchFormContainerOne{
+  width: 100%;
+  height: 97%;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  
+  box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.15);
+
+  padding: 7px;
+
+  /*
+  border-style: double;
+  border-width: 6px;
+   border-color: #03f8d7; 
+  */
+  }
+
+
+// The div that contains the text <p>
+// "Choose a County"
+.searchFormTextContainer{
+  /*
+  border-style: dotted;
+  border-width: 2px;
+  border-color: #df08f7;  
+*/
+width: 100%;
+height: 25%;
+
+
+                             }
+
+
+.searchFormSearchContainer{
+
+  /*
+  border-style: dotted;
+  border-width: 6px;
+   border-color: #f8d303;  
+*/
+
+width: 100%;
+height: 55%;
+
+/*
+display: flex;
+flex-direction: row;
+justify-content: space-around;
+align-items: center;
+*/
+
+                               }
+
+
+
+
+.listBackground{
+  background-color: $guidesMidBlue;
+  // transition: height 5s linear 2s, width 5s ease-in 2s;
+               }
+
+
+
+
+// Two styles to apply conditionally to the 
+// div that contains the dropdown list:
+
+// 1) to make the div
+// grow in height so that it shows all of the 
+// dropdown list options:
+.showDDlist{
+  box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.35);
+
+  background-color: $guidesMidBlue;
+
+  overflow-y: scroll;
+  
+  width: 45%; 
+  max-width: 120px;
+
+  animation-name: makeDDlistGrow;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
+  
+                 }
+
+// 2) to make the div
+// shrink in height to 0px so that it disappears:
+.hideDDlist {
+  animation-name: makeDDlistVanish;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
+            }
+
+// Two animations for the dropdown list,
+// one for the downward movement, one for the
+// upward movement:
+@keyframes makeDDlistGrow {
+  0% {
+    height: 0px;
+  }
+
+  80% {
+    height: 200px;
+  }
+
+
+  100% {
+    height: 180px;
+  }
+}
+
+@keyframes makeDDlistVanish {
+  0% {
+    height: 180px;
+    width: 45%
+  }
+
+  80% {
+    height: 20px;
+  }
+
+
+  100% {
+    height: 0px;
+    width: 0%
+  }
+}
+
+
+
+// For the <ul> that is the dropdown list
+.countiesList{
+  list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+    /*
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    */
+
+             }
+
+// The <p> for the text of each item
+// of the dropdown list:
+.regionsListText{
+font-size: 14px;
+line-height: 15px;
+
+font-family: 'Poppins';
+font-style: italic;
+font-weight: 300;
+
+color: rgb(0, 0, 0);
+
+margin: 0px;
+padding: 0px;
+
+}
+
+// For the div that goes in each <li>
+// of the regions list that the user sees
+// when she clicks in the search input field.
+// This div contains the <p> of class 
+// .regionsListText:
+.regionsListItem{
+background-color: $guidesLightBlue;
+/*
+border-style: solid;
+border-width: 1px;
+border-color: $browniesLightBlue;  
+*/
+
+width: 90%;
+height: 40px;
+
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+
+padding: 0px;
+margin: 2px;
+
+z-index: 20;
+
+animation-name: rotateDropdownItems;
+animation-duration: 0.7s;
+animation-fill-mode: forwards;
+animation-timing-function: ease-in-out;
+                }
+
+
+.regionsListItem:hover{
+
+  background-color: $girlGuidingLightBlue;
+
+}
+
+
+
+// Animation for the divs in
+// the dropdown list:
+@keyframes rotateDropdownItems {
+  0% {
+      transform: rotateX(120deg);
+      // transform: rotateY(30deg)
+  }
+  70% {
+      transform: rotateX(-30deg);
+      // transform: rotateY(-13deg)
+  }
+  100% {
+      transform: rotateX(0deg) ;
+      // transform: rotateY(0deg) 
+  }
+}
+
+
+
+
+
+
+// The input where the user types the 
+// county name:
+.countyInput{
+background-color: $guidesLightBlue;
+
+border-style: dotted;
+border-width: 1px;
+border-color: $browniesBlue; 
+
+height: 35px;
+width: 185px;
+
+
+}
+
+
+// The input's placeholder:
+::placeholder {
+  font-size: 14px;
+  line-height: 15px;
+  
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 200;
+  
+  color: $browniesBlue;
+  opacity: 0.5;
+}
+
+
+
+
+// The div that contains the div 
+// that contains the leaderboard table
+.leaderboardPageContainerThree{
+  /*
+  border-style: dotted;
+  border-width: 5px;
+   border-color: #032cf8;  
+*/
+width: 98%;
+height: 60%;
+
+box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.15);
+
+
+z-index: 1;
+                              }
+
+
+// The <p> that displays the 
+// name of the county: 
+.leaderboardPageCountyName{
+  font-size: 25px;
+  line-height: 26px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  color: $browniesBlue;
+
+  margin: 0px;
+}                              
+
+
+.leaderboardTableOutermostContainer{
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+align-items: center;
+
+width: 100%;
+height: 100%;
+
+/*
+border-style: dotted;
+  border-width: 2px;
+   border-color: #f82403;  
+*/
+overflow-y: scroll;
+
+}
+
+
+
+
+.leaderBoardPageTableHeader{
+  font-size: 15px;
+  line-height: 16px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  color: $girlGuidingDarkBlue;
+            }
+
+.leaderBoardTableText{
+  font-size: 13px;
+  line-height: 15px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  color: rgb(0, 0, 0);
+            }
+
+.leaderboardPageTextContainer{
+  border-style: dotted;
+  border-width: 2px;
+   border-color: #f82403;  
+}
+
+// The div that contains the table
+// of the leaderboard page:
+.leaderboardTableContainer{
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+
+  overflow-y: auto;
+
+  width: 98%;
+  max-height: 50%;
+} 
+
+
+
+// The table of the leaderboard page: 
+.leaderboardPageTable{
+
+  width: 98%;
+  height: 100%;
+
+ 
+    border-collapse: collapse;
+    margin: 25px 0;
+                     }            
+
+
+thead {
+	background-color: $girlGuidingMidBlue;
+	color: white;                     
+}
+
+
+// The three table headers (each a th):
+.thRank {
+  width: 20%;
+   }
+
+.thUnit {
+  width: 70%;
+     }
+  
+.thCompleted {
+  width: 10%;
+   }
+
+
+     
+// The divs that go in each th
+// and the <p>s for the text 
+// in the divs:
+
+// the div:
+.rankHead {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+          }
+// the <p>:
+.rankHeadText{
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 200;
+  font-size: 16px;
+  line-height: 16px;
+  margin: 0px;
+  padding: 0px;
+                  }
+// the div:
+.unitHead {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+          }
+
+// the <p>:
+.unitHeadText{
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 200;
+  font-size: 16px;
+  line-height: 16px;
+  margin: 0px;
+  padding: 0px;
+
+             }
+
+// the div:
+.completedHead {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+               }
+
+// the <p>:
+.completedHeadText{
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 200;
+  font-size: 13px;
+  line-height: 13px;
+  margin: 0px;
+  padding: 0px;
+                  }
+
+
+// The divs inside the tds:
+.tdDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+
+  padding-top: 5px;
+  padding-bottom: 5px;
+
+               }
+
+ 
+// the <p>s inside the divs 
+// inside the tds:
+.tdDiv p {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 200;
+  font-size: 16x;
+  line-height: 16px;
+  margin: 0px;
+  padding: 0px;
+                  }
+
+    
+// The imgs for the gold, silver 
+// and bronze stars:
+.starImg{
+width: 30px;
+height: 30px;
+}
+
+
+tr:nth-child(even) {
+  background-color: $guidesLightBlue;
+}
+
+tr {
+  border-bottom: 5px dotted $girlGuidingDarkBlue;
+  padding: 8px;
+  text-align: center;
+}
+
+
+// ------- End styles to do with the leader board page -------  -------  ------- 
+
+
+
+/* -------- styles for the completed-challenges page -------------- */ 
+.completedPageOuterContainer{
+  padding: 0;
+  margin: 0;
+
+  display: block;
+  
+  height: 100vh;
+  width: 100vw;
+
+  // background-color: #e19085;
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+}
+
+.completedPageMainContainer{
+  padding: 0;
+  margin: 0;
+
+  display: block;
+  
+
+  height: 80vh;
+  width: 100vw;
+
+//    background-color: #e1d085;
+position: absolute;
+top: 10vh;
+z-index: 50;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.showLogoutModal{
+z-index: 10;
+                }
+
+
+// There are two media queries:
+// 1) @media screen and (orientation: portrait) {// stuff here }
+// 2) @media screen and (orientation: landscape) {// stuff here }
+// Under each are styles for each page in turn.
+
+// When phone is held in portrait position:
+@media screen and (orientation: portrait) {
+
+
+/* -------- styles for the landing page -------------- */ 
+
+ .landingPageFirstContainer{
+  height: 17vh;
+    width: 100%;
+
+/*    
+    border-style: dotted;
+    border-width: 2px;
+     border-color: #f82403;  
+*/
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  align-items: center;
+                          }
+
+
+/*
+div containing two other divs:
+className = "landingPageSecondContainer"
+className = "landingPageThirdContainer"
+*/
+.landingPageSecondAndThirdContainer{
+  height: 80vh;
+  width: 100vw;
+
+  /*
+  border-style: dotted;
+  border-width: 2px;
+  border-color: #8b3326;
+  */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+align-items: center;
+
+margin-top: 2%;
+
+                          }
+
+
+
+/*div containing xxx*/
+.landingPageSecondContainer{
+  height: 45%;
+  width: 100%;
+/*
+  border-style: solid;
+  border-width: 2px;
+  border-color: #26308b;
+*/
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+align-items: flex-start;
+
+margin-top: 1%;
+
+                          }
+
+
+/*div containing xxx*/
+.landingPageThirdContainer{
+  height: 40%;
+  width: 100%;
+
+  /*
+  border-style: solid;
+  border-width: 2px;
+  border-color: #26308b;
+  */
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+align-items: flex-start;
+
+margin-top: 1%;
+
+                          }
+
+
+/* The main logo (an img of text "Guides") */
+.landingPageTextImage{
+  
+  position: relative;
+  top: 2vh;
+  left: 0vw;
+
+  width:  100%;
+  height: 100%;
+
+  overflow: hidden
+  
+                     }
+
+.welcomeText{
+  font-size: 38px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  color: $girlGuidingDarkBlue;
+                    }
+
+
+
+
+
+//****************************
+// Styles for the user guide page
+
+.userGuidePageOuterContainer{
+height: 90vh;
+width: 100vw;
+
+border-style: solid;
+border-color: $browniesLightBlue;
+border-width: 5px;
+
+padding-top: 10px;
+padding-left: 10px;
+padding-right: 10px;
+padding-bottom: 20px;
+
+overflow-y:scroll;
+                        }
+
+// For the div that contains the header text
+.userGuidePageHeaderContainer{
+height: 7vh;
+
+border-bottom:$girlGuidingDarkBlue;
+border-top: #fff;
+border-left: #fff;
+border-right: #fff;
+border-style: solid;
+border-width: 2px;
+
+margin-bottom: 10px;
+                              }
+
+
+
+// For a div that contains the grid 
+// that contains the instruction headers 
+// and instruction texts
+.userGuidePageContainerOne{
+  display: grid;
+  grid-template-columns: 100% ;
+                          } 
+  
+
+
+//***************************
+// Styles concerning the How-to-complete-challenges page
+
+// For the all-enclosing div:
+.howToPageOuterContainer{
+  height: 90vh;
+  width: 100vw;
+  
+  border-style: solid;
+  border-color: $browniesLightBlue;
+  border-width: 5px;
+  
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 20px;
+  
+  overflow-y:scroll;
+                          }
+  
+
+
+// For the div that contains the header text
+.howToPageHeaderContainer{
+  height: 14vh;
+  
+  border-bottom:$girlGuidingDarkBlue;
+  border-top: #fff;
+  border-left: #fff;
+  border-right: #fff;
+  border-style: solid;
+  border-width: 2px;
+  
+  margin-bottom: 20px;
+                                }
+
+
+// The grid container.
+// NOTE: this is exactly the same as for the style for the equivalent 
+// div in the user-guide page:
+.howToPageContainerOne{
+  display: grid;
+  grid-template-columns: 100% ;
+                      }                                
+  
+
+    
+                            
+  
+//***************************
+
+                        } // end media query for when phone is in portrait orientation
+                        
+                        
+
+
+
+// media query or when phone is in landscape orientation:
+@media screen and (orientation: landscape) {
+
+// styles for the landing page:
+
+ .landingPageFirstContainer{
+  height: 30%;
+    width: 100%;
+
+    /*
+    border-style: dotted;
+    border-width: 3px;
+     border-color: #3ae8ee;  
+     */
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  align-items: center;
+                          }
+
+
+/*
+div containing two other divs:
+className = "landingPageSecondContainer"
+className = "landingPageThirdContainer"
+*/
+
+.landingPageSecondAndThirdContainer{
+  height: 50%;
+  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+align-items: center;
+
+                          }
+
+
+
+/*div containing xxx*/
+.landingPageSecondContainer{
+  height: 95%;
+  width: 45%;
+/*
+  border-style: solid;
+  border-width: 2px;
+  border-color: #26308b;
+*/
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+align-items: flex-start;
+
+margin-top: 1%;
+
+                          }
+
+
+/*div containing xxx*/
+.landingPageThirdContainer{
+  height: 95%;
+  width: 53%;
+
+  /*
+  border-style: solid;
+  border-width: 2px;
+  border-color: #26308b;
+  */
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+align-items: flex-start;
+
+margin-top: 1%;
+
+                          }
+
+/* The div that contains the main logo img */
+.landingPageGGSContainer{
+  height: 100%;
+    width: 100%;
+
+    /*
+    border-style: solid;
+    border-width: 3px;
+    border-color: #ed2c17; 
+    */
+    /*
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  align-items: center;
+  */
+                            }
+
+
+/* The main logo (an img of text "Guides") */
+.landingPageTextImage{
+  
+  position: relative;
+  top: 0vh;
+  right: 0vw;
+
+  width:  100%;
+  height: 100%;
+
+  overflow: hidden
+  
+                     }
+
+.welcomeText{
+  font-size: 34px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  color: $girlGuidingDarkBlue;
+                    }
+
+
+//****************************
+// Styles for the user-guide page
+
+.userGuidePageOuterContainer{
+  height: 90vh;
+  width: 100vw;
+  
+  border-style: solid;
+  border-color: $browniesLightBlue;
+  border-width: 5px;
+  
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 20px;
+  
+  overflow-y:scroll;
+                          }
+  
+
+// For the div that contains the 
+// <p> for the page header text 
+.userGuidePageHeaderContainer{
+height: 12vh;
+
+border-bottom:$girlGuidingDarkBlue;
+border-top: #fff;
+border-left: #fff;
+border-right: #fff;
+border-style: solid;
+border-width: 2px;
+
+margin-bottom: 10px;
+                              }
+
+
+
+// For a div that contains the grid 
+// that contains the instruction headers 
+// and instruction texts
+.userGuidePageContainerOne{
+display: grid;
+grid-template-columns: 31% 31% 31% ;
+grid-column-gap: 2%;
+  
+                          } 
+
+
+//**************************
+// Styles for the how-to-complete-challenges page;
+
+// For the outermost div:
+.howToPageOuterContainer{
+  height: 90vh;
+  width: 100vw;
+  
+  border-style: solid;
+  border-color: $browniesLightBlue;
+  border-width: 5px;
+  
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 20px;
+  
+  overflow-y:scroll;
+                          }
+  
+// For the div that contains the header text
+// NOTE: this is exactly the same as for the style for the equivalent 
+// div in the user-guide page.
+.howToPageHeaderContainer{
+  height: 12vh;
+
+  border-bottom:$girlGuidingDarkBlue;
+  border-top: #fff;
+  border-left: #fff;
+  border-right: #fff;
+  border-style: solid;
+  border-width: 2px;
+  
+  margin-bottom: 10px;
+                                }
+
+
+// The grid container.
+// NOTE: this is exactly the same as for the style for the equivalent 
+// div in the user-guide page:
+.howToPageContainerOne{
+  display: grid;
+  grid-template-columns: 31% 31% 31% ;
+grid-column-gap: 2%;
+                      }         
+
+
+} // end media query for when phone is in landscape orientation
+                        
+
+
+
+
+
+
+
+
+
+
+//  ------------- Styles to do with the landing page ------------- ------------- -------------
+
+.landingPageOuterContainer{
+  height: 100vh;
+    width: 100vw;
+  
+  position: fixed;
+  
+    // background-color: $lightBlue;
+    background-color: none;
+  /*
+      border-style: dotted;
+      border-width: 0px;
+       border-color: #dc7f7f;  */
+  
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  align-items: center;
+  }
+  
+  
+  
+
+
+
+
+
+
+
+  
+  .landingPageWelcomeContainer{
+    height: 33%;
+      width: 100%;
+/*
+      border-style: solid;
+      border-width: 2px;
+      border-color: #86db41;  
+*/    
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+    align-items: center;
+                              }
+
+
+  .landingPageDigitalSafariContainer{
+    height: 50%;
+      width: 100%;
+/*
+      border-style: solid;
+      border-width: 2px;
+      border-color: #6c5709;  
+      */        
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    align-items: center;
+                              }
+
+
+
+/* The "Digital Safari" logo (an img) */
+.digitalSafariImg{
+  width:  100%;
+  height: 100%;
+                 }
+
+
+
+
+
+
+
+  .landingPageWelcomeTextContainer{
+    height: 25%;
+      width: 100%;
+/*
+      border-style: solid;
+      border-width: 3px;
+      border-color: #a78610;  
+*/          
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    align-items: center;
+                              }
+
+
+
+
+  
+.welcomeImgContainer{
+  height: 45%;
+    width: 100vw;
+  
+    border-style: solid;
+    border-width: 1px;
+    border-color: $girlGuidingDarkBlue;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  align-items: center;
+                    }
+
+/* the big image on the landing page */
+.welcomeImg{
+width: 120%;
+height: 100%;
+
+opacity: 0.2;
+
+}
+
+
+
+
+/*THe wfollowing styles are for the five divs of <LandingPage/> 
+that each contain an icon and a button */
+
+
+/*style for these divs when the page buttons are operable */
+
+.landingPageIconAndButtonContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  height: 18%;
+  width: 100%;
+                                  }
+
+/*style for these divs when the page buttons are inoperable */
+
+.landingPageIconAndButtonContainerFaded{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  height: 18%;
+  width: 100%;
+  opacity: 0.3;
+                                  }
+
+
+/*the containing div of the square buttons  */
+.landingPageIconContainer{
+  margin-right: 2vh;
+
+  height: 28px;
+  width: 28px;
+
+    border: $guidesLightBlue 1.5px outset;
+    border-radius: 5px 5px 5px 5px;
+    
+    background-color: $girlGuidingLightBlue;
+    box-shadow: rgb(5, 5, 5) 1px 1px 5px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+align-items: center;
+
+}
+
+
+
+
+
+/* ------------------------ */
+
+
+
+/* ----- styles for the navigation bar----- */
+.navbarContainer{
+  height: 55px;
+  width: 100vw;
+
+/*
+  border-style: solid;
+  border-width: 1px;
+  border-color: $girlGuidingDarkBlue;
+*/
+  background-color: $girlGuidingLightBlue;
+
+position: fixed;
+  bottom: 0;
+
+overflow-x: visible;
+                }
+
+.homeIconContainer{
+  height: 10vh;
+  width: 17vw;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+align-items: center;
+
+position: absolute;
+
+top: 0px;
+left: 90px;
+                  }
+
+
+  /* this style no longer in use: 
+.homeImg{
+  height: 10vh;
+  width: 17vw;
+  
+  
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+*/
+
+
+/* -------------- styles to do with the plus menu  -------------- */
+
+
+// The div that contains the plus icon:
+.plusIconContainer{
+  height: 50px;
+  width: 50px;
+  
+    border: $guidesLightBlue 1.5px outset;
+    border-radius: 5px 5px 5px 5px;
+    
+    background-color: $girlGuidingLightBlue;
+    box-shadow: rgb(5, 5, 5) 1px 1px 5px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+                  }
+
+
+/* 
+NOTE: THIS STYLE SHEET HAS TO BE LOWER
+(IE LATER) IN THIS DOCUMENT THAN THE 
+STYLESHEETS showPlusMenu AND
+hidePlusMenu.
+The div that contains all five icons 
+(ie the plus icon and the other four. Its 
+size grows or shrinks with each click of 
+the plus icon) 
+*/
+.plusMenuOuterContainer{
+    
+  border: $guidesLightBlue 1.5px outset;
+  border-radius: 5px 5px 5px 5px;
+  background-color: $girlGuidingLightBlue;
+  box-shadow: rgb(5, 5, 5) 1px 1px 5px;
+
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+align-items: center;
+
+position: absolute;
+
+height: 52px;
+width: 52px;
+right: 0px;
+                    }
+
+// This class positions the 
+// plus menu in its collapsed state
+// when the app loads:
+.plusMenuOnAppLoad{
+  top: 0px;
+            }
+
+// Code adds this class to the 
+// div that contains the plus 
+// icon and the other four icons 
+// when code wants to show the div:
+.showPlusMenu{
+/*height: 290px;*/
+
+animation-name: makePlusMenuGrow;
+animation-duration: 0.3s;
+animation-fill-mode: forwards;
+animation-timing-function: ease-in-out;
+
+             }
+
+// when code wants to hide the div:
+.hidePlusMenu{
+  /*height: "100%";*/
+  animation-name: makePlusMenuShrink;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
+            }
+
+// Two animations for the dropdown list,
+// one for the downward movement, one for the
+// upward movement:
+@keyframes makePlusMenuGrow {
+  0% {
+    height: 50px;
+    top: 0px;
+     }
+
+  80% {
+    height: 330px;
+    top: -280px;
+      }
+
+  100% {
+    height: 290px;
+    top: -240px;
+       }
+                            }
+
+@keyframes makePlusMenuShrink {
+  0% {
+    top: -240px;
+    height: 50px;
+     }
+
+  100% {
+    top: 0px;
+    height: 100%;
+       }
+                              }
+
+
+
+
+
+
+/* 
+On all pages except the 
+welcome/home/landing page 
+code conditionally applies 
+either class showIconContainer 
+or class hideIconContainer to 
+the four divs that contain 
+each of the four icons that 
+take the user to another page. 
+Clicking the plus icon either 
+gives all of those four 
+containing divs class 
+showIconContainer or class 
+hideIconContainer.
+*/
+.showIconContainer{
+  height: 50px;
+  width: 50px;
+
+  
+  border: $guidesLightBlue 1.5px outset;
+  border-radius: 5px 5px 5px 5px;
+    
+  background-color: $girlGuidingLightBlue;
+  box-shadow: rgb(5, 5, 5) 1px 1px 5px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  animation-name: rotatePlusMenuItems;
+  animation-duration: 0.7s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
+
+                  }
+
+
+
+.hideIconContainer{
+  height: 0px;
+  width: 0px;
+  border-width: 0px ;
+                  }
+
+
+
+// Animations for the items in
+// the plus menu:
+@keyframes rotatePlusMenuItems {
+  0% {
+      transform: rotateX(120deg);
+      // transform: rotateY(30deg)
+     }
+  70% {
+      transform: rotateX(-30deg);
+      // transform: rotateY(-13deg)
+      } 
+  100% {
+      transform: rotateX(0deg) ;
+      // transform: rotateY(0deg) 
+       }
+                              }
+
+
+
+
+
+
+/* -------------- Styles to do with the How to page  -------------- */
+
+.howToPageHeader{
+  font-size: 28px;
+  line-height: 30px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  color: $girlGuidingDarkBlue;
+}
+
+
+
+.howToPageSectionHeader{
+  font-size: 20px;
+  line-height: 22px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+ color: $browniesLightBlue;
+
+                  }
+
+
+
+.howToPageBodyText{
+  font-size: 14px;
+  line-height: 15px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 200;
+  color: black;
+
+                  }
+/* -------------- End styles to do with the How to page  -------------- */
+
+
+
+
+/* -------------- Styles to do with the User guide page  -------------- */
+
+
+.userGuidePageHeader{
+  font-size: 28px;
+  line-height: 30px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  color: $girlGuidingDarkBlue;
+  
+}
+
+.userGuidePageHeaderRule{
+  // width: 100vw;
+  height: 2px;
+  
+  background-color:$girlGuidingDarkBlue;
+  
+  }
+  
+
+.userGuidePageSectionHeader{
+  font-size: 20px;
+  line-height: 22px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  color: $browniesLightBlue;
+
+                  }
+
+
+
+.userGuidePageBodyText{
+  font-size: 14px;
+  line-height: 15px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 200;
+  color: black;
+
+                  }
+
+
+
+/* -------------- End styles to do with the User guide page  -------------- */
+
+
+
+//------------------------------------------------------------------------------------------------
+// Styles to do with the page that contains the link
+// to the survey form for testers
+
+
+// Styles for the button that app testers
+// tap on the landing page to take them to the page where 
+// the link is for the form:
+
+.surveyFormButtonLandingPage{
+  position: relative;
+  top: -60px;
+  left: 60px;
+  width: 140px;
+  height: 100px;
+                            }
+
+.surveyFormButtonFormLinkPage{
+  position: relative;
+  top: -15px;
+  left: 0px;
+  width: 350px;
+  height: 50px;
+  padding: 5px;
+                            }
+
+
+.surveyFormButton{
+    
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+          
+  align-self: center;
+
+  
+  padding-left: 3px;
+  padding-right: 3px;
+  
+  border: rgb(232, 143, 143) 1.5px outset ;
+  border-radius: 5px 5px 5px 5px ;
+  
+  background-color: rgb(136, 44, 44);
+  box-shadow: rgb(5, 5, 5) 1px 1px 5px;
+  
+  opacity: 1;
+  pointer-events: auto;
+
+            }
+          
+.surveyFormButton:hover{ 
+  background-color: rgb(186, 140, 140);
+                }  
+
+/*Now a class code gives to buttons 
+when the user clicks them */
+.surveyFormButton:active{   
+  transform: translateY(4px);
+  transform: translateX(4px);
+  box-shadow: black 1px 1px 1px;
+                 } 
+
+// The <p> for the text of
+// the surveyFormButton::after
+.surveyFormButtonP{
+
+font-family: Verdana, Geneva, Tahoma, sans-serif;
+font-size: 16px;
+line-height: 17px;
+color: #f0cfcf;
+
+padding: 0px;
+margin: 0px;
+
+                  }
+
+
+
+// The all-encompassing div:
+.FormLinkPageOuterContainer{
+ 
+  height: 100vh;
+  width: 100vw;
+
+position: fixed;
+
+border-style: solid;
+border-color: $browniesLightBlue;
+border-width: 5px;
+
+padding-top: 10px;
+padding-left: 2px;
+padding-right: 2px;
+padding-bottom: 20px;
+
+overflow-y:scroll;
+   background-color: none;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+align-items: center;
+
+/*
+border-style: dotted;
+ border-width: 6px;
+  border-color: #06f3b8;  
+*/
+}
+
+
+// The <p> for the text on the FormLinkPage.
+.FormLinkPageP1{
+
+font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+font-size: 26px;
+line-height: 27px;
+
+padding: 0px;
+margin: 15px;
+
+position: relative;
+top: -20px;
+              }
+
+
+// The iFrame on the FormLinkPage:
+.iFrameClass{
+  width: 95vw; 
+  height: 65vh; 
+  border: 3px solid rgb(240, 64, 64); 
+  max-width:500px; 
+  max-height:600px; 
+  position: relative;
+  top: -20px;
+                }
+
+
+
+
+
+//------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
 // COLOUR OVERRIDES
+// Mukund: these sass variables override the sass 
+// variables supplied by react-bootstrap that are found in
+// node_modules/bootstrap/scss/_variables
+
 $teal: #009cac;
 $pink: #c40063;
 $mutedPink: #ce74a1;
 // theme colours
 $primary: $teal;
+// $primary: #c41700;
 $secondary: $pink;
 $muted-secondary: $mutedPink;
 
@@ -23,6 +1999,38 @@ $black: #000;
 
 // BOOTSTRAP 5 BSPREFIXES START
 // Buttons
+
+// The following style overrides
+// react bootstrap's <Button/>
+// style when setting <Button/>
+// attribute variant to "custom" -- Mukund 
+.btn-customGGS{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+          
+  
+  width: fit-content;
+  height: 25px;
+  padding-left: 3px;
+  padding-right: 3px;
+  
+  border: $guidesLightBlue 1.5px outset !important;
+  border-radius: 5px 5px 5px 5px ;
+  
+  // NOTE: without the "!important" below the 
+  // something was overriding the <Button/> 
+  // background colour to white (I don't know what!)
+  // -- same with border colour above.
+  background-color: $girlGuidingLightBlue !important;
+  box-shadow: rgb(5, 5, 5) 1px 1px 5px;
+  
+  opacity: 1;
+  pointer-events: auto;
+            }
+
+
 .btn-branding {
   background-color: $secondary;
   color: $white;
@@ -100,6 +2108,15 @@ $black: #000;
 .container-fluid {
   padding: 0;
   margin: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  height: 100vh;
+  width: 100vw;
+
 }
 
 // Modals
@@ -132,27 +2149,51 @@ $black: #000;
   }
 }
 
-.leaderboard-modal {
+.logout-modal {
   max-width: 90vw;
   h1 {
-    color: $primary;
-    font-weight: bold;
-    font-size: x-large;
-    text-align: center;
+    color: $browniesLightBlue;
+    font-family: 'Poppins';
+    font-style: italic;
+    font-weight: 700;
+    font-size: 28px;  
+  }
+  p {
+    color: black;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 200;
+    font-size: 14px;    
   }
 }
 
 .login-modal {
   h1 {
-    color: $primary;
-    font-weight: bold;
-  }
+    color: $browniesLightBlue;
+    font-family: 'Poppins';
+    font-style: italic;
+    font-weight: 700;
+    font-size: 28px;    
+    }
+
+p {
+  color: black;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 200;
+  font-size: 14px;    
+}
+
   .switch-mode {
-    color: $primary;
-    font-weight: bold;
+    color: $browniesLightBlue;
+    font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
     cursor: pointer;
   }
 }
+
 
 .error-text {
   color: $secondary;
