@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext, useRef } from "react";
+import React, { useState, useContext, useRef } from "react";
 
 // Other components:
 import NavigationBar from "./NavigationBar.js";
@@ -33,7 +33,8 @@ const showTable = useRef(false)
 
 
 
-// Mock data from the server. Each region shows 
+// Mock data. In the production version of the app 
+// this data will come from the server. Each region shows 
 // only the three made-up units alpha, beta and gamma:
 let fetchedTableData = [
 {county: "Aberdeenshire", units: [{unitName: "Aberdeenshire unit eta seven seven eight eight eight", score: 4}, {unitName: "Aberdeenshire unit zeta seven seven eight eight eight", score: 4}, {unitName: "Aberdeenshire unit epsilon seven seven eight eight eight", score: 1}, {unitName: "Aberdeenshire unit delta seven seven eight eight eight", score: 1}, {unitName: "Aberdeenshire unit alpha seven seven eight eight eight", score: 6}, {unitName: "Aberdeenshire unit beta seven seven eight eight eight", score: 4}, {unitName: "Aberdeenshire unit gamma seven seven eight eight eight", score: 5} ] },

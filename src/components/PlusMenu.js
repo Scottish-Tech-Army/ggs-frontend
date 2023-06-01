@@ -12,11 +12,11 @@ import SquareButton from "./SquareButton";
 
 
 /*
-Four of the ive components that represent pages of the 
+Three of the four components that represent pages of the 
 app call component <NavigationBar/>, 
 which calls the component we are in (<PlusMenu/>). 
 
-There are two main parts to this component:
+There are two main parts to this component (<PlusMenu/>):
 
 1)  a plus('+') icon, which has an onClick 
     whose handler is toggleMenu(), which 
@@ -25,7 +25,7 @@ There are two main parts to this component:
     on this value the pop-up menu appears or 
     disappears.
 
-2)  four buttons (actually divs) that each contains
+2)  three buttons (actually divs) that each contain
     an icon. The user clicks the icon to go to the
     page it represents (but never the landing 
     page).
@@ -152,24 +152,27 @@ const toggleShouldMenuShow = () => {
         >
          {/* When the user clicks the plus icon the 
         height of the div above (which contains the 
-        plus icon and the other four icons) either 
-        i) grows so that all five icons show or 
+        plus icon and the other three icons) either 
+        i) grows so that all four icons show or 
         ii) shrinks so that only the plus icon shows.   
         */}   
 
         {/* When the user clicks the plus icon the 
         height of the containing div of each of the
-        four icons expands or contracts to zero:   
+        three icons expands or contracts to zero:   
         */}
-        {/* button 1, comprising a div and in it an icon (an img)*/}
+        {/* button 1, comprising a div and in it an icon (an img).
+        Fri26May23: we got rid of this button because we got rid of
+        the How to page.
         <SquareButton
             imgSRC = {iconsObject.icon1src}
             divCSSclass = {(shouldMenuShow === 0 || shouldMenuShow === 1) ? "hideIconContainer" : "showIconContainer"}
             imgClickHandler = {iconsObject.icon1ClickHandler}
             altText = {"Clicking this button takes the user to one of the pages of the app"}
         />
+        */}
         
-        {/* button 2 -- just like button 1*/}
+        {/* button 2, comprising a div and in it an icon (an img)*/}
         <SquareButton
             imgSRC = {iconsObject.icon2src}
             divCSSclass = {(shouldMenuShow === 0 || shouldMenuShow === 1) ? "hideIconContainer" : "showIconContainer"}
@@ -177,7 +180,7 @@ const toggleShouldMenuShow = () => {
             altText = {"Clicking this button takes the user to one of the pages of the app"}
         />
 
-        {/* button 3 -- just like button 1*/}
+        {/* button 3 -- just like button 2*/}
         <SquareButton
             imgSRC = {iconsObject.icon3src}
             divCSSclass = {(shouldMenuShow === 0 || shouldMenuShow === 1) ? "hideIconContainer" : "showIconContainer"}
@@ -185,7 +188,7 @@ const toggleShouldMenuShow = () => {
             altText = {"Clicking this button takes the user to one of the pages of the app"}
         />
         
-        {/* button 4 -- just like button 1*/}
+        {/* button 4 -- just like button 2*/}
         <SquareButton
             imgSRC = {iconsObject.icon4src}
             divCSSclass = {(shouldMenuShow === 0 || shouldMenuShow === 1) ? "hideIconContainer" : "showIconContainer"}

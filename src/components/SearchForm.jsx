@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext, useRef } from "react";
+import React, { useState, useRef } from "react";
 
 // scss stuff:
 import '../scss/style.scss';
@@ -24,7 +24,10 @@ function deepCopyArray(arrayArg){
                                }
 
 
-
+// A list of objects, each containing a 
+// county name and a key. This list must 
+// include all 30 or so counties (but has
+// only 6 at the moment)
 let allCountiesList = [
     {region: "Aberdeenshire", key: "1"},
     {region: "Angus", key: "2"},
@@ -35,7 +38,7 @@ let allCountiesList = [
                       ]
 
 
-
+/*
 // A state property to hold the array that will contain
 // either a filtered or unfiltered list of counties.
 // This is what code passes in as props to <RegionsList>:
@@ -44,32 +47,24 @@ const [countiesForRegionsList, setCountiesForRegionsList] = useState()
 
 // A ref to hold the filtered region data:
 const filteredCounties = useRef()
+*/
 
 
-
-// A ref to hold showRegionsList
-// (boolean that code in the return statement reads 
-// to determine whether to show component 
-// <RegionsList/> or not). When the user clicks 
-// in the search field, <RegionsList/> shows 
-// as the click handler sets showRegionsList
-// to true:
+// A ref to hold a boolean that code in the 
+// return statement reads 
+// to determine whether to show the dropdown 
+// menu or not:
 let showRegionsList = useRef(false)
 
 
 /*
-When the search field attracts focus the component
-<RegionsList/> shows. At this stage it shows all 
-the counties.
-
-
 When the user starts typing in the search input field,
 the list of counties appears and gets filtered as 
 the user types. 
 
 Filtering process:
 
-1) User clicks in search input.
+1) User taps in search input.
 React supports three events for forms in addition to standard React DOM events:
 onChange: Fires on each keystroke, not only on the loss of focus.
 onInput: Fires for each change in <textarea> and <input> element values. React team doesn’t recommend using this.
@@ -118,10 +113,9 @@ loss of focus on the input makes the dropdown disappear
 // 1) Put the county name into the input
 // 2) Make the dropdown disappear
 function selectCountyFromDropDown(countyName){
-//    console.log(`In div onClick handler. You selected county ${countyName}`)
     // 1&2):
     makeListDisappear(countyName)
-                                   }
+                                             }
 
 
 
@@ -153,42 +147,40 @@ showRegionsList.current = false
 // className = "countyInput". This handler must:
 // 1)   Put all the counties into 
 //      stateObj.filteredCounties
-// 2)   Show <RegionsList/>
 function showAllRegionsList(e){
-    // console.log(`The inout just gained focus!`)
-    // 1) copy array countiesList into regionData.current
+    // 1): 
     showRegionsList.current =true    
     setStateObj(
         {
             typedText: '',
-            filteredCounties: deepCopyArray(allCountiesList)   
+            filteredCounties: allCountiesList   
         }   
                )
-                              } // end displayRegionsList
+                              } // end showAllRegionsList
     
 
 // Two state properties to hold 
 // i)  what the user types in
 // ii) the filtered list of counties:
-// const [typedText, setTypedText] = useState()
 const [stateObj, setStateObj] = useState({
     typedText: '',
     filteredCounties: []
                                          })
 
-// The onChange handler for the input of 
-// className = "countyInput". This must:
+// The onChange handler for the input.
+// This function constantly creates and updates 
+// an array of all of the counties that contain the 
+// letters that the user is typing in and puts that
+// array into a state property.
+// This function must:
 //  1)   get what the user has typed in the input
-//  2)   compare the typed-in text with the text of 
+//  2)   compare the typed-in text with the text that is  
 //       each member of array allCountiesList. If the
-//       typed-in text is in any member of countiesList at 
-//       position 0 save that member object to array
-//       newArray.
+//       typed-in text is in any member of allCountiesList 
+//       save that member object to array newArray.
 //  3)   set showRegionsList to true.
-//  4)   pass newArray to RegionsList as props.
 //  5)   Change state property typedText to what was typed in
 function displayFilteredRegionsList(e){
-    
     let newArray = []
     // 1):
     let typedInText = e.target.value
@@ -198,76 +190,29 @@ for (let i = 0; i < allCountiesList.length; i++) {
     let county = allCountiesList[i].region.toUpperCase();
     if (county.includes(typedInText.toUpperCase())) {
         newArray.push(allCountiesList[i])
-                                      } // end if
+                                                    } // end if
                                                  } // end for
 // 3):                                                
 showRegionsList.current =true
 // 5):
 setStateObj({
     typedText: typedInText,
-    filteredCounties: deepCopyArray(newArray) // just 'newArray' would probably have sufficed here!
+    filteredCounties: newArray 
         })
-// 4):
-//setCountiesForRegionsList(deepCopyArray(newArray))
+
                              } // end displayFilteredRegionsList
                       
 
 
-// A function that gets passed to <RegionsList/>
-// as props. When the user clicks a county in   
-// <RegionsList/> code in that component calls 
-// this funtion with an argument that is a string  
-// for the county name.
-// This function must:
-// 1) pass the string for the county name 
-// to component <LeaderboardTable/>
-function passCountyToParent(countyName){
-passCountyToLeaderboardPage(countyName)
-                                        } // end fetchCountyData 
-/*
-countyArray will hold an object containing
-the county name, and the units and their scores,
-like this:
-{county: "Aberdeenshire", units: [{unitName: "alpha", score: 6}, {unitName: "beta", score: 4}, {unitName: "gamma", score: 5} ] },
-
-//1):
-let countyArray = []
-fetchedTableData.map((member)=>{
-    (member.county === countyName) ? countyArray.push(member) : void(0)
-                               })
-
-//2):
-*/
-
-// A function that puts the clicked on 
-// county name into the input.
-// This fn must:
-// 1) rx the name of the county
-// 2) change state property stateObj so that the 
-//    name of the county goes into the input
-// 3) make the dropdown list disappear
-function putCountyNameInInput(countyName) {
-console.log(`Inside putCountyNameInInput. You chose county ${countyName}`)
-
-// 1)&2)&3):
-setStateObj(
-    {
-        typedText: countyName,
-        filteredCounties: []   
-    }
-            )
-                                          }
-
-
-
-// Now create var countiesToDisplay and set it to 
-// an array whose members each comprise JSX for a
-// menu item for the dropdown menu. Each menu item 
-// is a div with text in it that shows one option
-// from the menu:
-const countiesToDisplay = (
+// Now make array countiesToDisplay. Each of its
+// members must be JSX for a menu item for the 
+// dropdown menu. Each menu item is a div that 
+// contains a <p> that is the name of one of the
+// counties in state property array 
+// filteredCounties, which is a filtered list 
+// of counties:
+const countiesToDisplay = 
     stateObj.filteredCounties.map((member)=>(
-        
             <li key = {member.key} >
     <div className="regionsListItem" onClick = {()=> selectCountyFromDropDown(member.region) }>
     <p className="regionsListText">
@@ -275,16 +220,15 @@ const countiesToDisplay = (
     </p>
     </div>
     </li>
-
-    )
-    )
-    )
+                                            )
+                                 )
+                         
 
 
 // The handler for the form submit event.
 // This function must:
-// 1) prevent the default behaviour of the form of
-//    reloading the page
+// 1) prevent the default behaviour of the form 
+//    (which is to reload the page)
 // 2) send the string for the county the user selected
 //    to <LeaderboardPage/>, where a function 
 //    will make a fetch() call to get the 
@@ -304,7 +248,7 @@ return (
 This component contains three divs:
 1) A div containing the <p> for text "Choose a County"
 2) The form, including the search input
-3) The div containing component <RegionsList> 
+3) xxxx
 */
 
 
@@ -364,7 +308,7 @@ This div contains two divs:
 
 
 {/* Conditionally show/hide the dropdown list */}
-<div className= {showRegionsList.current ? " showDDlist" : " hideDDlist"}>  
+<div className= {showRegionsList.current ? "showDDlist" : "hideDDlist"}>  
   
 <ul className="countiesList">
 {countiesToDisplay}

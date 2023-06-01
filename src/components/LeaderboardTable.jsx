@@ -5,10 +5,6 @@ import goldStar from "../assets/images/goldStar.svg";
 import silverStar from "../assets/images/silverStar.svg";
 import bronzeStar from "../assets/images/bronzeStar.svg";
 
-
-// context
-
-
 // scss stuff:
 import '../scss/style.scss';
 
@@ -95,7 +91,7 @@ function setEqualRanks(arrayArg){
                             }
                                                }
   return tempArray
-                                  }
+                                }
  
 //--------------------------------------------------------     
 
@@ -108,7 +104,7 @@ Rank         Unit          Completed
                            Challenges
 -------------------------------------
 1 (gold      unit name A       9
-start 
+star 
 here)
 2 (silver    unit name B       7
 star)

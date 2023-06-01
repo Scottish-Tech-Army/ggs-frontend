@@ -25,7 +25,7 @@ export default function NavigationBar({iconsObject}){
 return (
 <div className="navbarContainer">  
 
-{/* The button to click to show the landing/welcome/home page.*/}
+{/* The button to click to show the home/landing/welcome page.*/}
 
 <SquareButton
 imgSRC = {homePic}
@@ -33,15 +33,6 @@ altText = {"Home button"}
 divCSSclass = {"showIconContainer"}
 imgClickHandler = {iconsObject.homeIconClickHandler}
 />
-
-{/* test stuff follows 
-<SquareButton
-            imgSRC = {iconsObject.icon1src}
-            divCSSclass = {"showIconContainer" }
-            imgClickHandler = {iconsObject.icon1ClickHandler}
-            altText = {"Clicking this button takes the user to one of the pages of the app"}
-/>
-*/}
 
 
 {/* Now pass into <PlusMenu/> the object that 

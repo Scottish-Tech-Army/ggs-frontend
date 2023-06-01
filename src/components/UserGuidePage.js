@@ -65,6 +65,15 @@ When you are within 20 meters of the challenge, it will be collected automatical
 <br></br>
 If you are not close enough, you will be asked to move closer to the challenge location. 
 </p>
+<p className="userGuidePageSectionHeader">Check Your Progress</p>
+<p className="userGuidePageBodyText">
+If a marker is pale blue it means you have completed the challenge. If it's dark blue it means you have yet to do so.
+<br></br>
+<br></br>
+A unit's completed challenges will appear on the Completed Challenges page.
+</p>
+
+
 </div>
 </div>{/* end userGuidePageContainerOne */}
 

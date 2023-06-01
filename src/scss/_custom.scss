@@ -23,6 +23,40 @@ $girlGuidingLightBlue: #00a7e5;
 $rangersBlue: #4ea5dc;
 
 
+//----------------------------------------------------
+
+// To position the mapbox logo:
+.mapboxgl-ctrl-logo{
+  position: relative;
+  left: 90px;
+                   }
+
+// To position the div that contains the mapbox logo:
+.mapboxgl-ctrl-bottom-left{
+   border: red 1.5px outset ;
+  width: 250px;  
+                          }
+
+
+
+
+// To size the div that contains the mapbox "i" symbol:
+.mapboxgl-ctrl-bottom-right{
+  width: 200px;
+   border: red 1.5px outset ;
+                           }
+
+// to position the mapbox "i" symbolL
+.mapboxgl-ctrl-attrib{
+  position: relative;
+  right: 90px;
+
+
+}
+
+
+
+// Buttons
 
 /* class to position that button in <ChallengesNearMe/>
 that user clicks to take her to map of her area. */
@@ -107,6 +141,8 @@ hover or depress effects. */
   pointer-events: none;
             }
 
+
+//----------------------------------------------------            
 
 
 // Styles to do with the RegionsList component
@@ -381,7 +417,9 @@ align-items: center;
 
 
 // Two styles to apply conditionally to the 
-// div that contains the dropdown list:
+// div that contains the dropdown list
+// (which this app employs in the register modal 
+// -- ie <LoginModal/> -- and <LeaderboardPage/>):
 
 // 1) to make the div
 // grow in height so that it shows all of the 
@@ -393,8 +431,10 @@ align-items: center;
 
   overflow-y: scroll;
   
-  width: 45%; 
-  max-width: 120px;
+  width: fit-content;
+  height: fit-content;
+  max-height: 120px;
+
 
   animation-name: makeDDlistGrow;
   animation-duration: 0.3s;
@@ -412,6 +452,81 @@ align-items: center;
   animation-timing-function: ease-in-out;
             }
 
+// A style the app uses for the dd list 
+// in <LoginModal/> only:
+.positionDDlistInLoginModal{
+position: relative;
+top: -30px;
+
+width: 300px;
+height: 5px;
+
+overflow-y: visible;
+
+z-index: 20;
+
+/*
+border: #000 1px solid;
+*/
+
+                 }
+
+// The <p> for the error message that appears
+// when an input fails validation: 
+.registerErrorMessage{
+  font-size: 14px;
+  line-height: 15px;
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 200;
+
+  color: red;
+  
+  position: relative;
+  top: -15px;
+  left: 30px;
+
+}
+
+
+
+
+
+
+
+// The div that contains the text in <LoginModal/>
+// that reads "Already registered? Please log in":
+.positionFinalText{
+position: relative;
+top: 20px;
+left: 50px;
+
+/*
+background-color: #009cac;
+border: #000 1px solid;
+*/
+
+height: 20px;
+width: fit-content;
+
+z-index: 10;
+                  }
+
+// The <p> for the text in <LoginModal/>
+// that reads "Already registered? Please log in":
+.finalText{
+  font-size: 14px;
+  line-height: 15px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 200;
+
+padding: 0px;
+margin: 0px;
+
+}
+
+
 // Two animations for the dropdown list,
 // one for the downward movement, one for the
 // upward movement:
@@ -426,7 +541,9 @@ align-items: center;
 
 
   100% {
-    height: 180px;
+    // height: 180px;
+    height: fit-content;
+    max-height: 180px;
   }
 }
 
@@ -454,6 +571,9 @@ align-items: center;
   list-style-type: none;
     margin: 0;
     padding: 0;
+
+    width: 200px;
+    
 
     /*
     display: flex;
@@ -802,10 +922,12 @@ tr:nth-child(even) {
 }
 
 tr {
+  height: 40px;
   border-bottom: 5px dotted $girlGuidingDarkBlue;
   padding: 8px;
   text-align: center;
 }
+
 
 
 // ------- End styles to do with the leader board page -------  -------  ------- 
@@ -814,50 +936,219 @@ tr {
 
 /* -------- styles for the completed-challenges page -------------- */ 
 .completedPageOuterContainer{
-  padding: 0;
-  margin: 0;
 
   display: block;
+  position: relative;
   
-  height: 100vh;
+  height: 90vh;
   width: 100vw;
 
-  // background-color: #e19085;
+border-style: solid;
+border-color: $browniesLightBlue;
+border-width: 5px;
 
-  position: absolute;
+/*
+padding-top: 10px;
+padding-left: 10px;
+padding-right: 10px;
+padding-bottom: 20px;
+*/
+overflow-y:scroll;
 
-  top: 0;
-  left: 0;
+                          }
 
-}
 
+// The div that contains text "My completed challenges"
+// and the <ol/> that is the list of completed challenges:
 .completedPageMainContainer{
   padding: 0;
   margin: 0;
 
   display: block;
-  
-
   height: 80vh;
-  width: 100vw;
+  width: 100%;
 
-//    background-color: #e1d085;
 position: absolute;
 top: 10vh;
-z-index: 50;
 
+// border: red 2px solid;
+
+                          }
+
+
+
+//----------------------------------
+
+
+// Styles to do with the modal window in which the 
+// user registers:
+
+
+// override the margin and max-width settings
+// of the modal box:
+.custom-modal{
+
+margin: 10px !important;
+max-width: 95vw !important;
+
+             }
+
+
+
+
+// The div that holds the circular numbers
+// and the instruction next to each number:
+.registerModalGrid{
+
+display: grid;
+grid-template-columns: 10% 90%;
+grid-template-rows: 37% 15% 15% 15%;
+row-gap: 5%;
+
+width: 100%;
+height: 160px;
+
+// background-color: rgb(237, 132, 132);
+
+margin-top: 10px;
+margin-bottom: 50px;
+                  }
+
+
+// The div that is the circular number container:
+.numberCircle{
+  position: relative;
+  top: 0px;  
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+  width: 20px;
+  height: 20px;
+  
+  border-radius: 50%;
+
+  box-shadow: rgb(103, 103, 103) 1px 2px 3px;
+
+  z-index: 10;
 }
 
+// For the dark circled numbers
+.numbCircleDark{
+  background-color: $girlGuidingMidBlue;
+               }
+
+// For the light circled numbers
+.numbCircleLight{
+  background-color: $girlGuidingMidBlue;
+  opacity: 0.5;
+               }
 
 
 
 
+// The <p> for the text of the number 
+// that goes in the number circle:
+.numberCircleText{
+  font-family: 'Poppins'  !important;
+  font-style: normal  !important;
+  font-weight: 400  !important;
+  font-size: 15px;
+  line-height: 16px;
+
+  margin: 0px;
+  padding: 0px;
+
+  color: rgb(235, 227, 227) !important;
+
+                 }
+
+// The container for the down arrow
+.downArrowContainer{
+
+width: 100%;
+height: 40px;
+
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+
+position: relative;
+
+top: -50px;
+
+margin-top: 0px;
+
+// border: 2px solid black;
+
+                  }
+
+
+// The img that is the blue down arrow:
+.blueDownArrowIMG{
+position: relative;
+top: 0px;
+width: 100%;
+height: 100%;
+
+// border: 2px solid rgb(235, 91, 91);
+                 }
+
+// For the email and team name inputs:
+.formInputs{
+position: relative !important;
+top: -20px;
+
+           }
+
+
+// override the react bootstrap style
+// for the form (which includes the 
+// three input fields, the Register
+// button and the Cancel button:
+.mt-n2{
+  position: relative !important;
+top: -30px !important;
+z-index: 0;
+margin-bottom: 0px;
+// border: #000 2px solid;
+}           
+
+
+// override the text at the bottom of the
+// modal (that reads "Already registered? ..."):
+.mt-3{
+position: relative !important;
+top: -30px !important;
+z-index: 0 !important;
+     }
+
+// The div that contains the Register and Cancel
+// buttons in Register screen of the Login/Register modal:
+.modalButtonContainer{
+  width: 100%;
+  height: 30px;
+  
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  
+  /*
+  border-style: solid;
+  border-width: 2px;
+   border-color: #070707;
+  */
+  
+                      }
+  
 
 
 
-
-
-
+//----------------------------------
 
 
 
@@ -881,6 +1172,7 @@ z-index: 10;
  .landingPageFirstContainer{
   height: 17vh;
     width: 100%;
+position: relative;
 
 /*    
     border-style: dotted;
@@ -900,7 +1192,7 @@ className = "landingPageSecondContainer"
 className = "landingPageThirdContainer"
 */
 .landingPageSecondAndThirdContainer{
-  height: 80vh;
+  height: 83vh;
   width: 100vw;
 
   /*
@@ -910,16 +1202,19 @@ className = "landingPageThirdContainer"
   */
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
 align-items: center;
 
-margin-top: 2%;
+
 
                           }
 
 
 
-/*div containing xxx*/
+/*div containing:
+i)  a div containing the Welcome text and the login/out button
+ii) a div containing the main image
+*/
 .landingPageSecondContainer{
   height: 45%;
   width: 100%;
@@ -934,6 +1229,7 @@ margin-top: 2%;
 align-items: flex-start;
 
 margin-top: 1%;
+margin-bottom: 0px;
 
                           }
 
@@ -954,7 +1250,9 @@ margin-top: 1%;
   justify-content: flex-start;
 align-items: flex-start;
 
-margin-top: 1%;
+position: relative;
+
+top: -55px;
 
                           }
 
@@ -963,8 +1261,8 @@ margin-top: 1%;
 .landingPageTextImage{
   
   position: relative;
-  top: 2vh;
-  left: 0vw;
+  top: 0px;
+  right: 0px;  
 
   width:  100%;
   height: 100%;
@@ -1093,8 +1391,10 @@ margin-bottom: 10px;
 // styles for the landing page:
 
  .landingPageFirstContainer{
-  height: 30%;
+  height: 25%;
     width: 100%;
+
+    position: relative;
 
     /*
     border-style: dotted;
@@ -1105,7 +1405,7 @@ margin-bottom: 10px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
                           }
 
 
@@ -1116,12 +1416,12 @@ className = "landingPageThirdContainer"
 */
 
 .landingPageSecondAndThirdContainer{
-  height: 50%;
+  height: 75%;
   width: 100%;
   display: flex;
   flex-direction: row-reverse;
   justify-content: flex-start;
-align-items: center;
+align-items: flex-start;
 
                           }
 
@@ -1129,7 +1429,7 @@ align-items: center;
 
 /*div containing xxx*/
 .landingPageSecondContainer{
-  height: 95%;
+  height: 60%;
   width: 45%;
 /*
   border-style: solid;
@@ -1148,7 +1448,7 @@ margin-top: 1%;
 
 /*div containing xxx*/
 .landingPageThirdContainer{
-  height: 95%;
+  height: 70%;
   width: 53%;
 
   /*
@@ -1171,6 +1471,7 @@ margin-top: 1%;
   height: 100%;
     width: 100%;
 
+    position: relative;
     /*
     border-style: solid;
     border-width: 3px;
@@ -1180,7 +1481,7 @@ margin-top: 1%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-  align-items: center;
+  align-items: flex-end;
   */
                             }
 
@@ -1188,12 +1489,12 @@ margin-top: 1%;
 /* The main logo (an img of text "Guides") */
 .landingPageTextImage{
   
-  position: relative;
-  top: 0vh;
-  right: 0vw;
+  position: absolute;
+  top: 0px;
+  right: 0px;
 
-  width:  100%;
-  height: 100%;
+  width:  80%;
+  height: 80%;
 
   overflow: hidden
   
@@ -1332,7 +1633,7 @@ grid-column-gap: 2%;
   
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: space-between;
   align-items: center;
   }
   
@@ -1362,17 +1663,20 @@ grid-column-gap: 2%;
 
 
   .landingPageDigitalSafariContainer{
-    height: 50%;
+    height: 65%;
       width: 100%;
+      position: relative;
 /*
       border-style: solid;
       border-width: 2px;
       border-color: #6c5709;  
-      */        
+      */     
+      /*   
       display: flex;
       flex-direction: column;
       justify-content: center;
     align-items: center;
+    */
                               }
 
 
@@ -1381,6 +1685,7 @@ grid-column-gap: 2%;
 .digitalSafariImg{
   width:  100%;
   height: 100%;
+  
                  }
 
 
@@ -1390,7 +1695,7 @@ grid-column-gap: 2%;
 
 
   .landingPageWelcomeTextContainer{
-    height: 25%;
+    height: 35%;
       width: 100%;
 /*
       border-style: solid;
@@ -1400,9 +1705,44 @@ grid-column-gap: 2%;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
                               }
 
+// Div that contains the login/out button
+// and the login and learn-to-register
+// buttons:
+.loginOrRegisterContainer{
+
+/*        
+      border-style: solid;
+      border-width: 1px;
+      border-color: #a78610;  
+  */
+width: 137px;
+height: 75px;      
+
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+align-items: flex-end;
+                         } 
+
+// for the text that reads 
+// "or" and that goes between the login and
+// register buttons:
+.loginRegisterP{
+  font-size: 20px;
+  line-height: 20px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  
+  color: $girlGuidingDarkBlue;
+
+  padding: 0px;
+  margin: 0px;
+
+               }
 
 
 
@@ -1433,7 +1773,7 @@ opacity: 0.2;
 
 
 
-/*THe wfollowing styles are for the five divs of <LandingPage/> 
+/*The following styles are for the five divs of <LandingPage/> 
 that each contain an icon and a button */
 
 
@@ -1490,6 +1830,9 @@ align-items: center;
 
 
 /* ----- styles for the navigation bar----- */
+
+
+// the outer div for <NavigationBar/>
 .navbarContainer{
   height: 55px;
   width: 100vw;
@@ -1505,6 +1848,8 @@ position: fixed;
   bottom: 0;
 
 overflow-x: visible;
+
+z-index: 20;
                 }
 
 .homeIconContainer{
@@ -1521,20 +1866,6 @@ position: absolute;
 top: 0px;
 left: 90px;
                   }
-
-
-  /* this style no longer in use: 
-.homeImg{
-  height: 10vh;
-  width: 17vw;
-  
-  
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-*/
 
 
 /* -------------- styles to do with the plus menu  -------------- */
@@ -1822,13 +2153,16 @@ hideIconContainer.
 // tap on the landing page to take them to the page where 
 // the link is for the form:
 
+// This style simply positions the big brown button:
 .surveyFormButtonLandingPage{
-  position: relative;
-  top: -60px;
-  left: 60px;
-  width: 140px;
+  position: absolute;
+  top: 5px;
+  left: 30px;
+  margin: 1px;
+  width: 190px;
   height: 100px;
                             }
+                            
 
 .surveyFormButtonFormLinkPage{
   position: relative;
@@ -1846,9 +2180,6 @@ hideIconContainer.
   flex-direction: column;
   justify-content: center;
   align-items: center;
-          
-  align-self: center;
-
   
   padding-left: 3px;
   padding-right: 3px;
@@ -1861,12 +2192,39 @@ hideIconContainer.
   
   opacity: 1;
   pointer-events: auto;
+                }
 
-            }
-          
+
+.surveyFormButtonInoperable{
+    
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+  padding-left: 3px;
+  padding-right: 3px;
+  
+  border: rgb(232, 143, 143) 1.5px outset ;
+  border-radius: 5px 5px 5px 5px ;
+  
+  background-color: rgb(136, 44, 44);
+  box-shadow: rgb(5, 5, 5) 1px 1px 5px;
+  
+  opacity: 0;
+  pointer-events: none;
+                }
+
+
+
+
+
+
+
 .surveyFormButton:hover{ 
   background-color: rgb(186, 140, 140);
                 }  
+
 
 /*Now a class code gives to buttons 
 when the user clicks them */
@@ -1874,10 +2232,10 @@ when the user clicks them */
   transform: translateY(4px);
   transform: translateX(4px);
   box-shadow: black 1px 1px 1px;
-                 } 
+                        } 
 
 // The <p> for the text of
-// the surveyFormButton::after
+// the surveyFormButton:
 .surveyFormButtonP{
 
 font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -2173,7 +2531,9 @@ $black: #000;
     font-family: 'Poppins';
     font-style: italic;
     font-weight: 700;
-    font-size: 28px;    
+    font-size: 26px;    
+    margin: 0px;
+    padding: 0px;
     }
 
 p {
@@ -2181,7 +2541,11 @@ p {
   font-family: 'Poppins';
   font-style: normal;
   font-weight: 200;
-  font-size: 14px;    
+  font-size: 14px;
+  line-height: 18px;    
+  margin-bottom: 0px;
+  padding: 0px;
+  text-align: left;
 }
 
   .switch-mode {

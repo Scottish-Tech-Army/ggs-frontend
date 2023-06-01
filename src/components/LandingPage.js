@@ -6,6 +6,7 @@ import LogoutModal from "./LogoutModal";
 
 
 
+
 // Context:
 // Get access to the object that contains the stuff to do with making 
 // this app a multi-page app:
@@ -58,9 +59,28 @@ export default function LandingPage({
 
 //////////////////////////////////////////////////////////////////////////////////////////                                      
 // SET UP STATE PROPERTIES.
+
+// A state property to hold the string that is the 
+// classNames of the brown button. Change this value
+// from "surveyFormButtonInoperable surveyFormButtonLandingPage"
+// for before the user has logged in to 
+// "surveyFormButton surveyFormButtonLandingPage" for 
+// after the user has logged in (note that this state property
+// (like the brown button itself and its css classes) can 
+// be dumped for the production version of the app):
+const [classesForBrownButton, setClassesForBrownButton] = useState("surveyFormButtonInoperable surveyFormButtonLandingPage")
+
+
+// A state property that holds a string that this component
+// passes into <LoginModal/> as props. The value of this state
+// property tells <LoginModal/> what to show in the modal:
+const [whichModalScreen, setWhichModalScreen] = useState();
+
 // A state property that will hold the string for 
 // the text of the log-in/log-out button:
 const [loginButtonText, setLoginButtonText] = useState("Log in");
+
+const [registerButtonText, setRegisterButtonText] = useState("How to register");
 
 // A state property to hold the CSS class of 
 // the <p> that contains the text for the buttons that take the user to other pages. Value 
@@ -94,8 +114,11 @@ const [loggedInThenLoggedOut, setLoggedInThenLoggedOut] = useState(false);
 // event handler for the click of the login/logout button:
 const [logButtonClickHandler, setLogButtonClickHandler] = useState();
 
-
+// A state property whose value is true/false. Code changes this
+// so that the login modal shows or does not:
 const [showLogin, setShowLogin] = useState(false);
+
+
 //////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -137,39 +160,29 @@ const logout = () => {
   
   // Second a function to let the user log in. This fn should:
   // a) Show the login modal window
-  // b) Determine if login was successful.
-  // if yes:
-  // i)   change text of log-in/log-out button to "Log out"
-  // ii)  Make icons opaque
-  // iii) Make the buttons clickable, operable and opaque
-  // iv)  set the onClick of the login/logout button to function logout()
-  // v)   set loggedIn to true
-  // vi)  set unit (the state property of <AuthProvider/>) to the downloaded data
+  // b) set state propert whichModal to "login"
   const login = () => {
   // a):
   setShowLogin(true);
   // b):
-  // On successful login <LoginModal/> will:
-  // i)   call function onLoginSuccess() of this component (<LandingPage/>). 
-  // onLoginSuccess() does b) i)-v) above.
-  // ii)  call its own handleLogin() function, which does vi) above.
-  // On error onLoginSuccess() sets loggedIn to false and b) i)-vi) above
-  // are NOT done
+  setWhichModalScreen("login");  
                       } // end fn login 
   
 
 
 
 // A callback function that <LoginModal/> calls when the user tries to login. 
-// If the arg is true This function 
+// If the arg is true the login was successful and this function 
 // a)  changes text of log-in/log-out button to "Log out"
 // b)  Makes the icons opaque
 // c)  Makes the buttons clickable, operable and opaque
 // d)  sets the onClick of the login/logout button to function logout()
 // e)  sets loggedIn to true
-// If the arg is false this function
-// f) sets loggedIn to false 
-const onLoginSuccess= (trueFalse) =>{
+// f)  make the big brown button visible and operable
+//     NOTE: DUMP THIS FOR PRODUCTION VERSION OF THE APP!
+// If the arg is false this function simply
+// g) sets loggedIn to false 
+const onLoginSuccess = (trueFalse) =>{
 // If logging in was successful:
   if (trueFalse) {
     // a): 
@@ -182,16 +195,33 @@ const onLoginSuccess= (trueFalse) =>{
   setLogButtonClickHandler(()=>logout)
   // e):
   setLoggedIn(true)
- 
+  // f):
+  setClassesForBrownButton("surveyFormButton surveyFormButtonLandingPage")  
                  } // end if
 // If logging in produced an error (mon27Mar23: I'm not
 // yet sure if the following if statement is necessary):
 if (!trueFalse) {
+  // g):
     setLoggedIn(false)
                 } // end if                 
                            } // end onLoginSuccess
 
 
+// The click handler for the register button. This 
+// must:
+  // a) Show the login modal window
+  // b) set state propert whichModal to "howToRegister"
+function showHowToRegisterScreen(){
+ // a):
+ setShowLogin(true);
+ // b):
+ setWhichModalScreen("register");
+                                  }
+
+
+
+
+//------------------------------------------------------------------------------------------------
 
   // A function to change the buttons that take user to the other pages and their icons so that 
   // either
@@ -239,7 +269,7 @@ const callbackToParent = (data) => {
 // Consume context that contains xxxxxx:                                    
 const bigIconsObject = useContext(MenuContext);
 
-console.log(`bigIconsObject.p0.takeTesterToFormLinkPage is a ${typeof bigIconsObject.p0.takeTesterToFormLinkPage}`)
+// console.log(`bigIconsObject.p0.takeTesterToFormLinkPage is a ${typeof bigIconsObject.p0.takeTesterToFormLinkPage}`)
 
 // Consume context accessed from <AuthProvider/>:
 const { unit, setUnit } = useContext(authContext);
@@ -295,12 +325,14 @@ changeButtonsAndIcons(false)
 
 //////////////////////////////////////////////////////////////////////////////////////////
   // Modal controls
+
+  // This function gets passed in as props to <LoginModal/>, in which
+  // the close button calls this function
   const handleLoginClose = () => {
-  //  setLoadingText("Logging in"); // Message for signed in users only
-  //  setLoadingTimer(500);
     setShowLogin(false);
-  //  setShowLoading(true);
                                  };
+
+
 
 //////////////////////////////////////////////////////////////////////////////////////////
 ///// VARIABLES
@@ -325,7 +357,7 @@ let renderThis
 
 /////////////////////// TEST CODE HERE
 function testHandler(){
-  console.log(`The testHandler fired!`)
+  // console.log(`The testHandler fired!`)
                         }
 
 /////////////////////// END TEST CODE HERE
@@ -344,13 +376,14 @@ if (isThisPageActive) {
 renderThis = (
 <div>
 
-{showModal}
+
 
 { /* If the user has logged in and then 
-logs out again show the modal that 
-tells the user she has logged out but 
-show it for several seconds and then 
+at some stage logs out again, for several seconds show the modal that 
+tells the user she has logged out and then 
 make it disappear: */ }
+{showModal}
+
 {loggedInThenLoggedOut ? ( <>
   {showModal} = <LogoutModal className="showLogoutModal"/>
   {setTimeout(() => {
@@ -411,37 +444,48 @@ This contains two items:
       two elements:
       1) a <p> for text "Welcome" and 
       2) a <GGSbuttonOne> for the login/logout button
+      3) a <GGSbuttonOne> for the register button
 
       b) a div (className="landingPageDigitalSafariContainer") that contains
    the image for "Digital Safari"
   */}
     <div className="landingPageSecondContainer">
     
-    {/* iia-a): */}
+    {/* iia-a-1): */}
     <div className="landingPageWelcomeTextContainer">
     <p className="welcomeText"> Welcome </p>
 
+<div className="loginOrRegisterContainer">
      <GGSbuttonOne
      buttonDivCSSclass = {"largeButton1New"}
      pTextCSSclass = {"buttonOperable"}
      clickHandler = {logButtonClickHandler}
      pText = {loginButtonText}
      />      
+<p  className="loginRegisterP">or</p>
+    <GGSbuttonOne
+     buttonDivCSSclass = {"largeButton1New"}
+     pTextCSSclass = {"buttonOperable"}
+     clickHandler = {showHowToRegisterScreen}
+     pText = {registerButtonText}
+     />      
     </div>
+</div>
 
  {/* iia-b): */}
  <div className="landingPageDigitalSafariContainer">
     <img src={digitalSafariImage} alt="Digital safari image" className = "digitalSafariImg"/>
-    </div>
+    
 
-{/* Comment out the following button for production. It is only for field testers: */}
+{/* Comment out the following button for production. It's only for field testers.
+  It's the big brown button sitting on top of the main image: */}
     <GGSbuttonOne
-     buttonDivCSSclass = {"surveyFormButton surveyFormButtonLandingPage"}
+     buttonDivCSSclass = {classesForBrownButton}
      pTextCSSclass = {"surveyFormButtonP"}
      clickHandler = {bigIconsObject.p0.takeTesterToFormLinkPage}
-     pText = "When you're ready to fill in the questionnaire TAP HERE"
+     pText = "When you're ready to do the questionnaire return to this page and TAP HERE"
      />
-
+</div>
 
     </div>  {/* end div for landingPageSecondContainer*/}
 
@@ -450,16 +494,24 @@ This contains two items:
 
 
     {/* iib):
-    A div (className="landingPageThirdContainer") that contains five divs, each 
-    containing two things: a square button that contains an icon for one of the other five pages 
-    and a long clickable button to take the user to one of the other five pages. 
+    A div (className="landingPageThirdContainer") that contains four divs, each 
+    containing two things: a square button that contains an icon for one of the other four pages 
+    and a long clickable button to take the user to one of the other four pages. 
     The five divs are: 
-    i)   the div that contains the challenges near me button (<SquareButton/>) and button with text on it (<GGSbuttonOne/>)
-    ii)  the div that contains the my completed challenges button (<SquareButton/>) and button with text on it (<GGSbuttonOne/>)
-    iii) the div that contains the challenges leader board button (<SquareButton/>) and button with text on it (<GGSbuttonOne/>)
-    iv)  the div that contains the how to complete challenges button (<SquareButton/>) and button with text on it (<GGSbuttonOne/>)
-    v)   the div that contains the user guide button (<SquareButton/>) and button with text on it (<GGSbuttonOne/>) 
+    i)   the div that contains 
+          a) the challenges near me button (a <SquareButton/>) and 
+          b) a button with text "Challenges near me" on it (a <GGSbuttonOne/>)
+    ii)  the div that contains 
+          a) the my completed challenges button (a <SquareButton/>) and 
+          b) a button with text "Completed challenges" on it (a <GGSbuttonOne/>)          
+    iii) the div that contains 
+          a) the challenges leader board button (a <SquareButton/>) and 
+          b) a button with text "Challenges leaderboard" on it (a <GGSbuttonOne/>)                    
+    iv)  the div that contains 
+          a) the user guide button (a <SquareButton/>) and 
+          b) a button with text "User guide" on it (a <GGSbuttonOne/>)                    
     */}
+    
     <div className="landingPageThirdContainer"> 
 
     {/*  i)   */}
@@ -518,7 +570,7 @@ This contains two items:
     </div>
 
 
-    {/*  iv)   */}
+    {/*  Fri26May23: we no longer need the How to page   
     <div className={iconAndButtDivCSSclass}>    
     <SquareButton
     divCSSclass = {"landingPageIconContainer"}
@@ -526,6 +578,7 @@ This contains two items:
     altText = {"Button for how-to page"}
     imgClickHandler = {null}
     />
+    
 
     <GGSbuttonOne
       buttonDivCSSclass = {buttonDivCSSclass}
@@ -534,9 +587,9 @@ This contains two items:
       pText = "How to complete challenges"
     />
     </div>
+    */}
 
-
-    {/*  v)  */}
+    {/*  iv)  */}
     <div className={iconAndButtDivCSSclass}>    
     <SquareButton
     divCSSclass = {"landingPageIconContainer"}
@@ -558,9 +611,9 @@ This contains two items:
 
    </div>     {/* end div of className landingPageSecondAndThirdContainer */}
 
-   {showLogin && <LoginModal successOrFailResponse = {onLoginSuccess} handleLoginClose={handleLoginClose} />}
-
-
+   {showLogin && <LoginModal successOrFailResponse = {onLoginSuccess} handleLoginClose={handleLoginClose} whichModalScreen = {whichModalScreen} />}
+   
+   
 </div> {/* end landingPageOuterContainer follows on next line*/}
 
 </div>

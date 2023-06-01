@@ -10,7 +10,7 @@ import UserGuidePage from "./UserGuidePage";
 import CompletedChallengesPage from "./CompletedChallengesPage";
 import LeaderboardPage from "./LeaderboardPage";
 
-// Follownig line must be commented out for production 
+// Following line must be commented out for production 
 // as it is for field testing only:
 import FormLinkPage from "./FormLinkPage";
 
@@ -22,13 +22,8 @@ import userGuideIcon from "../assets/images/UserGuideIcon.svg";
 import completedIcon from "../assets/images/completedChallenges.svg";
 import leaderboardIcon from "../assets/images/clipboardIcon3.svg";
 
-// React-bootstrap stuff
-import Button from "react-bootstrap/Button";
-
 // scss stuff:
 import '../scss/style.scss';
-
-
 
 // Create context to share data with all descendants
 // of this component:
@@ -45,15 +40,15 @@ export default function Home(){
   const [pageIndex, setPageIndex] = useState(0);
   
 
-// The big object that is made available
+// First the big object that is made available
 // to all page components via context.
 // It contains:
 // 1) For every page except the landing page
 // and FormLinkPage: 
 // i)   the click handlers for the navigation bar 
-//      and plus-menu square buttons for each page
-// ii)  srcs for the the square buttons of the 
-//      navigation bar and plus menu for every page 
+//      home and plus-menu square buttons for each page
+// ii)  srcs for the navigation bar home and plus 
+//      menu square buttons for every page 
 //      except the landing page.     
 // 2) For the landing page:
 // i)   the click handlers for the buttons.
